@@ -1,0 +1,31 @@
+.sidenav-container {
+    display: flex;
+    height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+  }
+  
+  .sidenav {
+    width: 250px; /* Ajusta el ancho del sidenav */
+  }
+
+  .container-close{
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .mat-sidenav-content {
+    flex: 1;
+    padding: 16px;
+  }
+  
+  @media (max-width: 600px) {
+    .sidenav {
+      width: 100%; /* El sidenav ocupa toda la pantalla en móviles */
+    }
+  
+    .mat-sidenav-container {
+      flex-direction: column;
+    }
+  }
+  
+  
