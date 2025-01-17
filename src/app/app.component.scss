@@ -1,6 +1,8 @@
 .sidenav-container {
     display: flex;
-    height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    position: inherit;
+    z-index: 2;
+    //height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
   }
   
   .sidenav {
@@ -12,10 +14,22 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .contenedor-navbar{
+    width: 100%;
+    display: flex;
+    gap: 75%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .link-carrito{
+    cursor: pointer;
+  }
   
   .mat-sidenav-content {
-    flex: 1;
-    padding: 16px;
+    width: 100%;
+    padding: 0px;
   }
   
   @media (max-width: 600px) {
