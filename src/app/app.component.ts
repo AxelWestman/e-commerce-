@@ -7,6 +7,7 @@ import { MatDrawerMode,MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatTreeModule} from '@angular/material/tree';
+import { DatosService } from './datos.service';
 
 interface FoodNode {
   name: string;
@@ -52,5 +53,10 @@ export class AppComponent {
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
+
+  pasarDatos(){
+    let nodeName = document.getElementsByClassName("nodename");
+    console.log(nodeName[0].innerHTML);
+  }
 
 }
