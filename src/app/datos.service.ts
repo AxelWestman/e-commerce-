@@ -6,4 +6,13 @@ import { Injectable } from '@angular/core';
 export class DatosService {
 
   constructor() { }
+
+
+  contenidoParaCargar = "";
+
+  datoParaContenido(parametro: string){
+    this.contenidoParaCargar = parametro;
+    console.log("El dato pasado es " + this.contenidoParaCargar);
+  }
+
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DatosService } from '../datos.service';
 
 @Component({
   selector: 'app-content',
@@ -7,6 +8,21 @@ import { Component } from '@angular/core';
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
-export class ContentComponent {
+export class ContentComponent implements OnInit {
+
+  datoPasadoDeServicio = "";
+
+  constructor(private datosService: DatosService) {}
+  ngOnInit() {
+    this.pasarInfo()
+  }
+
+  pasarInfo(){
+    this.datoPasadoDeServicio = this.datosService.contenidoParaCargar;
+    console.log("el dato en content es " + this.datoPasadoDeServicio);
+  }
+
+
+  
 
 }

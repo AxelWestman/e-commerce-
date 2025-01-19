@@ -47,16 +47,21 @@ const TREE_DATA: FoodNode[] = [
 export class AppComponent {
   title = 'colombina-web';
 
+  selectedNode: string = '';
+
   dataSource = TREE_DATA;
 
   childrenAccessor = (node: FoodNode) => node.children ?? [];
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
+  constructor(private datosService: DatosService) {}
 
-  pasarDatos(){
-    let nodeName = document.getElementsByClassName("nodename");
-    console.log(nodeName[0].innerHTML);
+  onNodeClick(node: any) {
+    // Si el nodo tiene un nombre, lo asignamos a la variable
+    this.selectedNode = node.name || node; // Si es un nodo con subelementos, podría ser una cadena directa
+    console.log('Nodo seleccionado:', this.selectedNode);
+    this.datosService.datoParaContenido(this.selectedNode);
   }
 
 }
