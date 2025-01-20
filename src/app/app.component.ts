@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -55,7 +55,7 @@ export class AppComponent {
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
-  constructor(private datosService: DatosService) {}
+  constructor(private datosService: DatosService, private changeDetectorRef: ChangeDetectorRef) {}
 
   onNodeClick(node: any) {
     // Si el nodo tiene un nombre, lo asignamos a la variable
