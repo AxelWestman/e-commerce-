@@ -1,12 +1,15 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { DatosService } from '../datos.service';
 import { Subscription } from 'rxjs';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatButtonModule, CommonModule],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
@@ -16,6 +19,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
 
   receivedData: any;
+  receivedDataArray:any[] = [];
 
   datoPasadoDeServicio = "";
 
@@ -27,10 +31,23 @@ export class ContentComponent implements OnInit, OnDestroy  {
    this.dataSubscription = this.datosService.data$.subscribe(data => {
     if (data !== undefined) {
       this.receivedData = data;  // Asignamos el dato solo si no es undefined
+      console.log(this.receivedData);
+      this.datosService.busquedaDatosCategoria(this.receivedData)
+    .then(data =>{
+      this.receivedDataArray = data;
+      console.log(this.receivedDataArray);
+    })
+    .catch(error => {
+      console.error('Error al cargar productos:', error);
+    });
     } else {
       console.warn('Se ha recibido un dato undefined');
     }
   });
+
+  //this.llenarDatos();
+  
+
   }
 
   ngOnDestroy() {
@@ -41,8 +58,15 @@ export class ContentComponent implements OnInit, OnDestroy  {
     }
   }
 
-
-
-  
+  /*llenarDatos(){
+    this.datosService.busquedaDatosCategoria(this.receivedData)
+    .then(data =>{
+      this.receivedDataArray = data;
+      console.log(this.receivedDataArray);
+    })
+    .catch(error => {
+      console.error('Error al cargar productos:', error);
+    });
+  }*/
 
 }

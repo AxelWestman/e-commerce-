@@ -25,4 +25,17 @@ export class DatosService {
     }
   }
 
+  //Obtener productos por categoría:
+  busquedaDatosCategoria = async (categoria: string) => {
+    const response = await fetch(`http://192.168.0.164:3000/api/getProductos/categoria/${categoria}`);
+    try {
+      const data = await response.json();
+      const listaProductos = data.data
+      //console.log(listaProductos);
+      return listaProductos;
+    } catch (err) {
+      console.log(err + "no existe");
+    }
+  }
+
 }
