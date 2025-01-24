@@ -2,10 +2,15 @@
     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
         <mat-card-content>
-            <h1>{{producto.nombre}}</h1>
-            <h2>${{producto.precio}}</h2> 
-            <h2>Stock: {{producto.stock}}</h2> 
-            <p>{{producto.descripcion}}</p>
+            <div class="datos-productos">
+                <h1>{{producto.nombre}}</h1>
+                <h2>${{producto.precio}}</h2> 
+                <h2>Stock: {{producto.stock}}</h2> 
+                <!--<p>{{producto.descripcion}}</p>-->
+            </div>
+            <div class="boton-carrito">
+                <mat-icon mat-list-item ariaCurrentWhenActive="page">shopping_cart</mat-icon>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

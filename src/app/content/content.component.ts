@@ -4,12 +4,14 @@ import { DatosService } from '../datos.service';
 import { Subscription } from 'rxjs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
