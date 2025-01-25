@@ -9,7 +9,7 @@
                 <!--<p>{{producto.descripcion}}</p>-->
             </div>
             <div class="boton-carrito">
-                <mat-icon mat-list-item ariaCurrentWhenActive="page">shopping_cart</mat-icon>
+                <mat-icon mat-list-item ariaCurrentWhenActive="page" (click)="agregarAlCarrito(producto)">shopping_cart</mat-icon>
             </div>
         </mat-card-content>
     </mat-card>

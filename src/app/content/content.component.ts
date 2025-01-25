@@ -71,4 +71,13 @@ export class ContentComponent implements OnInit, OnDestroy  {
     });
   }*/
 
+    //Agregamos los productos al carrito mediante localstorage
+    agregarAlCarrito(producto: any) {
+      let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+      carrito.push(producto);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      //mostrar un mensaje o actualizar la interfaz
+      alert('Producto agregado al carrito: ' + producto.nombre);
+    }
+
 }
