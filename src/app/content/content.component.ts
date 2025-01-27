@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { CarritoService } from '../carrito.service';
+
 
 
 
@@ -25,7 +27,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   datoPasadoDeServicio = "";
 
-  constructor(private datosService: DatosService ) {}
+  constructor(private datosService: DatosService, private carritoService: CarritoService ) {}
 
   ngOnInit() {
    
@@ -73,11 +75,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
     //Agregamos los productos al carrito mediante localstorage
     agregarAlCarrito(producto: any) {
-      let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-      carrito.push(producto);
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-      //mostrar un mensaje o actualizar la interfaz
-      alert('Producto agregado al carrito: ' + producto.nombre);
+     this.carritoService.agregarProducto(producto);
     }
 
 }

@@ -1,42 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { CarritoService } from '../carrito.service';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule],
   templateUrl: './carrito.component.html',
-  styleUrl: './carrito.component.scss'
+  styleUrl: './carrito.component.scss',
 })
 export class CarritoComponent implements OnInit {
+  carrito: any[] = [];
 
-  productosEnCarrito: any[] = [];
+  constructor(
+    private ngZone: NgZone,
+    private changeDetectorRef: ChangeDetectorRef,
+    private carritoService: CarritoService
+  ) {}
   ngOnInit() {
-    this.obtenerProductosLocalStorage();
+    this.carritoService.carrito$.subscribe((carrito) => {
+      this.carrito = carrito; // Actualizar la vista cuando cambie el carrito
+    });
   }
 
-  obtenerProductosLocalStorage(){
-    this.productosEnCarrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    console.log(this.productosEnCarrito);
+  obtenerProductosLocalStorage() {
+    this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    console.log(this.carrito);
   }
 
-  limpiarLocalStorage(){
-    localStorage.removeItem('carrito');
-   console.log('Carrito eliminado');
+  limpiarLocalStorage() {
+    this.carritoService.eliminarTodo();
   }
 
   borrarProductoDelCarrito(producto: any) {
-    if (!producto || !producto.nombre) {
-      console.error('El producto no tiene un nombre válido');
-      return;
-    }
-    let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    carrito = carrito.filter((item: any) => item.nombre !== producto.nombre);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    console.log('Producto eliminado del carrito:', producto.nombre);
+    this.carritoService.eliminarProducto(producto);
   }
-
 }
