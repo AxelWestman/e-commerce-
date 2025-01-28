@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatTreeModule} from '@angular/material/tree';
 import { DatosService } from './datos.service';
 import {MatBadgeModule} from '@angular/material/badge';
+import { CarritoService } from './carrito.service';
 
 interface FoodNode {
   name: string;
@@ -45,21 +46,28 @@ const TREE_DATA: FoodNode[] = [
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'colombina-web';
 
   valorBadge = 0;
 
   selectedNode: string = '';
-
+  
   dataSource = TREE_DATA;
-
+  
   childrenAccessor = (node: FoodNode) => node.children ?? [];
-
+  
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
-
-  constructor(private datosService: DatosService, private changeDetectorRef: ChangeDetectorRef) {}
-
+  
+  constructor(private datosService: DatosService, private changeDetectorRef: ChangeDetectorRef, private carritoService: CarritoService) {}
+  ngOnInit() {
+    this.carritoService.carritoNum$.subscribe((carritoNum) => {
+      this.valorBadge = carritoNum; // Actualizar la vista cuando cambie el carrito
+    });
+  }
+  
+  
+  
   onNodeClick(node: any) {
     // Si el nodo tiene un nombre, lo asignamos a la variable
     this.selectedNode = node.name || node; // Si es un nodo con subelementos, podría ser una cadena directa

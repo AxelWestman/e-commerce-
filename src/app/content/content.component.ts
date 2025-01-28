@@ -89,6 +89,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
     //Agregamos los productos al carrito mediante localstorage
     agregarAlCarrito(producto: any) {
      this.carritoService.agregarProducto(producto);
+     this.carritoService.numeroProductosEnCarrito();
      this.openSnackBar();
     }
   }

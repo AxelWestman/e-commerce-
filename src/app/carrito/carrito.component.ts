@@ -45,11 +45,13 @@ export class CarritoComponent implements OnInit {
 
   limpiarLocalStorage() {
     this.carritoService.eliminarTodo();
+    this.carritoService.numeroProductosEnCarrito();
     this.openSnackBar();
   }
 
   borrarProductoDelCarrito(producto: any) {
     this.carritoService.eliminarProducto(producto);
+    this.carritoService.numeroProductosEnCarrito();
     this.openSnackBar();
   }
 }
