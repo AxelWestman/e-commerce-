@@ -20,7 +20,6 @@ export class CarritoService {
     localStorage.setItem('carrito', JSON.stringify(carrito));
     //mostrar un mensaje o actualizar la interfaz
     this.carritoSubject.next(carrito);
-    alert('Producto agregado al carrito: ' + producto.nombre);
   }
 
   eliminarProducto(productoId: any) {

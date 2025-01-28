@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
+import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-carrito',
@@ -14,6 +16,16 @@ import { CarritoService } from '../carrito.service';
 })
 export class CarritoComponent implements OnInit {
   carrito: any[] = [];
+
+  private _snackBar = inject(MatSnackBar);
+
+  durationInSeconds = 5;
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(PizzaPartyAnnotatedComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 
   constructor(
     private ngZone: NgZone,
@@ -33,9 +45,43 @@ export class CarritoComponent implements OnInit {
 
   limpiarLocalStorage() {
     this.carritoService.eliminarTodo();
+    this.openSnackBar();
   }
 
   borrarProductoDelCarrito(producto: any) {
     this.carritoService.eliminarProducto(producto);
+    this.openSnackBar();
   }
 }
+
+    /////////////////////////////////////////////////////////////////
+    //         Seccion de snackbard                                          ////
+  //////////////////////////////////////////////////////////////////
+
+  @Component({
+    selector: 'snack-bar-annotated-component-example-snack',
+    standalone: true,
+    templateUrl: 'snack-bar-annotated-component-example-snack.html',
+    styles: `
+      :host {
+        display: flex;
+      }
+  
+      .example-pizza-party {
+        color: white;
+        background-color: #D30000;
+        display: flex;
+        gap: 30%;
+      }
+      
+      .mdc-snackbar__surface{
+        padding-right: 0px;
+        background-color: #D30000;
+      }
+  
+    `,
+    imports: [MatButtonModule, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction],
+  })
+  export class PizzaPartyAnnotatedComponent {
+    snackBarRef = inject(MatSnackBarRef);
+  }

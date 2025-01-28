@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatTreeModule} from '@angular/material/tree';
 import { DatosService } from './datos.service';
+import {MatBadgeModule} from '@angular/material/badge';
 
 interface FoodNode {
   name: string;
@@ -40,12 +41,14 @@ const TREE_DATA: FoodNode[] = [
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ RouterOutlet, RouterLink, RouterLinkActive ,MatToolbarModule,MatListModule, MatButtonModule, MatSidenavModule, MatIconModule, MatTreeModule],
+  imports: [ RouterOutlet, RouterLink, RouterLinkActive ,MatToolbarModule,MatListModule, MatButtonModule, MatSidenavModule, MatIconModule, MatTreeModule, MatBadgeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'colombina-web';
+
+  valorBadge = 0;
 
   selectedNode: string = '';
 
