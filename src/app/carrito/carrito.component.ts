@@ -26,6 +26,8 @@ export class CarritoComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
     });
   }
+  
+  
 
   constructor(
     private ngZone: NgZone,
@@ -41,6 +43,14 @@ export class CarritoComponent implements OnInit {
   obtenerProductosLocalStorage() {
     this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
     console.log(this.carrito);
+  }
+
+  agregarCantidadProducto(producto: any){
+    this.carritoService.agregarCantidadDeProducto(producto);
+  }
+
+  disminuirCantidadProducto(producto: any){
+    this.carritoService.disminuirCantidadDeProducto(producto);
   }
 
   limpiarLocalStorage() {

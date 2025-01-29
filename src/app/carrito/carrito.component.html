@@ -8,6 +8,9 @@
                 <h1>{{producto.nombre}}</h1>
                 <h2>${{producto.precio}}</h2> 
                 <!--<p>{{producto.descripcion}}</p>-->
+                <div class="contenedor-botones-suma-resta">
+                    <button (click)="disminuirCantidadProducto(producto)">-</button><p>cant: {{producto.cantidad}}</p><button (click)="agregarCantidadProducto(producto)">+</button>
+                </div>   
             </div>
             <div class="boton-carrito">
                 <mat-icon mat-list-item ariaCurrentWhenActive="page" (click)="borrarProductoDelCarrito(producto)">delete</mat-icon>

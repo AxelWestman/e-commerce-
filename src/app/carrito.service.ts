@@ -15,6 +15,8 @@ export class CarritoService {
 
   numeroDeProductosEnCarrito: any;
 
+  cantidadProducto:number = 0;
+
   obtenerCarrito(): any[] {
     // Verifica si localStorage está disponible
   if (typeof localStorage !== 'undefined') {
@@ -38,11 +40,46 @@ export class CarritoService {
 
   agregarProducto(producto: any) {
     let carrito = this.obtenerCarrito();
+    console.log(carrito)
+    let verificacion = carrito.some(item => item.nombre === producto.nombre);
+    console.log(verificacion)
+    if(verificacion == true){
+      let posicionEnArray = carrito.findIndex(item => item.nombre === producto.nombre);
+      console.log(posicionEnArray);
+      let cantidadActual = carrito[posicionEnArray].cantidad;
+      let cantidadActualizada = cantidadActual + 1;
+      console.log("ahora es: " + cantidadActualizada)
+      carrito[posicionEnArray].cantidad = cantidadActualizada;
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+    else {
+    producto = {cantidad: 1, ...producto}
     carrito.push(producto);
     localStorage.setItem('carrito', JSON.stringify(carrito));
+    this.cantidadProducto++;
+    console.log(`Se agrego el primer ${producto.nombre} en el carro`)
     //mostrar un mensaje o actualizar la interfaz
     this.carritoSubject.next(carrito);
     this.carritoNum.next(carrito.length)
+    }
+  }
+
+  agregarCantidadDeProducto(producto: any){
+    let carrito = this.obtenerCarrito();
+    let posicionEnArray = carrito.findIndex(item => item.nombre === producto.nombre);
+      let cantidadActual = carrito[posicionEnArray].cantidad;
+      let cantidadActualizada = cantidadActual + 1;
+      carrito[posicionEnArray].cantidad = cantidadActualizada;
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+  }
+
+  disminuirCantidadDeProducto(producto:any){
+    let carrito = this.obtenerCarrito();
+    let posicionEnArray = carrito.findIndex(item => item.nombre === producto.nombre);
+      let cantidadActual = carrito[posicionEnArray].cantidad;
+      let cantidadActualizada = cantidadActual - 1;
+      carrito[posicionEnArray].cantidad = cantidadActualizada;
+      localStorage.setItem('carrito', JSON.stringify(carrito));
   }
 
   eliminarProducto(productoId: any) {
