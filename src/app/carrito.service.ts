@@ -17,6 +17,8 @@ export class CarritoService {
 
   cantidadProducto:number = 0;
 
+  
+
   obtenerCarrito(): any[] {
     // Verifica si localStorage está disponible
   if (typeof localStorage !== 'undefined') {
@@ -70,16 +72,22 @@ export class CarritoService {
       let cantidadActual = carrito[posicionEnArray].cantidad;
       let cantidadActualizada = cantidadActual + 1;
       carrito[posicionEnArray].cantidad = cantidadActualizada;
-      localStorage.setItem('carrito', JSON.stringify(carrito));
+       localStorage.setItem('carrito', JSON.stringify(carrito));
+       this.carritoSubject.next(carrito);
   }
 
   disminuirCantidadDeProducto(producto:any){
     let carrito = this.obtenerCarrito();
     let posicionEnArray = carrito.findIndex(item => item.nombre === producto.nombre);
       let cantidadActual = carrito[posicionEnArray].cantidad;
-      let cantidadActualizada = cantidadActual - 1;
-      carrito[posicionEnArray].cantidad = cantidadActualizada;
-      localStorage.setItem('carrito', JSON.stringify(carrito));
+      if(cantidadActual === 1){
+        return cantidadActual;
+      } else{
+        let cantidadActualizada = cantidadActual - 1;
+        carrito[posicionEnArray].cantidad = cantidadActualizada;
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        this.carritoSubject.next(carrito);
+      }
   }
 
   eliminarProducto(productoId: any) {

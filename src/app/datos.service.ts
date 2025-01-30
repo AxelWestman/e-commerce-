@@ -16,6 +16,8 @@ export class DatosService {
 
   contenidoParaCargar = "";
 
+  productoParaVer: any;
+
 
   datoParaContenido(data: any){
     if (data !== undefined) {
@@ -36,6 +38,12 @@ export class DatosService {
     } catch (err) {
       console.log(err + "no existe");
     }
+  }
+
+  productoDetallado(producto: string){
+    let contenido = producto;
+    console.log(contenido)
+    this.productoParaVer = contenido;
   }
 
 }

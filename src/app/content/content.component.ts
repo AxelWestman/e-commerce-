@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DatosService } from '../datos.service';
 import { Subscription } from 'rxjs';
 import {MatButtonModule} from '@angular/material/button';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
@@ -13,7 +14,7 @@ import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, Ma
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, MatIconModule],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
@@ -92,6 +93,12 @@ export class ContentComponent implements OnInit, OnDestroy  {
      this.carritoService.numeroProductosEnCarrito();
      this.openSnackBar();
     }
+
+
+    verProductoDetallado(producto: any){
+      this.datosService.productoDetallado(producto);
+    }
+
   }
 
     /////////////////////////////////////////////////////////////////

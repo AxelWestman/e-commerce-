@@ -1,5 +1,6 @@
 <div class="content">
     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray">
+        <a routerLink="/producto" routerLinkActive="true" ariaCurrentWhenActive="page" (click)="verProductoDetallado(producto)">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
         <mat-card-content>
             <div class="datos-productos">
@@ -12,5 +13,8 @@
                 <mat-icon mat-list-item ariaCurrentWhenActive="page" (click)="agregarAlCarrito(producto)">shopping_cart</mat-icon>
             </div>
         </mat-card-content>
+    </a>
     </mat-card>
 </div>
+
+<router-outlet></router-outlet>

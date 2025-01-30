@@ -15,6 +15,11 @@
     margin-bottom: 20px;
   }
 
+  .content a{
+    text-decoration: none;
+    color: black;
+  }
+
   img{
     margin-top: 10px;
     width: 215px;
@@ -82,5 +87,7 @@
         justify-content: center;
         gap: 20px;
     }
+
+  
 
   }
