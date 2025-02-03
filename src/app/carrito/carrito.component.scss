@@ -4,14 +4,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
 }
 
 .contenedor-productos{
     width: 100%; display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
     gap: 5px;
+    background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
 }
 
 .example-card {
@@ -21,6 +22,8 @@
     flex-direction: row;
     align-items: center;
     border: black;
+    //background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
+    background-color:transparent ;
   }
 
   img{

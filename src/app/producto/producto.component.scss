@@ -5,8 +5,9 @@
     align-items: center;
     //--opacidad-negro: 0.2;
     //background-image: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro)), rgba(0, 0, 0, var(--opacidad-negro)));
-    --opacidad-rojo: 0.2;
-    background-image: linear-gradient(rgba(246, 74, 52, var(--opacidad-rojo)), rgba(246, 74, 52, var(--opacidad-rojo)));
+    --opacidad-rojo: 0.9;
+    //background-image: linear-gradient(rgba(246, 74, 52, var(--opacidad-rojo)), rgba(246, 74, 52, var(--opacidad-rojo)));
+    background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
     height: 100vh;
 }
 
@@ -16,6 +17,30 @@
     flex-direction: column;
     text-align: start;    
     margin-top: 20px;
+    align-items: center;
+    background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
+    width: 90%;
+    border-top-right-radius: 20px ;
+    border-top-left-radius: 20px ;
+
+}
+
+.mat-divider{
+  display: block;
+  width: 90%;
+  margin: 0;
+  border-top-style: solid;
+  border-top-color:rgb(18 18 18 / 53%);
+  border-top-width: var(--mat-divider-width);
+}
+
+.contenedor-info div{
+  display: flex;
+  width: 100%;
+}
+
+.container-precio{
+  flex-direction: column;
 }
 
 img{
@@ -24,13 +49,18 @@ img{
     //height: 215px;
   }
 
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
   h1{
     margin: 0;
     height: 30px;
     margin-left: 20px;
     font-family: "DM Serif Text", serif;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 45px;
     font-style: normal;
     height: auto;
   }
@@ -42,11 +72,47 @@ img{
     margin-left: 20px;
     height: auto;
     font-family: "DM Serif Text", serif;
-    font-weight: 400;
-    font-size: 30px;
+    //font-weight: ;
+    font-size: 35px;
   }
 
+
+
   p{
+    font-family: "DM Serif Text", serif;
     font-size: 15px;
     margin: 0;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 20px
   }
+
+  .boton-carrito{
+    justify-content: end;
+    align-items: center;
+    margin-right: 22px;
+  }
+
+  .boton-carrito mat-icon{
+    border: 1px solid black;
+    border-radius: 10%;
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1dcb1d;
+    //margin-top: 20px;
+  }
+
+  mat-icon{
+    cursor: pointer;
+  }
+
+.divider-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}

@@ -8,8 +8,21 @@ export class DatosService {
 
   constructor() { }
 
+  valorInicial: any = this.busquedaNodo();
+
+  busquedaNodo(){
+    if(typeof localStorage !== 'undefined') {
+    let prueba = localStorage.getItem('nodo');
+    return prueba ? JSON.parse(prueba) : null;
+    } else {
+      // Si localStorage no está disponible, muestra un mensaje de advertencia y devuelve un array vacío
+      console.warn('localStorage no está disponible en este entorno.');
+      return [];
+    }
+  }
+
    // Usamos un Subject para emitir los cambios de datos
-   private dataSubject = new BehaviorSubject<any>(null);  // Valor inicial definido
+   private dataSubject = new BehaviorSubject<any>(this.valorInicial);  // Valor inicial definido
 
    // Observable para que otros componentes puedan suscribirse
    data$ = this.dataSubject.asObservable();
@@ -28,8 +41,8 @@ export class DatosService {
   }
 
   //Obtener productos por categoría:
-  busquedaDatosCategoria = async (categoria: string) => {
-    const response = await fetch(`http://192.168.0.164:3000/api/getProductos/categoria/${categoria}`);
+  busquedaDatosCategoria = async (categoria: any) => {
+    const response = await fetch(`http://192.168.0.164:3000/api/getProductos/categoria?categoria=${categoria}`);
     try {
       const data = await response.json();
       const listaProductos = data.data
@@ -43,6 +56,7 @@ export class DatosService {
   productoDetallado(producto: string){
     let contenido = producto;
     console.log(contenido)
+    localStorage.setItem('productoparaver', JSON.stringify(producto))
     this.productoParaVer = contenido;
   }
 

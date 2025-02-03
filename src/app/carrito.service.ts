@@ -53,6 +53,7 @@ export class CarritoService {
       console.log("ahora es: " + cantidadActualizada)
       carrito[posicionEnArray].cantidad = cantidadActualizada;
       localStorage.setItem('carrito', JSON.stringify(carrito));
+      this.carritoSubject.next(carrito);
     }
     else {
     producto = {cantidad: 1, ...producto}

@@ -1,4 +1,56 @@
 .content{
     width: 100%;
     height: 100vh;
+    background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
+}
+
+.imagen{
+    width: 100%;
+    height: 95vh;
+    background-image: url(https://scontent.fsfn7-1.fna.fbcdn.net/v/t39.30808-6/301138798_471561541649255_782372696995189754_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=6XObAl7IWagQ7kNvgHuVrpu&_nc_oc=AdgS6ZmEcGHbZrF_dbxnIl994_FbtdRJS1FDD5NGc1cI7YVJUVQf1jRf4t7jLwKpInU&_nc_zt=23&_nc_ht=scontent.fsfn7-1.fna&_nc_gid=AOp3EZ8WmV5DI4ZnkK3iXGi&oh=00_AYCSU90eNvWlHrdm_dS7xF0XF0y4Aq_CdanMvTUWVzzECA&oe=67A6AB6B);
+    border: 1px solid black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container-header{
+    width: 100%;
+    height: 95vh;
+    background-image:linear-gradient((rgb(55 48 47 / 70%)), rgb(55 48 47 / 70%));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    margin: 0px;
+    color: white;
+    text-align: center;
+    font-family: "Pacifico", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 60px
+}
+
+.descripcion{
+    font-family: "DM Serif Text", serif;
+    margin: 0;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    padding: 0px 5px 0px 5px;
+}
+
+button{
+    width: 150px;
+    height: auto;
+    font-family: "DM Serif Text", serif;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    background-color: #F64A34;
+    border-radius: 10px;
+    border: 0px;
 }

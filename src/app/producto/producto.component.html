@@ -1,10 +1,26 @@
 <div class="content">
     <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
     <div class="contenedor-info">
+        <div class="contenedor-h1">
         <h1>{{producto.nombre}}</h1>
-        <h2 style="color: green;">${{producto.precio}}</h2>
-        <h2>{{producto.stock}}</h2>
-        <h2>{{producto.color}}</h2>
-        <p>{{producto.descripcion}}</p>
+         </div>
+        <div style="margin-top: 10px;">
+        <div class="container-precio">
+        <h2 style="font-weight: 100;">${{producto.precio}}</h2>
+        <!--<h2>{{producto.stock}}</h2>
+        <h2>{{producto.color}}</h2>-->
+        </div>
+        <div class="boton-carrito">
+            <a routerLink="/carrito" routerLinkActive="true" ariaCurrentWhenActive="page"><mat-icon mat-list-item ariaCurrentWhenActive="page" (click)="agregarAlCarrito(producto)">shopping_cart</mat-icon></a>
+        </div>
+     </div>
+        <mat-divider></mat-divider>
+        <div class="contenedor-descripcion">
+            <p>Stock: {{producto.stock}}</p>
+        </div>    
+        <mat-divider></mat-divider>
+        <div class="contenedor-descripcion">
+            <p>{{producto.descripcion}}</p>
+        </div>    
     </div>
 </div>

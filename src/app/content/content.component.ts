@@ -7,7 +7,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
-import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
 
 
 
@@ -28,15 +27,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   datoPasadoDeServicio = "";
 
-  private _snackBar = inject(MatSnackBar);
 
-  durationInSeconds = 5;
-
-  openSnackBar() {
-    this._snackBar.openFromComponent(PizzaPartyAnnotatedComponent, {
-      duration: this.durationInSeconds * 1000,
-    });
-  }
 
   constructor(private datosService: DatosService, private carritoService: CarritoService ) {}
 
@@ -47,19 +38,13 @@ export class ContentComponent implements OnInit, OnDestroy  {
     if (data !== undefined) {
       this.receivedData = data;  // Asignamos el dato solo si no es undefined
       console.log(this.receivedData);
-      this.datosService.busquedaDatosCategoria(this.receivedData)
-    .then(data =>{
-      this.receivedDataArray = data;
-      console.log(this.receivedDataArray);
-    })
-    .catch(error => {
-      console.error('Error al cargar productos:', error);
-    });
+      localStorage.setItem('nodo', JSON.stringify(this.receivedData));
+      this.busquedaNodo();
     } else {
       console.warn('Se ha recibido un dato undefined');
     }
   });
-
+    
   //this.llenarDatos();
   
 
@@ -73,6 +58,18 @@ export class ContentComponent implements OnInit, OnDestroy  {
     }
   }
 
+  busquedaNodo(){
+    let prueba = localStorage.getItem('nodo');
+      this.datosService.busquedaDatosCategoria(prueba)
+    .then(data =>{
+      this.receivedDataArray = data;
+      console.log(this.receivedDataArray);
+    })
+    .catch(error => {
+      console.error('Error al cargar productos:', error);
+    });
+  }
+
   /*llenarDatos(){
     this.datosService.busquedaDatosCategoria(this.receivedData)
     .then(data =>{
@@ -83,16 +80,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
       console.error('Error al cargar productos:', error);
     });
   }*/
-
    
-
-
-    //Agregamos los productos al carrito mediante localstorage
-    agregarAlCarrito(producto: any) {
-     this.carritoService.agregarProducto(producto);
-     this.carritoService.numeroProductosEnCarrito();
-     this.openSnackBar();
-    }
 
 
     verProductoDetallado(producto: any){
@@ -101,34 +89,4 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   }
 
-    /////////////////////////////////////////////////////////////////
-    //         Seccion de snackbard                                          ////
-  //////////////////////////////////////////////////////////////////
-
-  @Component({
-    selector: 'snack-bar-annotated-component-example-snack',
-    standalone: true,
-    templateUrl: 'snack-bar-annotated-component-example-snack.html',
-    styles: `
-      :host {
-        display: flex;
-      }
   
-      .example-pizza-party {
-        color: white;
-        background-color: #52D452;
-        display: flex;
-        gap: 30%;
-      }
-      
-      .mdc-snackbar__surface{
-        padding-right: 0px;
-        background-color: #52D452;
-      }
-  
-    `,
-    imports: [MatButtonModule, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction],
-  })
-  export class PizzaPartyAnnotatedComponent {
-    snackBarRef = inject(MatSnackBarRef);
-  }
