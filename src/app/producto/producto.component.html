@@ -1,4 +1,5 @@
 <div class="content">
+    <div  *ngFor="let producto of producto">
     <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
     <div class="contenedor-info">
         <div class="contenedor-h1">
@@ -10,17 +11,24 @@
         <!--<h2>{{producto.stock}}</h2>
         <h2>{{producto.color}}</h2>-->
         </div>
-        <div class="boton-carrito">
+        <div class="boton-carrito" *ngIf="producto.stock > 0">
             <a routerLink="/carrito" routerLinkActive="true" ariaCurrentWhenActive="page"><mat-icon mat-list-item ariaCurrentWhenActive="page" (click)="agregarAlCarrito(producto)">shopping_cart</mat-icon></a>
+        </div>
+        <div class="boton-carrito-desabilitado" *ngIf="producto.stock === 0">
+            <a  routerLinkActive="true" ariaCurrentWhenActive="page"><mat-icon mat-list-item ariaCurrentWhenActive="page">shopping_cart</mat-icon></a>
         </div>
      </div>
         <mat-divider></mat-divider>
-        <div class="contenedor-descripcion">
+        <div class="contenedor-descripcion" *ngIf="producto.stock > 0">
             <p>Stock: {{producto.stock}}</p>
         </div>    
+        <div class="contenedor-descripcion" *ngIf="producto.stock === 0">
+            <p>Stock: Sin stock</p>
+        </div>  
         <mat-divider></mat-divider>
         <div class="contenedor-descripcion">
             <p>{{producto.descripcion}}</p>
         </div>    
+    </div>
     </div>
 </div>

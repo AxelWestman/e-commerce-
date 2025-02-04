@@ -11,8 +11,14 @@
     height: 100vh;
 }
 
+.content div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .contenedor-info{
-    width: 100%;
+    width: 95% !important;
     display: flex;
     flex-direction: column;
     text-align: start;    
@@ -37,6 +43,7 @@
 .contenedor-info div{
   display: flex;
   width: 100%;
+  flex-direction: row;
 }
 
 .container-precio{
@@ -93,7 +100,28 @@ img{
     margin-right: 22px;
   }
 
+  .boton-carrito-desabilitado{
+    justify-content: end;
+    align-items: center;
+    margin-right: 22px;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .boton-carrito mat-icon{
+    border: 1px solid black;
+    border-radius: 10%;
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1dcb1d;
+    //margin-top: 20px;
+  }
+
+  .boton-carrito-desabilitado mat-icon{
     border: 1px solid black;
     border-radius: 10%;
     width: 65px;

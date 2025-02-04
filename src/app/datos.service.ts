@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatosService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   valorInicial: any = this.busquedaNodo();
+
+  getProductosPorCategoria(categoria: string) : Observable<any>{
+    return this.http.get(`http://192.168.0.164:3000/api/getProductos/categoria?categoria=${categoria}`)
+  }
+
+  getProductoPorId(id: string): Observable<any> {
+    return this.http.get(`http://192.168.0.164:3000/api/getProductos/id/${id}`);
+  }
 
   busquedaNodo(){
     if(typeof localStorage !== 'undefined') {
@@ -53,11 +63,11 @@ export class DatosService {
     }
   }
 
-  productoDetallado(producto: string){
+  /*productoDetallado(producto: string){
     let contenido = producto;
     console.log(contenido)
     localStorage.setItem('productoparaver', JSON.stringify(producto))
     this.productoParaVer = contenido;
-  }
+  }*/
 
 }

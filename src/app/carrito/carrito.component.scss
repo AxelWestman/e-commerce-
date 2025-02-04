@@ -15,6 +15,17 @@
     background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
 }
 
+.container-if-productos{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: black;
+  //background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
+  background-color:transparent ;
+}
+
 .example-card {
     width: 100%;
     height: auto;
@@ -35,17 +46,23 @@
     font-size: 18px;
     margin: 0;
     height: 30px;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
   }
 
   h2{
     font-size: 15px;
     margin: 0;
     height: 30px;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
   }
 
   p{
     font-size: 15px;
     margin: 0;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
   }
   
   mat-card-content{
@@ -95,7 +112,7 @@
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
     cursor: pointer;
     color: white;
   }

@@ -7,13 +7,14 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; 
 
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, MatIconModule],
+  imports: [HttpClientModule, RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, MatIconModule],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
@@ -29,12 +30,20 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
 
 
-  constructor(private datosService: DatosService, private carritoService: CarritoService ) {}
+  constructor(private datosService: DatosService, private carritoService: CarritoService, private route: ActivatedRoute ) {}
 
   ngOnInit() {
-   
+    this.route.params.subscribe(params => {
+      this.receivedData = params['categoria'];
+      this.datosService.getProductosPorCategoria(this.receivedData).subscribe(data => {
+        this.receivedDataArray = data.data;
+        console.log(this.receivedDataArray);
+      });
+    });
+  
+
    // Nos suscribimos al Observable para recibir los datos
-   this.dataSubscription = this.datosService.data$.subscribe(data => {
+   /*this.dataSubscription = this.datosService.data$.subscribe(data => {
     if (data !== undefined) {
       this.receivedData = data;  // Asignamos el dato solo si no es undefined
       console.log(this.receivedData);
@@ -46,7 +55,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
   });
     
   //this.llenarDatos();
-  
+  */
 
   }
 
@@ -58,7 +67,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
     }
   }
 
-  busquedaNodo(){
+  /*busquedaNodo(){
     let prueba = localStorage.getItem('nodo');
       this.datosService.busquedaDatosCategoria(prueba)
     .then(data =>{
@@ -68,7 +77,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
     .catch(error => {
       console.error('Error al cargar productos:', error);
     });
-  }
+  }*/
 
   /*llenarDatos(){
     this.datosService.busquedaDatosCategoria(this.receivedData)
@@ -83,9 +92,9 @@ export class ContentComponent implements OnInit, OnDestroy  {
    
 
 
-    verProductoDetallado(producto: any){
+    /*verProductoDetallado(producto: any){
       this.datosService.productoDetallado(producto);
-    }
+    }*/
 
   }
 

@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-producto',
@@ -29,15 +30,22 @@ export class ProductoComponent implements OnInit {
 
   
   
-  constructor(private datosService: DatosService, private carritoService: CarritoService ) {}
+  constructor(private datosService: DatosService, private carritoService: CarritoService, private route:ActivatedRoute ) {}
   
   producto: any;
 
   ngOnInit() {
-    this.recibirProducto();
+   // this.recibirProducto();
+   this.route.params.subscribe(params => {
+    const productId = params['id'];
+    this.datosService.getProductoPorId(productId).subscribe(data => {
+      this.producto = data.data;
+      console.log(this.producto)
+    });
+  });
   } 
 
-  recibirProducto(){
+ /* recibirProducto(){
       if(typeof localStorage !== 'undefined') {
       let prueba = localStorage.getItem('productoparaver');
       this.producto = prueba ? JSON.parse(prueba) : null;
@@ -47,7 +55,7 @@ export class ProductoComponent implements OnInit {
         console.warn('localStorage no está disponible en este entorno.');
         return [];
       }
-    }
+    }*/
    //this.producto = this.datosService.productoParaVer;
    //console.log("el producto para ver es" + this.producto.nombre);
 
