@@ -1,0 +1,21 @@
+.content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
+    //height: auto;
+    height: 90vh;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }

@@ -5,12 +5,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
 import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
+import { PagoService } from '../pago.service';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.scss',
 })
@@ -27,13 +29,13 @@ export class CarritoComponent implements OnInit {
     });
   }
   
-  
-
   constructor(
     private ngZone: NgZone,
     private changeDetectorRef: ChangeDetectorRef,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private pagoService: PagoService
   ) {}
+
   ngOnInit() {
     this.carritoService.carrito$.subscribe((carrito) => {
       this.carrito = carrito; // Actualizar la vista cuando cambie el carrito
