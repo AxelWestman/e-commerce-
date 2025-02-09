@@ -37,6 +37,27 @@ export class PagoComponent implements OnInit {
   direccionFormControl = new FormControl('', [Validators.required]);
 
   cordobaCiudadesArray: any[] = []
+  santaFeCiudadesArray: any[] = []
+  mendozaCiudadesArray: any[] = []
+  tucumanCiudadesArray: any[] = []
+  entreRiosCiudadesArray: any[] = []
+  saltaCiudadesArray: any[] = []
+  chacoCiudadesArray: any[] = []
+  corrientesCiudadesArray: any[] = []
+  santiagoDelEsteroCiudadesArray: any[] = []
+  sanJuanCiudadesArray: any[] = []
+  jujuyCiudadesArray: any[] = []
+  rioNegroCiudadesArray: any[] = []
+  neuquenCiudadesArray: any[] = []
+  formosaCiudadesArray: any[] = []
+  chubutCiudadesArray: any[] = []
+  sanLuisCiudadesArray: any[] = []
+  catamarcaCiudadesArray: any[] = []
+  laRiojaCiudadesArray: any[] = [] 
+  laPampaCiudadesArray: any[] = []
+  santaCruzCiudadesArray: any[] = []
+  tierraDelFuegoCiudadesArray: any[] = []
+  misionesCiudadesArray: any[] = []
 
  // Función de validación personalizada para números de teléfono argentinos
  argentinaPhoneValidator(control: AbstractControl) {
@@ -62,6 +83,237 @@ ciudadesDeCordoba(){
   .then(data => {
     this.cordobaCiudadesArray = [...this.cordobaCiudadesArray, ...data];
     console.log(this.cordobaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+ciudadesDeSantaFe(){
+  this.pagoService.getSantaFeCiudades()
+  .then(data => {
+    this.santaFeCiudadesArray = [...this.santaFeCiudadesArray, ...data];
+    console.log(this.santaFeCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeMendoza(){
+  this.pagoService.getMendozaCiudades()
+  .then(data => {
+    this.mendozaCiudadesArray = [...this.mendozaCiudadesArray, ...data];
+    console.log(this.mendozaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeTucuman(){
+  this.pagoService.getTucumanCiudades()
+  .then(data => {
+    this.tucumanCiudadesArray = [...this.tucumanCiudadesArray, ...data];
+    console.log(this.tucumanCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeEntreRios(){
+  this.pagoService.getEntreRiosCiudades()
+  .then(data => {
+    this.entreRiosCiudadesArray = [...this.entreRiosCiudadesArray, ...data];
+    console.log(this.entreRiosCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeSalta(){
+  this.pagoService.getSaltaCiudades()
+  .then(data => {
+    this.saltaCiudadesArray = [...this.saltaCiudadesArray, ...data];
+    console.log(this.saltaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeChaco(){
+  this.pagoService.getChacoCiudades()
+  .then(data => {
+    this.chacoCiudadesArray = [...this.chacoCiudadesArray, ...data];
+    console.log(this.chacoCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeCorrientes(){
+  this.pagoService.getCorrientesCiudades()
+  .then(data => {
+    this.corrientesCiudadesArray = [...this.corrientesCiudadesArray, ...data];
+    console.log(this.corrientesCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeSantiagoDelEstero(){
+  this.pagoService.getSantiagoDelEsteroCiudades()
+  .then(data => {
+    this.santiagoDelEsteroCiudadesArray = [...this.santiagoDelEsteroCiudadesArray, ...data];
+    console.log(this.santiagoDelEsteroCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeSanJuan(){
+  this.pagoService.getSanJuanCiudades()
+  .then(data => {
+    this.sanJuanCiudadesArray = [...this.sanJuanCiudadesArray, ...data];
+    console.log(this.sanJuanCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeJujuy(){
+  this.pagoService.getJujuyCiudades()
+  .then(data => {
+    this.jujuyCiudadesArray = [...this.jujuyCiudadesArray, ...data];
+    console.log(this.jujuyCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeRioNegro(){
+  this.pagoService.getRioNegroCiudades()
+  .then(data => {
+    this.rioNegroCiudadesArray = [...this.rioNegroCiudadesArray, ...data];
+    console.log(this.rioNegroCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeNeuquen(){
+  this.pagoService.getNeuquenCiudades()
+  .then(data => {
+    this.neuquenCiudadesArray = [...this.neuquenCiudadesArray, ...data];
+    console.log(this.neuquenCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeFormosa(){
+  this.pagoService.getFormosaCiudades()
+  .then(data => {
+    this.formosaCiudadesArray = [...this.formosaCiudadesArray, ...data];
+    console.log(this.formosaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeChubut(){
+  this.pagoService.getChubutCiudades()
+  .then(data => {
+    this.chubutCiudadesArray = [...this.chubutCiudadesArray, ...data];
+    console.log(this.chubutCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeSanLuis(){
+  this.pagoService.getSanLuisCiudades()
+  .then(data => {
+    this.sanLuisCiudadesArray = [...this.sanLuisCiudadesArray, ...data];
+    console.log(this.sanLuisCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeCatamarca(){
+  this.pagoService.getCatamarcaCiudades()
+  .then(data => {
+    this.catamarcaCiudadesArray = [...this.catamarcaCiudadesArray, ...data];
+    console.log(this.catamarcaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+
+ciudadesDeLaRioja(){
+  this.pagoService.getLaRiojaCiudades()
+  .then(data => {
+    this.laRiojaCiudadesArray = [...this.laRiojaCiudadesArray, ...data];
+    console.log(this.laRiojaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeLaPampa(){
+  this.pagoService.getLaPampaCiudades()
+  .then(data => {
+    this.laPampaCiudadesArray = [...this.laPampaCiudadesArray, ...data];
+    console.log(this.laPampaCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeSantaCruz(){
+  this.pagoService.getSantaCruzCiudades()
+  .then(data => {
+    this.santaCruzCiudadesArray = [...this.santaCruzCiudadesArray, ...data];
+    console.log(this.santaCruzCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeTierraDelFuego(){
+  this.pagoService.getTierraDelFuegoCiudades()
+  .then(data => {
+    this.tierraDelFuegoCiudadesArray = [...this.tierraDelFuegoCiudadesArray, ...data];
+    console.log(this.tierraDelFuegoCiudadesArray);
+  })
+  .catch(error => {
+    console.error('Error al cargar productos:', error);
+  });
+}
+
+ciudadesDeMisiones(){
+  this.pagoService.getMisionesCiudades()
+  .then(data => {
+    this.misionesCiudadesArray = [...this.misionesCiudadesArray, ...data];
+    console.log(this.misionesCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -950,7 +1202,50 @@ ciudadesDeCordoba(){
     ];
   } else if (provincia === 'Córdoba') {
     this.ciudades = this.cordobaCiudadesArray;
-  } else {
+  } else if (provincia === 'Santa Fe' ){
+    this.ciudades = this.santaFeCiudadesArray;
+  } else if (provincia === 'Mendoza'){
+    this.ciudades = this.mendozaCiudadesArray;
+  } else if (provincia === 'Tucumán'){
+    this.ciudades = this.tucumanCiudadesArray;
+  } else if  (provincia === 'Entre Ríos'){
+    this.ciudades = this.entreRiosCiudadesArray;
+  } else if (provincia === 'Salta'){
+    this.ciudades = this.saltaCiudadesArray;
+  } else if (provincia === 'Chaco'){
+    this.ciudades = this.chacoCiudadesArray;
+  } else if(provincia === 'Corrientes'){
+    this.ciudades = this.corrientesCiudadesArray;
+  } else if(provincia === 'Santiago del Estero'){
+    this.ciudades = this.santiagoDelEsteroCiudadesArray;
+  } else if (provincia === 'San Juan'){
+    this.ciudades = this.sanJuanCiudadesArray;
+  } else if(provincia === 'Jujuy'){
+    this.ciudades = this.jujuyCiudadesArray;
+  } else if(provincia === 'Río Negro'){
+    this.ciudades = this.rioNegroCiudadesArray;
+  } else if(provincia === 'Neuquén'){
+    this.ciudades = this.neuquenCiudadesArray;
+  } else if(provincia === 'Formosa'){
+    this.ciudades = this.formosaCiudadesArray;
+  } else if(provincia === 'Chubut'){
+    this.ciudades = this.chubutCiudadesArray;
+  } else if(provincia === 'San Luis'){
+    this.ciudades = this.sanLuisCiudadesArray;
+  } else if(provincia === 'Catamarca'){
+    this.ciudades = this.catamarcaCiudadesArray;
+  } else if(provincia === 'La Rioja'){
+    this.ciudades = this.laRiojaCiudadesArray;
+  } else if(provincia === 'La Pampa'){
+    this.ciudades = this.laPampaCiudadesArray;
+  } else if(provincia === 'Santa Cruz'){
+    this.ciudades = this.santaCruzCiudadesArray;
+  } else if(provincia === 'Tierra del Fuego'){
+    this.ciudades = this.tierraDelFuegoCiudadesArray;
+  } else if(provincia === 'Misiones'){
+    this.ciudades = this.misionesCiudadesArray;
+  }
+  else {
     this.ciudades = [];
   }
   this.ciudadFormControl.reset(); // Reinicia el campo de ciudad al cambiar la provincia
@@ -959,7 +1254,27 @@ ciudadesDeCordoba(){
 
   ngOnInit() {
     this.ciudadesDeCordoba();
-    console.log(this.cordobaCiudadesArray);
+    this.ciudadesDeSantaFe();
+    this.ciudadesDeMendoza();
+    this.ciudadesDeTucuman();
+    this.ciudadesDeEntreRios();
+    this.ciudadesDeSalta();
+    this.ciudadesDeChaco();
+    this.ciudadesDeCorrientes();
+    this.ciudadesDeSantiagoDelEstero();
+    this.ciudadesDeSanJuan();
+    this.ciudadesDeJujuy();
+    this.ciudadesDeRioNegro();
+    this.ciudadesDeNeuquen();
+    this.ciudadesDeFormosa();
+    this.ciudadesDeChubut();
+    this.ciudadesDeSanLuis();
+    this.ciudadesDeCatamarca();
+    this.ciudadesDeLaRioja();
+    this.ciudadesDeLaPampa();
+    this.ciudadesDeSantaCruz();
+    this.ciudadesDeTierraDelFuego();
+    this.ciudadesDeMisiones();
   }
 
     constructor(private pagoService: PagoService) { }
