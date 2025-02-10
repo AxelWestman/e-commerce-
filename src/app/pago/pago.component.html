@@ -1,8 +1,9 @@
 <div class="content">
-  <form class="example-form">
+ <h2>Rellene los campos para luego proceder al pago:</h2>
+  <form class="example-form" (ngSubmit)="onSubmit()">
     <mat-form-field class="example-full-width">
       <mat-label>Nombre completo</mat-label>
-      <input type="string" matInput [formControl]="nombreFormControl" placeholder="">
+      <input type="string" matInput [formControl]="nombreFormControl" placeholder="" [(ngModel)]="nombreCliente" name="nombre">
       @if (nombreFormControl.hasError('nombre') && !nombreFormControl.hasError('required')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
@@ -13,7 +14,7 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailFormControl" placeholder="Ej: pat@example.com">
+      <input type="email" matInput [formControl]="emailFormControl" placeholder="Ej: pat@example.com" [(ngModel)]="emailCliente" name="mail">
       @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
@@ -24,7 +25,7 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Nro Teléfono</mat-label>
-      <input type="tel" matInput [formControl]="phoneNumberFormControl" placeholder="Ej: 3421234567">
+      <input type="tel" matInput [formControl]="phoneNumberFormControl" placeholder="Ej: 3421234567" [(ngModel)]="telefonoCliente" name="telefono">
       @if (phoneNumberFormControl.hasError('required')) {
         <mat-error>Nro Teléfono <strong>es requerido</strong></mat-error>
       }
@@ -36,7 +37,7 @@
     <!-- Campo de Provincia -->
 <mat-form-field class="example-full-width">
   <mat-label>Provincia</mat-label>
-  <mat-select [formControl]="provinciaFormControl" (selectionChange)="cargarCiudades($event.value)">
+  <mat-select [formControl]="provinciaFormControl" (selectionChange)="cargarCiudades($event.value)" [(ngModel)]="provinciaCliente" name="provincia">
     <mat-option *ngFor="let provincia of provincias" [value]="provincia">
       {{ provincia }}
     </mat-option>
@@ -49,7 +50,7 @@
 <!-- Campo de Ciudad -->
 <mat-form-field class="example-full-width">
   <mat-label>Ciudad</mat-label>
-  <mat-select [formControl]="ciudadFormControl">
+  <mat-select [formControl]="ciudadFormControl" [(ngModel)]="ciudadCliente" name="ciudad">
     <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad">
       {{ ciudad }}
     </mat-option>
@@ -60,9 +61,10 @@
 </mat-form-field>
 
 <!-- Campo de Código Postal -->
+<p style="margin: 0px; text-align: left; width: 90%;">¿No sabes cual es tu código postal? <a href="https://www.correoargentino.com.ar/formularios/cpa" target="_blank">Haz click aquí</a></p>
 <mat-form-field class="example-full-width">
   <mat-label>Código Postal</mat-label>
-  <input type="number" matInput [formControl]="postalFormControl" placeholder="3000">
+  <input type="number" matInput [formControl]="postalFormControl" placeholder="3000" [(ngModel)]="codigoPostalCliente" name="postal">
   @if (postalFormControl.hasError('required')) {
     <mat-error>Código Postal <strong>es requerido</strong></mat-error>
   }
@@ -71,9 +73,10 @@
   }
 </mat-form-field>
 
+
     <mat-form-field class="example-full-width">
       <mat-label>Dirección</mat-label>
-      <input type="string" matInput [formControl]="direccionFormControl" placeholder="">
+      <input type="string" matInput [formControl]="direccionFormControl" placeholder="" [(ngModel)]="direccionCliente" name="direccion">
       @if (direccionFormControl.hasError('Nro Telefono') && !direccionFormControl.hasError('required')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
@@ -84,9 +87,13 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Interno/Depto nro (opcional)</mat-label>
-      <input matInput placeholder="Ej: Interno 4 / Dpto 8 ">
+      <input matInput placeholder="Ej: Interno 4 / Dpto 8 " [(ngModel)]="internoDeptoCliente" name="depto" >
     </mat-form-field>
 
+    <button type="submit">¡Proceder al pago!</button>
   </form>
+
+ 
+
       
 </div>

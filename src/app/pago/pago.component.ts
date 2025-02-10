@@ -16,6 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { PagoService } from '../pago.service';
+import { CarritoService } from '../carrito.service';
 
 
 
@@ -59,6 +60,15 @@ export class PagoComponent implements OnInit {
   tierraDelFuegoCiudadesArray: any[] = []
   misionesCiudadesArray: any[] = []
 
+  nombreCliente: any = '';
+  emailCliente: any = '';
+  telefonoCliente: any = '';
+  provinciaCliente: any = '';
+  ciudadCliente: any = '';
+  codigoPostalCliente: any = '';
+  direccionCliente: any = '';
+  internoDeptoCliente: any;
+
  // Función de validación personalizada para números de teléfono argentinos
  argentinaPhoneValidator(control: AbstractControl) {
   const phoneRegex = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
@@ -82,7 +92,6 @@ ciudadesDeCordoba(){
   this.pagoService.getCordobaCiudades()
   .then(data => {
     this.cordobaCiudadesArray = [...this.cordobaCiudadesArray, ...data];
-    console.log(this.cordobaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -92,7 +101,6 @@ ciudadesDeSantaFe(){
   this.pagoService.getSantaFeCiudades()
   .then(data => {
     this.santaFeCiudadesArray = [...this.santaFeCiudadesArray, ...data];
-    console.log(this.santaFeCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -103,7 +111,6 @@ ciudadesDeMendoza(){
   this.pagoService.getMendozaCiudades()
   .then(data => {
     this.mendozaCiudadesArray = [...this.mendozaCiudadesArray, ...data];
-    console.log(this.mendozaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -114,7 +121,6 @@ ciudadesDeTucuman(){
   this.pagoService.getTucumanCiudades()
   .then(data => {
     this.tucumanCiudadesArray = [...this.tucumanCiudadesArray, ...data];
-    console.log(this.tucumanCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -125,7 +131,6 @@ ciudadesDeEntreRios(){
   this.pagoService.getEntreRiosCiudades()
   .then(data => {
     this.entreRiosCiudadesArray = [...this.entreRiosCiudadesArray, ...data];
-    console.log(this.entreRiosCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -136,7 +141,6 @@ ciudadesDeSalta(){
   this.pagoService.getSaltaCiudades()
   .then(data => {
     this.saltaCiudadesArray = [...this.saltaCiudadesArray, ...data];
-    console.log(this.saltaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -147,7 +151,6 @@ ciudadesDeChaco(){
   this.pagoService.getChacoCiudades()
   .then(data => {
     this.chacoCiudadesArray = [...this.chacoCiudadesArray, ...data];
-    console.log(this.chacoCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -158,7 +161,6 @@ ciudadesDeCorrientes(){
   this.pagoService.getCorrientesCiudades()
   .then(data => {
     this.corrientesCiudadesArray = [...this.corrientesCiudadesArray, ...data];
-    console.log(this.corrientesCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -169,7 +171,6 @@ ciudadesDeSantiagoDelEstero(){
   this.pagoService.getSantiagoDelEsteroCiudades()
   .then(data => {
     this.santiagoDelEsteroCiudadesArray = [...this.santiagoDelEsteroCiudadesArray, ...data];
-    console.log(this.santiagoDelEsteroCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -180,7 +181,6 @@ ciudadesDeSanJuan(){
   this.pagoService.getSanJuanCiudades()
   .then(data => {
     this.sanJuanCiudadesArray = [...this.sanJuanCiudadesArray, ...data];
-    console.log(this.sanJuanCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -191,7 +191,6 @@ ciudadesDeJujuy(){
   this.pagoService.getJujuyCiudades()
   .then(data => {
     this.jujuyCiudadesArray = [...this.jujuyCiudadesArray, ...data];
-    console.log(this.jujuyCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -202,7 +201,6 @@ ciudadesDeRioNegro(){
   this.pagoService.getRioNegroCiudades()
   .then(data => {
     this.rioNegroCiudadesArray = [...this.rioNegroCiudadesArray, ...data];
-    console.log(this.rioNegroCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -213,7 +211,6 @@ ciudadesDeNeuquen(){
   this.pagoService.getNeuquenCiudades()
   .then(data => {
     this.neuquenCiudadesArray = [...this.neuquenCiudadesArray, ...data];
-    console.log(this.neuquenCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -224,7 +221,6 @@ ciudadesDeFormosa(){
   this.pagoService.getFormosaCiudades()
   .then(data => {
     this.formosaCiudadesArray = [...this.formosaCiudadesArray, ...data];
-    console.log(this.formosaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -235,7 +231,6 @@ ciudadesDeChubut(){
   this.pagoService.getChubutCiudades()
   .then(data => {
     this.chubutCiudadesArray = [...this.chubutCiudadesArray, ...data];
-    console.log(this.chubutCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -246,7 +241,6 @@ ciudadesDeSanLuis(){
   this.pagoService.getSanLuisCiudades()
   .then(data => {
     this.sanLuisCiudadesArray = [...this.sanLuisCiudadesArray, ...data];
-    console.log(this.sanLuisCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -257,7 +251,6 @@ ciudadesDeCatamarca(){
   this.pagoService.getCatamarcaCiudades()
   .then(data => {
     this.catamarcaCiudadesArray = [...this.catamarcaCiudadesArray, ...data];
-    console.log(this.catamarcaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -269,7 +262,6 @@ ciudadesDeLaRioja(){
   this.pagoService.getLaRiojaCiudades()
   .then(data => {
     this.laRiojaCiudadesArray = [...this.laRiojaCiudadesArray, ...data];
-    console.log(this.laRiojaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -280,7 +272,6 @@ ciudadesDeLaPampa(){
   this.pagoService.getLaPampaCiudades()
   .then(data => {
     this.laPampaCiudadesArray = [...this.laPampaCiudadesArray, ...data];
-    console.log(this.laPampaCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -291,7 +282,6 @@ ciudadesDeSantaCruz(){
   this.pagoService.getSantaCruzCiudades()
   .then(data => {
     this.santaCruzCiudadesArray = [...this.santaCruzCiudadesArray, ...data];
-    console.log(this.santaCruzCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -302,7 +292,6 @@ ciudadesDeTierraDelFuego(){
   this.pagoService.getTierraDelFuegoCiudades()
   .then(data => {
     this.tierraDelFuegoCiudadesArray = [...this.tierraDelFuegoCiudadesArray, ...data];
-    console.log(this.tierraDelFuegoCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -313,7 +302,6 @@ ciudadesDeMisiones(){
   this.pagoService.getMisionesCiudades()
   .then(data => {
     this.misionesCiudadesArray = [...this.misionesCiudadesArray, ...data];
-    console.log(this.misionesCiudadesArray);
   })
   .catch(error => {
     console.error('Error al cargar productos:', error);
@@ -1277,6 +1265,60 @@ ciudadesDeMisiones(){
     this.ciudadesDeMisiones();
   }
 
-    constructor(private pagoService: PagoService) { }
+    constructor(private pagoService: PagoService, private carritoService: CarritoService) { }
+
+    onSubmit(){
+
+      let carrito = this.carritoService.obtenerCarrito();
+
+     let carritoNombres = carrito.map((nombre =>`${nombre.nombre} X${nombre.cantidad}`));
+     console.log(carritoNombres)
+
+
+
+
+      if (this.nombreFormControl.invalid || this.emailFormControl.invalid || this.phoneNumberFormControl.invalid ||
+        this.provinciaFormControl.invalid || this.ciudadFormControl.invalid || this.postalFormControl.invalid ||
+        this.direccionFormControl.invalid) {
+      return;
+    }
+
+    if(carritoNombres.length > 1){
+      for(let i = 0; i < carritoNombres.length; i++){
+        const datos = {
+          nombre: this.nombreCliente,
+          email: this.emailCliente,
+          telefono: this.telefonoCliente,
+          provincia: this.provinciaCliente,
+          ciudad: this.ciudadCliente,
+          postal: this.codigoPostalCliente,
+          direccion: this.direccionCliente,
+          dept: this.internoDeptoCliente,
+          productos: carritoNombres[i],
+        };
+        this.pagoService.datosClienteEnvio(datos);
+      }
+      
+    }
+    else{
+
+
+      const datos = {
+        nombre: this.nombreCliente,
+        email: this.emailCliente,
+        telefono: this.telefonoCliente,
+        provincia: this.provinciaCliente,
+        ciudad: this.ciudadCliente,
+        postal: this.codigoPostalCliente,
+        direccion: this.direccionCliente,
+        dept: this.internoDeptoCliente,
+        productos: carritoNombres,
+      };
+
+    
+        this.pagoService.datosClienteEnvio(datos);
+      
+    }
+    }
 
 }
