@@ -5,7 +5,7 @@
     justify-content: center;
     background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
     //height: auto;
-    height: 90vh;
+    height: auto;
     gap: 15px;
     flex-wrap: wrap;
 }
@@ -79,7 +79,11 @@
   }
 
   
-
+@media(min-width: 375px){
+  .content{
+    height: 100vh;
+  }
+}
 
 
   @media (min-width: 768px) {
@@ -88,6 +92,7 @@
         flex-direction: row;
         justify-content: center;
         gap: 20px;
+        height: 100vh;
     }
 
   
