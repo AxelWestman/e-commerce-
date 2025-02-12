@@ -1,12 +1,12 @@
 .content{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
 }
 
 .imagen{
     width: 100%;
-    height: 95vh;
+    min-height: 100vh;
     background-image: url(/colombina.jpg);
     border: 1px solid black;
     background-size: cover;
@@ -16,7 +16,7 @@
 
 .container-header{
     width: 100%;
-    height: 95vh;
+    min-height: 100vh;
     background-image:linear-gradient((rgb(55 48 47 / 70%)), rgb(55 48 47 / 70%));
     display: flex;
     flex-direction: column;
@@ -53,4 +53,12 @@ button{
     background-color: #F64A34;
     border-radius: 10px;
     border: 0px;
+}
+
+@media(min-width: 768px){
+
+    .imagen{
+        background-size: 100% 100vh;
+    }
+
 }

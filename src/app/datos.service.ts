@@ -13,11 +13,11 @@ export class DatosService {
   valorInicial: any = this.busquedaNodo();
 
   getProductosPorCategoria(categoria: string) : Observable<any>{
-    return this.http.get(`http://192.168.0.164:3000/api/getProductos/categoria?categoria=${categoria}`)
+    return this.http.get(`http://192.168.0.163:3000/api/getProductos/categoria?categoria=${categoria}`)
   }
 
   getProductoPorId(id: string): Observable<any> {
-    return this.http.get(`http://192.168.0.164:3000/api/getProductos/id/${id}`);
+    return this.http.get(`http://192.168.0.163:3000/api/getProductos/id/${id}`);
   }
 
   busquedaNodo(){
@@ -52,7 +52,7 @@ export class DatosService {
 
   //Obtener productos por categoría:
   busquedaDatosCategoria = async (categoria: any) => {
-    const response = await fetch(`http://192.168.0.164:3000/api/getProductos/categoria?categoria=${categoria}`);
+    const response = await fetch(`http://192.168.0.163:3000/api/getProductos/categoria?categoria=${categoria}`);
     try {
       const data = await response.json();
       const listaProductos = data.data

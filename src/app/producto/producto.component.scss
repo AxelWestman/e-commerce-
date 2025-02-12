@@ -144,3 +144,45 @@ img{
   display: flex;
   justify-content: center;
 }
+
+.contenedor-descripcion{
+  gap: 10px;
+  height: 50px;
+}
+
+.contenedor-descripcion mat-icon{
+  line-height: 25px;
+}
+
+
+
+@media (min-width: 768px){
+
+  img{
+    width: 25%;
+    margin-top: 10px
+  }
+
+  .content{
+    justify-content: center;
+  }
+
+  .segundo-content {
+    flex-direction: row !important;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    gap: 20px;
+  }
+
+  .contenedor-info{
+    width: 30% !important;
+  }
+
+} 
+
+@media (min-width: 1024px){
+  .contenedor-info{
+    height: 420px;
+  }
+}

@@ -5,7 +5,7 @@
     justify-content: center;
     background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
     //height: auto;
-    height: 100vh;
+    min-height: 100vh;
     gap: 15px;
     flex-direction: column;
     font-family: "DM Serif Text", serif;
@@ -42,4 +42,20 @@ h2{
     font-weight: 400;
     color: white;
     cursor:pointer;
+  }
+
+  @media (min-width: 768px) {
+
+    .content{
+      height: auto;
+    }
+
+    h2{
+      margin-top: 20px;
+    }
+
+    .example-form{
+      margin-bottom: 20px;
+    }
+
   }

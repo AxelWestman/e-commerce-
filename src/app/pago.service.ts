@@ -354,7 +354,7 @@ export class PagoService {
     this.datos = data;
     console.log(this.datos);
     try {
-      const response = await fetch(`http://192.168.0.164:3000/api/postDatosClienteCompras`, {
+      const response = await fetch(`http://192.168.0.163:3000/api/postDatosClienteCompras`, {
         method: 'POST',  // Usamos el método POST
         headers: {
           'Content-Type': 'application/json'  // Especificamos que estamos enviando JSON

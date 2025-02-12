@@ -1,5 +1,5 @@
 <div class="content">
-    <div  *ngFor="let producto of producto">
+    <div class="segundo-content"  *ngFor="let producto of producto">
     <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
     <div class="contenedor-info">
         <div class="contenedor-h1">
@@ -19,14 +19,15 @@
         </div>
      </div>
         <mat-divider></mat-divider>
-        <div class="contenedor-descripcion" *ngIf="producto.stock > 0">
-            <p>Stock: {{producto.stock}}</p>
-        </div>    
         <div class="contenedor-descripcion" *ngIf="producto.stock === 0">
             <p>Stock: Sin stock</p>
         </div>  
         <mat-divider></mat-divider>
         <div class="contenedor-descripcion">
+            <p>Calcular envío</p><mat-icon> local_shipping</mat-icon>
+        </div>    
+        <mat-divider></mat-divider>
+        <div class="descripcion">
             <p>{{producto.descripcion}}</p>
         </div>    
     </div>
