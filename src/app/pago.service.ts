@@ -376,4 +376,30 @@ export class PagoService {
     }
   }
 
+  pedidosPendientes = async (data: any) => {
+    this.datos = data;
+    console.log(this.datos);
+    try {
+      const response = await fetch(`http://192.168.0.163:3000/api/postComprasPendientes`, {
+        method: 'POST',  // Usamos el método POST
+        headers: {
+          'Content-Type': 'application/json'  // Especificamos que estamos enviando JSON
+        },
+        body: JSON.stringify(this.datos)  // Convertimos los datos del producto a JSON
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error al enviar los datos');
+      }
+  
+      const data = await response.json();  // Procesamos la respuesta en formato JSON
+      console.log(data);  // Muestra la respuesta del servidor
+  
+      return data;  // Retorna la respuesta si es necesario
+  
+    } catch (err) {
+      console.log(err);  // Manejamos cualquier error que ocurra
+    }
+  }
+
 }

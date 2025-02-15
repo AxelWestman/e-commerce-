@@ -29,6 +29,7 @@ import { CarritoService } from '../carrito.service';
 })
 export class PagoComponent implements OnInit {
 
+  formaPagoFormControl = new FormControl('', [Validators.required]);
   nombreFormControl = new FormControl('', [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   phoneNumberFormControl = new FormControl('', [Validators.required, this.argentinaPhoneValidator]) // Validación personalizada
@@ -36,6 +37,8 @@ export class PagoComponent implements OnInit {
   ciudadFormControl = new FormControl('', [Validators.required]);
   postalFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d{4}$/)]);
   direccionFormControl = new FormControl('', [Validators.required]);
+
+  formaPago:string = "";
 
   cordobaCiudadesArray: any[] = []
   santaFeCiudadesArray: any[] = []
@@ -84,6 +87,8 @@ provincias = [
   'San Juan', 'Jujuy', 'Río Negro', 'Neuquén', 'Formosa', 'Chubut', 'San Luis', 'Catamarca', 'La Rioja', 'La Pampa', 'Santa Cruz',
   'Tierra del Fuego', 'Misiones'
 ];
+
+metodosDePago = ["Transferencia", "Tarjeta"]
 
 // Lista de ciudades (puedes cargarla dinámicamente según la provincia seleccionada)
 ciudades: string[] = [];
@@ -1239,6 +1244,17 @@ ciudadesDeMisiones(){
   this.ciudadFormControl.reset(); // Reinicia el campo de ciudad al cambiar la provincia
 }
 
+formaDePago(pago: string){
+  if(pago === "Transferencia"){
+    this.formaPago = "Transferencia"
+  }
+  else if(pago === "Tarjeta"){
+    this.formaPago = "Tarjeta"
+  } else{
+    this.formaPago= "";
+  }
+}
+
 
   ngOnInit() {
     this.ciudadesDeCordoba();
@@ -1269,23 +1285,49 @@ ciudadesDeMisiones(){
 
     onSubmit(){
 
+      const formaPago = this.formaPago.trim(); 
+
+      console.log(formaPago)
+
+     if(formaPago === "Tarjeta"){
       let carrito = this.carritoService.obtenerCarrito();
 
-     let carritoNombres = carrito.map((nombre =>`${nombre.nombre} X${nombre.cantidad}`));
-     console.log(carritoNombres)
+      let carritoNombres = carrito.map(
+        (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+      );
+      console.log(carritoNombres);
 
+      if (
+        this.nombreFormControl.invalid ||
+        this.emailFormControl.invalid ||
+        this.phoneNumberFormControl.invalid ||
+        this.provinciaFormControl.invalid ||
+        this.ciudadFormControl.invalid ||
+        this.postalFormControl.invalid ||
+        this.direccionFormControl.invalid
+      ) {
+        return;
+      }
 
-
-
-      if (this.nombreFormControl.invalid || this.emailFormControl.invalid || this.phoneNumberFormControl.invalid ||
-        this.provinciaFormControl.invalid || this.ciudadFormControl.invalid || this.postalFormControl.invalid ||
-        this.direccionFormControl.invalid) {
-      return;
-    }
-
-    if(carritoNombres.length > 1){
-      for(let i = 0; i < carritoNombres.length; i++){
+      if (carritoNombres.length > 1) {
+        for (let i = 0; i < carritoNombres.length; i++) {
+          const datos = {
+            formaPago: this.formaPago,
+            nombre: this.nombreCliente,
+            email: this.emailCliente,
+            telefono: this.telefonoCliente,
+            provincia: this.provinciaCliente,
+            ciudad: this.ciudadCliente,
+            postal: this.codigoPostalCliente,
+            direccion: this.direccionCliente,
+            dept: this.internoDeptoCliente,
+            productos: carritoNombres[i],
+          };
+          this.pagoService.datosClienteEnvio(datos);
+        }
+      } else {
         const datos = {
+          formaPago: this.formaPago,
           nombre: this.nombreCliente,
           email: this.emailCliente,
           telefono: this.telefonoCliente,
@@ -1294,31 +1336,64 @@ ciudadesDeMisiones(){
           postal: this.codigoPostalCliente,
           direccion: this.direccionCliente,
           dept: this.internoDeptoCliente,
-          productos: carritoNombres[i],
+          productos: carritoNombres,
         };
+
         this.pagoService.datosClienteEnvio(datos);
+        }
+      } else if(formaPago === "Transferencia") {
+        let carrito = this.carritoService.obtenerCarrito();
+
+      let carritoNombres = carrito.map(
+        (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+      );
+      console.log(carritoNombres);
+
+      if (
+        this.nombreFormControl.invalid ||
+        this.emailFormControl.invalid ||
+        this.phoneNumberFormControl.invalid ||
+        this.provinciaFormControl.invalid ||
+        this.ciudadFormControl.invalid ||
+        this.postalFormControl.invalid ||
+        this.direccionFormControl.invalid
+      ) {
+        return;
       }
-      
-    }
-    else{
 
+      if (carritoNombres.length > 1) {
+        for (let i = 0; i < carritoNombres.length; i++) {
+          const datos = {
+            formaPago: this.formaPago,
+            nombre: this.nombreCliente,
+            email: this.emailCliente,
+            telefono: this.telefonoCliente,
+            provincia: this.provinciaCliente,
+            ciudad: this.ciudadCliente,
+            postal: this.codigoPostalCliente,
+            direccion: this.direccionCliente,
+            dept: this.internoDeptoCliente,
+            productos: carritoNombres[i],
+          };
+          this.pagoService.pedidosPendientes(datos);
+        }
+      } else {
+        const datos = {
+          formaPago: this.formaPago,
+          nombre: this.nombreCliente,
+          email: this.emailCliente,
+          telefono: this.telefonoCliente,
+          provincia: this.provinciaCliente,
+          ciudad: this.ciudadCliente,
+          postal: this.codigoPostalCliente,
+          direccion: this.direccionCliente,
+          dept: this.internoDeptoCliente,
+          productos: carritoNombres,
+        };
 
-      const datos = {
-        nombre: this.nombreCliente,
-        email: this.emailCliente,
-        telefono: this.telefonoCliente,
-        provincia: this.provinciaCliente,
-        ciudad: this.ciudadCliente,
-        postal: this.codigoPostalCliente,
-        direccion: this.direccionCliente,
-        dept: this.internoDeptoCliente,
-        productos: carritoNombres,
-      };
-
-    
-        this.pagoService.datosClienteEnvio(datos);
-      
-    }
+        this.pagoService.pedidosPendientes(datos);
+        }
+      }
     }
 
 }
