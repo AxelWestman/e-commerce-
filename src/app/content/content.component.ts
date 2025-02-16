@@ -9,12 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { CarritoService } from '../carrito.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [HttpClientModule, RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, MatIconModule],
+  imports: [HttpClientModule, RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, NgxPaginationModule, MatIconModule ],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
@@ -25,6 +26,8 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   receivedData: any;
   receivedDataArray:any[] = [];
+
+  public page! : number;
 
   datoPasadoDeServicio = "";
 

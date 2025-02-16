@@ -1,5 +1,6 @@
 <div class="content">
-    <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray">
+    <div class="cards-styles">
+    <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray | paginate: { itemsPerPage: 12, currentPage: page }">
         <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
         <mat-card-content>
@@ -12,6 +13,11 @@
         </mat-card-content>
     </a>
     </mat-card>
+    </div>
+    <div class="pagination-styles">
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
 </div>
+
 
 <router-outlet></router-outlet>

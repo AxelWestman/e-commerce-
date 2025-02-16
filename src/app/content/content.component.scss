@@ -10,6 +10,16 @@
     flex-wrap: wrap;
 }
 
+.cards-styles{
+  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
 .example-card {
     width: 171px;
     height: auto;
