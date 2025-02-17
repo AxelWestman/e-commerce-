@@ -10,6 +10,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { DatosService } from './datos.service';
 import {MatBadgeModule} from '@angular/material/badge';
 import { CarritoService } from './carrito.service';
+import {MatMenuModule} from '@angular/material/menu';
 
 interface FoodNode {
   name: string;
@@ -44,7 +45,7 @@ const TREE_DATA: FoodNode[] = [
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ RouterOutlet, RouterLink, RouterLinkActive ,MatToolbarModule,MatListModule, MatButtonModule, MatSidenavModule, MatIconModule, MatTreeModule, MatBadgeModule],
+  imports: [ RouterOutlet, RouterLink, RouterLinkActive ,MatToolbarModule,MatListModule, MatButtonModule, MatSidenavModule, MatIconModule, MatTreeModule, MatBadgeModule, MatMenuModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

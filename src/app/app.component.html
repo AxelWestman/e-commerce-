@@ -26,7 +26,7 @@
         </mat-tree-node>
       </mat-tree>
       
-      <a mat-list-item href="#">¿Quienes Sómos?</a>
+      <a mat-list-item href="#">¿Quiénes somos?</a>
       <a mat-list-item href="#">Contacto</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -35,9 +35,72 @@
     <!-- Botón para abrir el sidenav en dispositivos móviles -->
     <mat-toolbar color="primary" style="padding: 0px !important; background-color: #F64A34;">
       <div class="contenedor-navbar">
-        <button mat-icon-button (click)="sidenav.toggle()">
+        <div class="header-desktop">
+          <a mat-list-item routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer; "><button mat-button>Inicio</button></a>
+          <button mat-button [matMenuTriggerFor]="productos">Productos</button>
+          <mat-menu #productos="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="ropa">Ropa</button>
+            <button mat-menu-item [matMenuTriggerFor]="accesorios">Accesorios</button>
+            <button mat-menu-item [matMenuTriggerFor]="sahumerios">Sahumerios</button>
+            <button mat-menu-item [matMenuTriggerFor]="decoracion">Decoración</button>
+            <button mat-menu-item >Ofertas</button>
+          </mat-menu>
+          <mat-menu #ropa="matMenu">
+          <a a mat-list-item routerLink="/content/remeras" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Remeras</button></a>
+          <a a mat-list-item routerLink="/content/blusas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Blusas</button></a>
+          <a a mat-list-item routerLink="/content/camisas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Camisas</button></a>
+          <a a mat-list-item routerLink="/content/camisolas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Camisolas</button></a>
+          <a a mat-list-item routerLink="/content/tunicas" routerLinkActive="active" ariaCurrentWhenActive="page"> <button mat-menu-item>Túnicas</button></a>
+          <a a mat-list-item routerLink="/content/vestidos" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Vestidos</button></a>
+          <a a mat-list-item routerLink="/content/soleros" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Soleros</button></a>
+            <a a mat-list-item routerLink="/content/palazos" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Palazos</button></a>
+            <a a mat-list-item routerLink="/content/babuchas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Babuchas</button></a>
+            <a a mat-list-item routerLink="/content/leggings" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Leggings</button></a>
+            <a a mat-list-item routerLink="/content/calsa" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Calsa</button></a>
+            <a a mat-list-item routerLink="/content/shorts" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Shorts</button></a>
+            <a a mat-list-item routerLink="/content/bermudas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Bermudas</button></a>
+            <a a mat-list-item routerLink="/content/polleras" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Polleras</button></a>
+            <a a mat-list-item routerLink="/content/faldas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item>Faldas</button></a>
+          </mat-menu>
+          <mat-menu #accesorios="matMenu">
+            <a a mat-list-item routerLink="/content/pareos" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Pareo</button></a>
+            <a a mat-list-item routerLink="/content/pañuelos" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Pañuelos</button></a>
+            <a a mat-list-item routerLink="/content/pashminas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Pashminas</button></a>
+            <a a mat-list-item routerLink="/content/sombreros" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Sombreros</button></a>
+            <a a mat-list-item routerLink="/content/capelinas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Capelinas</button></a>
+            <a a mat-list-item routerLink="/content/ruanas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Ruanas</button></a>
+            <a a mat-list-item routerLink="/content/mantones" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Mantones</button></a>
+            <a a mat-list-item routerLink="/content/bufandas" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Bufandas</button></a>
+            <a a mat-list-item routerLink="/content/cuellos" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Cuellos</button></a>
+            <a a mat-list-item routerLink="/content/japamalas indias" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Japamalas Indias</button></a>
+            <a a mat-list-item routerLink="/content/collares" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Collares</button></a>
+            <a a mat-list-item routerLink="/content/sobres" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Sobres</button></a>
+            <a a mat-list-item routerLink="/content/monederos pakistan" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Monederos Pakistan</button></a>
+            <a a mat-list-item routerLink="/content/carteras" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Carteras</button></a>
+            <a a mat-list-item routerLink="/content/bolsos" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Bolsos</button></a>
+          </mat-menu>
+          <mat-menu #sahumerios="matMenu">
+            <a a mat-list-item routerLink="/content/satya" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Satya</button></a>
+            <a a mat-list-item routerLink="/content/goloka" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Goloka</button></a>
+            <a a mat-list-item routerLink="/content/namaste" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Namaste</button></a>
+            <a a mat-list-item routerLink="/content/thales" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Thales</button></a>
+            <a a mat-list-item routerLink="/content/mistic spirits" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Mistic Spirits</button></a>
+            <a a mat-list-item routerLink="/content/sagrada madre" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Sagrada Madre</button></a>
+          </mat-menu>
+          <mat-menu #decoracion="matMenu">
+            <a a mat-list-item routerLink="/content/manta" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Manta</button></a>
+            <a a mat-list-item routerLink="/content/corazon individual" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Corazón individual</button></a>
+            <a a mat-list-item routerLink="/content/corazon doble" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Corazón doble</button></a>
+            <a a mat-list-item routerLink="/content/corazon triple" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Corazón triple</button></a>
+            <a a mat-list-item routerLink="/content/tira colgante india" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Tira colgante India</button></a>
+          </mat-menu>
+          <a mat-list-item routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer;"><button mat-button >¿Quiénes somos?</button></a>
+          <a mat-list-item routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer;"><button mat-button >Contacto</button></a>
+        </div>
+        <button mat-icon-button (click)="sidenav.toggle()" class="boton-side">
           <mat-icon>reorder</mat-icon>
         </button>
+
           <mat-icon mat-list-item routerLink="/carrito" routerLinkActive="active" ariaCurrentWhenActive="page" matBadge="{{valorBadge}}" class="link-carrito">shopping_cart</mat-icon>
       </div>
     </mat-toolbar>

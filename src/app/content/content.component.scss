@@ -28,6 +28,7 @@
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    animation: slideIn 1s ease-in-out;
   }
 
   .mat-mdc-card-content {
@@ -88,6 +89,10 @@
     width: 30%;
   }
 
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
   
 @media(min-width: 375px){
   .content{

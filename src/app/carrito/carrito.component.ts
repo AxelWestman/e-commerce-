@@ -7,12 +7,13 @@ import { CarritoService } from '../carrito.service';
 import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
 import { PagoService } from '../pago.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [MatCardModule, MatButtonModule, FooterComponent, CommonModule, MatIconModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.scss',
 })

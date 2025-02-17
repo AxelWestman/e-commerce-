@@ -10,12 +10,13 @@ import { CarritoService } from '../carrito.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { FooterComponent } from '../footer/footer.component';
 
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [HttpClientModule, RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, NgxPaginationModule, MatIconModule ],
+  imports: [HttpClientModule, FooterComponent, RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, NgxPaginationModule, MatIconModule ],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })

@@ -8,11 +8,12 @@ import { CarritoService } from '../carrito.service';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, CommonModule, MatIconModule, MatDividerModule],
+  imports: [RouterOutlet, FooterComponent,RouterLink, RouterLinkActive, MatButtonModule, CommonModule, MatIconModule, MatDividerModule],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.scss'
 })

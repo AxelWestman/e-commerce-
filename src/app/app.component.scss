@@ -4,6 +4,10 @@
     z-index: 2;
     //height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
   }
+
+  .header-desktop{
+    display: none;
+  }
   
   .sidenav {
     width: 250px; /* Ajusta el ancho del sidenav */
@@ -41,6 +45,48 @@
     .mat-sidenav-container {
       flex-direction: column;
     }
+  }
+
+  @media (min-width: 1024px) {
+
+    .boton-side{
+      display: none;
+    }
+
+    .header-desktop{
+      display: flex;
+    }
+
+    .contenedor-navbar{
+      gap: 35%;
+    }
+
+    .mdc-list-item.mdc-list-item--with-one-line {
+      height: inherit;
+    }
+
+    a{
+      height: auto;
+      width:  auto;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    a:hover{
+      background-color: #EC4732;
+    }
+
+    mat-menu{
+      display: block !important;
+      
+    }
+
+    button{
+      font-family: "DM Serif Text", serif;
+      font-weight: 400;
+    }
+    
+
   }
   
   
