@@ -1,5 +1,13 @@
 <div class="content">
-    <div class="cards-styles">
+    <mat-form-field class="example-full-width">
+        <mat-label></mat-label>
+        <mat-select  (selectionChange)="filtrarProductos($event.value)" [(ngModel)]="filtroValor"  name="filtro">
+          <mat-option *ngFor="let filtro of filtros" [value]="filtro">
+            {{ filtro }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <div class="cards-styles" *ngIf="filtroValor === 'Destacados'">
     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray | paginate: { itemsPerPage: 12, currentPage: page }">
         <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
@@ -14,6 +22,66 @@
     </a>
     </mat-card>
     </div>
+    <div class="cards-styles" *ngIf="filtroValor === 'Más nuevo a más viejo'">
+        <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayMasNuevoAMasViejo | paginate: { itemsPerPage: 12, currentPage: page }">
+            <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+            <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+            <mat-card-content>
+                <div class="datos-productos">
+                    <h1>{{producto.nombre}}</h1>
+                    <h2>${{producto.precio}}</h2> 
+                    <!--<h2>Stock: {{producto.stock}}</h2> 
+                    <p>{{producto.descripcion}}</p>-->
+                </div>
+            </mat-card-content>
+        </a>
+        </mat-card>
+        </div>
+        <div class="cards-styles" *ngIf="filtroValor === 'Más viejo a más nuevo'">
+            <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayMasNuevoAMasViejo | paginate: { itemsPerPage: 12, currentPage: page }">
+                <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+                <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+                <mat-card-content>
+                    <div class="datos-productos">
+                        <h1>{{producto.nombre}}</h1>
+                        <h2>${{producto.precio}}</h2> 
+                        <!--<h2>Stock: {{producto.stock}}</h2> 
+                        <p>{{producto.descripcion}}</p>-->
+                    </div>
+                </mat-card-content>
+            </a>
+            </mat-card>
+            </div>
+            <div class="cards-styles" *ngIf="filtroValor === 'Precio menor a mayor'">
+                <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayPrecioMenorAMayor | paginate: { itemsPerPage: 12, currentPage: page }">
+                    <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+                    <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+                    <mat-card-content>
+                        <div class="datos-productos">
+                            <h1>{{producto.nombre}}</h1>
+                            <h2>${{producto.precio}}</h2> 
+                            <!--<h2>Stock: {{producto.stock}}</h2> 
+                            <p>{{producto.descripcion}}</p>-->
+                        </div>
+                    </mat-card-content>
+                </a>
+                </mat-card>
+                </div>
+                <div class="cards-styles" *ngIf="filtroValor === 'Precio mayor a menor'">
+                    <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayPrecioMayorAMenor | paginate: { itemsPerPage: 12, currentPage: page }">
+                        <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+                        <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+                        <mat-card-content>
+                            <div class="datos-productos">
+                                <h1>{{producto.nombre}}</h1>
+                                <h2>${{producto.precio}}</h2> 
+                                <!--<h2>Stock: {{producto.stock}}</h2> 
+                                <p>{{producto.descripcion}}</p>-->
+                            </div>
+                        </mat-card-content>
+                    </a>
+                    </mat-card>
+                    </div>
     <div class="pagination-styles">
     <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
     </div>

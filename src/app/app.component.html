@@ -26,8 +26,8 @@
         </mat-tree-node>
       </mat-tree>
       
-      <a mat-list-item href="#">¿Quiénes somos?</a>
-      <a mat-list-item href="#">Contacto</a>
+      <a mat-list-item routerLink="/somos" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="sidenav.toggle()">¿Quiénes somos?</a>
+      <a  mat-list-item routerLink="/contacto" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="sidenav.toggle()">Contacto</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -94,8 +94,8 @@
             <a a mat-list-item routerLink="/content/corazon triple" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Corazón triple</button></a>
             <a a mat-list-item routerLink="/content/tira colgante india" routerLinkActive="active" ariaCurrentWhenActive="page"><button mat-menu-item >Tira colgante India</button></a>
           </mat-menu>
-          <a mat-list-item routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer;"><button mat-button >¿Quiénes somos?</button></a>
-          <a mat-list-item routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer;"><button mat-button >Contacto</button></a>
+          <a mat-list-item routerLink="/somos" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer;"><button mat-button >¿Quiénes somos?</button></a>
+          <a mat-list-item routerLink="/contacto" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer;"><button mat-button >Contacto</button></a>
         </div>
         <button mat-icon-button (click)="sidenav.toggle()" class="boton-side">
           <mat-icon>reorder</mat-icon>

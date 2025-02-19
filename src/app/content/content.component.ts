@@ -11,12 +11,25 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FooterComponent } from '../footer/footer.component';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [HttpClientModule, FooterComponent, RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, NgxPaginationModule, MatIconModule ],
+  imports: [HttpClientModule, FooterComponent, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule,RouterOutlet, RouterLink, RouterLinkActive, MatCardModule, MatButtonModule, CommonModule, NgxPaginationModule, MatIconModule,  ],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
@@ -32,14 +45,56 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   datoPasadoDeServicio = "";
 
+  filtros = ["Destacados", "Más nuevo a más viejo", "Más viejo a más nuevo", "Precio menor a mayor", "Precio mayor a menor"]
 
+  filtroValor: string = '';
+  filtroArrayMasNuevoAMasViejo:any[] = [];
+  filtroArrayMasViejoAMasNuevo: any[] = [];
+  filtroArrayPrecioMenorAMayor:any[] = [];
+  filtroArrayPrecioMayorAMenor:any[] = [];
+
+  filtrarProductos(filtro: string){
+    if(filtro === "Destacados"){
+      this.filtroValor = "Destacados"
+    }
+    else if(filtro === "Más nuevo a más viejo"){
+      this.filtroValor = "Más nuevo a más viejo"
+      this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
+        this.filtroArrayMasNuevoAMasViejo = data.data;
+        console.log(this.filtroArrayMasNuevoAMasViejo);
+      });
+    }
+    else if(filtro === "Más viejo a más nuevo"){
+      this.filtroValor = "Más viejo a más nuevo"
+      this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
+        this.filtroArrayMasNuevoAMasViejo = data.data;
+        console.log(this.filtroArrayMasNuevoAMasViejo);
+      });
+    }
+    else if(filtro === "Precio menor a mayor"){
+      this.filtroValor = "Precio menor a mayor"   
+      this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
+        this.filtroArrayPrecioMenorAMayor = data.data;
+      });
+    }
+    else if(filtro === "Precio mayor a menor"){
+      this.filtroValor = "Precio mayor a menor"
+      this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
+        this.filtroArrayPrecioMayorAMenor = data.data;
+      });
+    }
+    else{
+      this.filtroValor= "Destacados";
+    }
+  }
 
   constructor(private datosService: DatosService, private carritoService: CarritoService, private route: ActivatedRoute ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.filtroValor = 'Destacados'
       this.receivedData = params['categoria'];
-      this.datosService.getProductosPorCategoria(this.receivedData).subscribe(data => {
+      this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
         this.receivedDataArray = data.data;
         console.log(this.receivedDataArray);
       });

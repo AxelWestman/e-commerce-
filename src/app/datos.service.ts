@@ -12,9 +12,10 @@ export class DatosService {
 
   valorInicial: any = this.busquedaNodo();
 
-  getProductosPorCategoria(categoria: string) : Observable<any>{
+  getProductosPorCategoria(categoria: string, filtro:string) : Observable<any>{
     //Si el parámetro recibido es "ofertas", realizar un if para que traiga todos los productos
-    return this.http.get(`http://192.168.0.163:3000/api/getProductos/categoria?categoria=${categoria}`)
+    return this.http.get(`http://192.168.0.163:3000/api/getProductos/categoria?categoria=${categoria}&filtro=${filtro}`)
+    
   }
 
   getProductoPorId(id: string): Observable<any> {
