@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PagoService {
+
+  private url = environment.apiUrl;
 
 
   private datos = {
@@ -354,7 +357,7 @@ export class PagoService {
     this.datos = data;
     console.log(this.datos);
     try {
-      const response = await fetch(`http://192.168.0.163:3000/api/postDatosClienteCompras`, {
+      const response = await fetch(`${this.url}postDatosClienteCompras`, {
         method: 'POST',  // Usamos el método POST
         headers: {
           'Content-Type': 'application/json'  // Especificamos que estamos enviando JSON
@@ -380,7 +383,7 @@ export class PagoService {
     this.datos = data;
     console.log(this.datos);
     try {
-      const response = await fetch(`http://192.168.0.163:3000/api/postComprasPendientes`, {
+      const response = await fetch(`${this.url}postComprasPendientes`, {
         method: 'POST',  // Usamos el método POST
         headers: {
           'Content-Type': 'application/json'  // Especificamos que estamos enviando JSON

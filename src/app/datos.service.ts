@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,16 @@ export class DatosService {
 
   valorInicial: any = this.busquedaNodo();
 
+  private url = environment.apiUrl;
+
   getProductosPorCategoria(categoria: string, filtro:string) : Observable<any>{
     //Si el parámetro recibido es "ofertas", realizar un if para que traiga todos los productos
-    return this.http.get(`http://192.168.0.163:3000/api/getProductos/categoria?categoria=${categoria}&filtro=${filtro}`)
+    return this.http.get(`${this.url}getProductos/categoria?categoria=${categoria}&filtro=${filtro}`)
     
   }
 
   getProductoPorId(id: string): Observable<any> {
-    return this.http.get(`http://192.168.0.163:3000/api/getProductos/id/${id}`);
+    return this.http.get(`${this.url}getProductos/id/${id}`);
   }
 
   busquedaNodo(){
@@ -54,7 +57,7 @@ export class DatosService {
 
   //Obtener productos por categoría:
   busquedaDatosCategoria = async (categoria: any) => {
-    const response = await fetch(`http://192.168.0.163:3000/api/getProductos/categoria?categoria=${categoria}`);
+    const response = await fetch(`${this.url}getProductos/categoria?categoria=${categoria}`);
     try {
       const data = await response.json();
       const listaProductos = data.data
