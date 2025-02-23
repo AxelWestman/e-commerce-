@@ -38,8 +38,12 @@ export class ProductoComponent implements OnInit {
   ngOnInit() {
    // this.recibirProducto();
    this.route.params.subscribe(params => {
-    const productId = params['id'];
-    this.datosService.getProductoPorId(productId).subscribe(data => {
+
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    
+    
+    console.log(id)
+    this.datosService.getProductoPorId(id).subscribe(data => {
       this.producto = data.data;
       console.log(this.producto)
     });

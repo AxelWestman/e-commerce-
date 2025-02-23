@@ -96,7 +96,7 @@
   
 @media(min-width: 375px){
   .content{
-    height: 100vh;
+    min-height: 100vh;
   }
 }
 
@@ -107,7 +107,7 @@
         flex-direction: row;
         justify-content: center;
         gap: 50px;
-        height: 100vh;
+        min-height: 100vh;
     }
   }
 

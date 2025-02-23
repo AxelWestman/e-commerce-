@@ -18,11 +18,19 @@ export class DatosService {
   getProductosPorCategoria(categoria: string, filtro:string) : Observable<any>{
     //Si el parámetro recibido es "ofertas", realizar un if para que traiga todos los productos
     return this.http.get(`${this.url}getProductos/categoria?categoria=${categoria}&filtro=${filtro}`)
-    
   }
 
-  getProductoPorId(id: string): Observable<any> {
+  getProductosGeneral(productos: string, filtro:string): Observable<any>{
+    console.log("se traeran los producos de " + productos)
+    return this.http.get(`${this.url}getProductos/general?categoria=${productos}&filtro=${filtro}`)
+  }
+
+  getProductoPorId(id: number): Observable<any> {
     return this.http.get(`${this.url}getProductos/id/${id}`);
+  }
+
+  getProductoPorNombre(id: string): Observable<any> {
+    return this.http.get(`${this.url}getProductosPorNombre/nombre/${id}`);
   }
 
   busquedaNodo(){

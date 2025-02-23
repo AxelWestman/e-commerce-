@@ -45,6 +45,8 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   datoPasadoDeServicio = "";
 
+  paramsUrl: boolean | undefined;
+
   filtros = ["Destacados", "Más nuevo a más viejo", "Más viejo a más nuevo", "Precio menor a mayor", "Precio mayor a menor"]
 
   filtroValor: string = '';
@@ -59,29 +61,57 @@ export class ContentComponent implements OnInit, OnDestroy  {
     }
     else if(filtro === "Más nuevo a más viejo"){
       this.filtroValor = "Más nuevo a más viejo"
+      if(this.paramsUrl === false){
+        this.datosService.getProductosGeneral(this.receivedData, this.filtroValor).subscribe(data => {
+          this.filtroArrayMasNuevoAMasViejo = data.data;
+          console.log(this.filtroArrayMasNuevoAMasViejo);
+         });
+      } else{
       this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
         this.filtroArrayMasNuevoAMasViejo = data.data;
         console.log(this.filtroArrayMasNuevoAMasViejo);
-      });
+       });
+      }
     }
     else if(filtro === "Más viejo a más nuevo"){
       this.filtroValor = "Más viejo a más nuevo"
+      if(this.paramsUrl === false){
+        this.datosService.getProductosGeneral(this.receivedData, this.filtroValor).subscribe(data => {
+          this. filtroArrayMasViejoAMasNuevo = data.data;
+          console.log(this.filtroArrayMasNuevoAMasViejo);
+         });
+      } else{
       this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
-        this.filtroArrayMasNuevoAMasViejo = data.data;
+        this. filtroArrayMasViejoAMasNuevo = data.data;
         console.log(this.filtroArrayMasNuevoAMasViejo);
       });
     }
+    }
     else if(filtro === "Precio menor a mayor"){
-      this.filtroValor = "Precio menor a mayor"   
+      this.filtroValor = "Precio menor a mayor"
+      if(this.paramsUrl === false){
+        this.datosService.getProductosGeneral(this.receivedData, this.filtroValor).subscribe(data => {
+          this.filtroArrayPrecioMenorAMayor = data.data;
+          console.log(this.filtroArrayMasNuevoAMasViejo);
+         });
+      } else{   
       this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
         this.filtroArrayPrecioMenorAMayor = data.data;
       });
+     }
     }
     else if(filtro === "Precio mayor a menor"){
       this.filtroValor = "Precio mayor a menor"
+      if(this.paramsUrl === false){
+        this.datosService.getProductosGeneral(this.receivedData, this.filtroValor).subscribe(data => {
+          this.filtroArrayPrecioMayorAMenor = data.data;
+          console.log(this.filtroArrayMasNuevoAMasViejo);
+         });
+      } else{
       this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
         this.filtroArrayPrecioMayorAMenor = data.data;
       });
+    }
     }
     else{
       this.filtroValor= "Destacados";
@@ -93,11 +123,22 @@ export class ContentComponent implements OnInit, OnDestroy  {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.filtroValor = 'Destacados'
+      console.log(params['category'])
+      if(params['categoria'] === undefined){
+        this.paramsUrl = false;
+        this.receivedData = params['category'];
+       this.datosService.getProductosGeneral(this.receivedData, this.filtroValor).subscribe(data => {
+        this.receivedDataArray = data.data;
+       })
+      } else{
+        this.paramsUrl = true;
       this.receivedData = params['categoria'];
+      console.log("aca " + this.receivedData);
       this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
         this.receivedDataArray = data.data;
         console.log(this.receivedDataArray);
       });
+    }
     });
   
 

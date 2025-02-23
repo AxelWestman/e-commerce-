@@ -8,8 +8,9 @@ import { SomosComponent } from './somos/somos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 
 export const routes: Routes = [
-    {path: 'content/:categoria', component: ContentComponent},
-    {path: 'producto/:id', component: ProductoComponent},
+    {path: 'content/:category', component: ContentComponent},
+    {path: 'content/:productos/:categoria', component: ContentComponent},
+    {path: 'producto/:id/:nombre', component: ProductoComponent},
     {path: 'carrito', component: CarritoComponent},
     {path: 'home', component: HomeComponent },
     {path: 'pago', component: PagoComponent},

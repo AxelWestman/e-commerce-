@@ -9,7 +9,7 @@
       </mat-form-field>
     <div class="cards-styles" *ngIf="filtroValor === 'Destacados'">
     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray | paginate: { itemsPerPage: 12, currentPage: page }">
-        <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+        <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
         <mat-card-content>
             <div class="datos-productos">
@@ -24,7 +24,7 @@
     </div>
     <div class="cards-styles" *ngIf="filtroValor === 'Más nuevo a más viejo'">
         <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayMasNuevoAMasViejo | paginate: { itemsPerPage: 12, currentPage: page }">
-            <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+            <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
             <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
             <mat-card-content>
                 <div class="datos-productos">
@@ -38,8 +38,8 @@
         </mat-card>
         </div>
         <div class="cards-styles" *ngIf="filtroValor === 'Más viejo a más nuevo'">
-            <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayMasNuevoAMasViejo | paginate: { itemsPerPage: 12, currentPage: page }">
-                <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+            <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayMasViejoAMasNuevo | paginate: { itemsPerPage: 12, currentPage: page }">
+                <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
                 <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
                 <mat-card-content>
                     <div class="datos-productos">
@@ -54,7 +54,7 @@
             </div>
             <div class="cards-styles" *ngIf="filtroValor === 'Precio menor a mayor'">
                 <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayPrecioMenorAMayor | paginate: { itemsPerPage: 12, currentPage: page }">
-                    <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+                    <a [routerLink]="['/producto', producto.id, producto.nombre] " routerLinkActive="true" ariaCurrentWhenActive="page">
                     <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
                     <mat-card-content>
                         <div class="datos-productos">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="cards-styles" *ngIf="filtroValor === 'Precio mayor a menor'">
                     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of filtroArrayPrecioMayorAMenor | paginate: { itemsPerPage: 12, currentPage: page }">
-                        <a [routerLink]="['/producto', producto.id]" routerLinkActive="true" ariaCurrentWhenActive="page">
+                        <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
                         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
                         <mat-card-content>
                             <div class="datos-productos">
