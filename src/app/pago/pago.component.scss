@@ -16,7 +16,7 @@ h2{
   text-align: center;
   padding: 0px 10px 0px 10px;
   margin-bottom: 0px;
-  margin-top: 0px;
+  margin-top: 20px;
 }
 
 .example-form {
@@ -26,6 +26,7 @@ h2{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px
   }
   
   .example-full-width {
@@ -44,6 +45,37 @@ h2{
     cursor:pointer;
   }
 
+  .cartel{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
+  }
+
+  .boton-tienda{
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 2px;
+    background-color: #F64A34;
+    cursor: pointer;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
+    color: white;
+    width: 144px;
+    display: flex
+;
+  }
+
+  .boton-tienda p{
+    width: 279px;
+  }
+ 
+
   @media (min-width: 768px) {
 
     .content{
@@ -56,6 +88,17 @@ h2{
 
     .example-form{
       margin-bottom: 20px;
+    }
+
+    .boton-tienda p{
+      font-size: 16px;
+    /* padding: 0px; */
+      width: 485px; 
+    }
+
+    .parrafo{
+      font-size: 21px;
+      width: 300px;
     }
 
   }

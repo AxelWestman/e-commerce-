@@ -1,6 +1,6 @@
 <div class="content">
- <h2>Rellene los campos para luego proceder al pago:</h2>
-  <form class="example-form" (ngSubmit)="onSubmit()">
+ <h2 *ngIf="mostrarFormulario === true">Rellene los campos para luego proceder al pago:</h2>
+  <form class="example-form" (ngSubmit)="onSubmit()" *ngIf="mostrarFormulario === true">
 
 
     <mat-form-field class="example-full-width">
@@ -106,7 +106,20 @@
 
     <button type="submit">¡Proceder al pago!</button>
   </form>
-
+  <div *ngIf="mostrarCartel === true" class="cartel">
+    <h2>¡Gracias por su compra!</h2>
+    <p class="parrafo">En breve le llegará un mail a su correo, asegurese de verificar la carpeta de "correo no deseado".</p>
+    <a mat-list-item routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none; width: 0px;
+    display: flex
+;
+    text-align: center;
+    justify-content: center;
+    align-items: center;">
+      <div class="boton-tienda">
+        <p>Volver a la tienda</p>
+    </div>
+  </a>
+  </div>
  
 
       

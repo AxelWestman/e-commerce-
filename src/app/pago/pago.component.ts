@@ -29,6 +29,9 @@ import { CarritoService } from '../carrito.service';
 })
 export class PagoComponent implements OnInit {
 
+  mostrarCartel: boolean = false;
+  mostrarFormulario: boolean = true;
+
   formaPagoFormControl = new FormControl('', [Validators.required]);
   nombreFormControl = new FormControl('', [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -1324,6 +1327,9 @@ formaDePago(pago: string){
             productos: carritoNombres[i],
           };
           this.pagoService.datosClienteEnvio(datos);
+          this.carritoService.eliminarTodo();
+          this.mostrarFormulario= false;
+          this.mostrarCartel = true;
         }
       } else {
         const datos = {
@@ -1340,6 +1346,9 @@ formaDePago(pago: string){
         };
 
         this.pagoService.datosClienteEnvio(datos);
+        this.carritoService.eliminarTodo();
+        this.mostrarFormulario= false;
+          this.mostrarCartel = true;
         }
       } else if(formaPago === "Transferencia") {
         let carrito = this.carritoService.obtenerCarrito();
@@ -1376,6 +1385,9 @@ formaDePago(pago: string){
             productos: carritoNombres[i],
           };
           this.pagoService.pedidosPendientes(datos);
+          this.carritoService.eliminarTodo();
+          this.mostrarFormulario= false;
+          this.mostrarCartel = true;
         }
       } else {
         const datos = {
@@ -1392,6 +1404,9 @@ formaDePago(pago: string){
         };
 
         this.pagoService.pedidosPendientes(datos);
+        this.carritoService.eliminarTodo();
+        this.mostrarFormulario= false;
+          this.mostrarCartel = true;
         }
       }
     }
