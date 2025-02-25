@@ -1295,10 +1295,16 @@ formaDePago(pago: string){
      if(formaPago === "Tarjeta"){
       let carrito = this.carritoService.obtenerCarrito();
 
+
       let carritoNombres = carrito.map(
         (nombre) => `${nombre.nombre} X${nombre.cantidad}`
       );
       console.log(carritoNombres);
+
+      let id_productos = carrito.map(
+        (id) => `${id.id}`
+      )
+      console.log(id_productos);
 
       if (
         this.nombreFormControl.invalid ||
@@ -1324,6 +1330,7 @@ formaDePago(pago: string){
             postal: this.codigoPostalCliente,
             direccion: this.direccionCliente,
             dept: this.internoDeptoCliente,
+            idProducto: id_productos[i],
             productos: carritoNombres[i],
           };
           this.pagoService.datosClienteEnvio(datos);
@@ -1342,6 +1349,7 @@ formaDePago(pago: string){
           postal: this.codigoPostalCliente,
           direccion: this.direccionCliente,
           dept: this.internoDeptoCliente,
+          idProducto: id_productos,
           productos: carritoNombres,
         };
 
@@ -1357,6 +1365,12 @@ formaDePago(pago: string){
         (nombre) => `${nombre.nombre} X${nombre.cantidad}`
       );
       console.log(carritoNombres);
+
+      let id_productos = carrito.map(
+        (id) => `${id.id}`
+      )
+      console.log(id_productos);
+
 
       if (
         this.nombreFormControl.invalid ||
@@ -1382,6 +1396,7 @@ formaDePago(pago: string){
             postal: this.codigoPostalCliente,
             direccion: this.direccionCliente,
             dept: this.internoDeptoCliente,
+            idProducto: id_productos[i],
             productos: carritoNombres[i],
           };
           this.pagoService.pedidosPendientes(datos);
@@ -1400,6 +1415,7 @@ formaDePago(pago: string){
           postal: this.codigoPostalCliente,
           direccion: this.direccionCliente,
           dept: this.internoDeptoCliente,
+          idProducto: id_productos,
           productos: carritoNombres,
         };
 
