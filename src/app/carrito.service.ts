@@ -69,12 +69,20 @@ export class CarritoService {
 
   agregarCantidadDeProducto(producto: any){
     let carrito = this.obtenerCarrito();
+    console.log(carrito)
     let posicionEnArray = carrito.findIndex(item => item.nombre === producto.nombre);
+    console.log(posicionEnArray)
       let cantidadActual = carrito[posicionEnArray].cantidad;
+      if(carrito[posicionEnArray].stock > cantidadActual){
       let cantidadActualizada = cantidadActual + 1;
       carrito[posicionEnArray].cantidad = cantidadActualizada;
        localStorage.setItem('carrito', JSON.stringify(carrito));
        this.carritoSubject.next(carrito);
+      }
+      else{
+        alert ("No hay mas de esta cantidad en existencia")
+        return cantidadActual;
+      }
   }
 
   disminuirCantidadDeProducto(producto:any){
