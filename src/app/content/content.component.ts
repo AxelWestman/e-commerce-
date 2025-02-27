@@ -47,7 +47,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   paramsUrl: boolean | undefined;
 
-  filtros = ["Destacados", "Más nuevo a más viejo", "Más viejo a más nuevo", "Precio menor a mayor", "Precio mayor a menor"]
+  filtros = ["Destacados", "Precio menor a mayor", "Precio mayor a menor"]
 
   filtroValor: string = '';
   filtroArrayMasNuevoAMasViejo:any[] = [];
