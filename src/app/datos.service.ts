@@ -33,6 +33,18 @@ export class DatosService {
     return this.http.get(`${this.url}getProductosPorNombre/nombre/${id}`);
   }
 
+  busquedaDatosNombre = async (nombre: string) => {
+    const response = await fetch(`${this.url}getProductos/nombre/${nombre}`);
+    try {
+      const data = await response.json();
+      const listaProductos = data.data
+      //console.log(listaProductos);
+      return listaProductos;
+    } catch (err) {
+      console.log(err + "no existe");
+    }
+  }
+
   busquedaNodo(){
     if(typeof localStorage !== 'undefined') {
     let prueba = localStorage.getItem('nodo');

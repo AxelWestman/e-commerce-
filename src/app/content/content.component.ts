@@ -20,10 +20,11 @@ import {
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
-
+import {Subject} from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -36,10 +37,14 @@ import { MatSelectModule } from '@angular/material/select';
 export class ContentComponent implements OnInit, OnDestroy  {
 
   public dataSubscription: Subscription | null = null;
+  private searchSubject = new Subject<string>();
+  private readonly debounceTimeMs = 300;
 
+  valuee$: string = "";
 
   receivedData: any;
   receivedDataArray:any[] = [];
+  productosNombre: any[] = []
 
   public page! : number;
 
@@ -156,7 +161,32 @@ export class ContentComponent implements OnInit, OnDestroy  {
     
   //this.llenarDatos();
   */
+  this.searchSubject.pipe(debounceTime(this.debounceTimeMs)).subscribe((searchValue) => {
+    this.performSearch(searchValue);
+  });
 
+  }
+
+  busqueda(){
+    this.searchSubject.next(this.valuee$);
+  }
+
+  llenarData() { 
+    this.datosService.busquedaDatosNombre(this.valuee$)
+      .then(data => {
+        this.productosNombre = data;
+        console.log("el array de productos: " + this.productosNombre);
+      })
+      .catch(error => {
+        console.error('Error al cargar productos:', error);
+      });
+  }
+
+  performSearch(searchValue: string) {
+    // Perform the actual search operation here
+    console.log('Performing search for:', searchValue);
+    this.llenarData();
+    // ... Your search logic ...
   }
 
   ngOnDestroy() {

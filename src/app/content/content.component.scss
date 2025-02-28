@@ -10,6 +10,22 @@
     flex-wrap: wrap;
 }
 
+.contenedor-contenedores{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.contenedor-busqueda{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
 .cards-styles{
   width: 100%;
     display: flex;
@@ -42,6 +58,14 @@
     color: black;
   }
 
+  .matform-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
 
 
   img{
@@ -109,6 +133,12 @@
         gap: 50px;
         min-height: 100vh;
     }
+
+    .matform-container{
+      flex-direction: row;
+      gap: 20px;
+    }
+
   }
 
   @media (min-width: 1024px) {
