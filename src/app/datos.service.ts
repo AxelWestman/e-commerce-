@@ -25,6 +25,10 @@ export class DatosService {
     return this.http.get(`${this.url}getProductos/general?categoria=${productos}&filtro=${filtro}`)
   }
 
+  getProductosEnOferta()  : Observable<any>{
+    return this.http.get(`${this.url}getProductosOfertas`)
+  }
+
   getProductoPorId(id: number): Observable<any> {
     return this.http.get(`${this.url}getProductos/id/${id}`);
   }
