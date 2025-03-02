@@ -1,0 +1,126 @@
+<div class="content">
+    <button style="margin-top: 20px;" class="boton-compra">Ver mi compra</button>
+  
+    <mat-stepper linear #stepper>
+      <!-- Paso 1 -->
+      <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+        <form [formGroup]="firstFormGroup" class="example-form">
+          <ng-template matStepLabel>Envío</ng-template>
+          <h2 class="titulo-seccion" style="text-align: start;">Contacto</h2>
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="emailFormControl" placeholder="Ej: pat@example.com" name="mail">
+            @if (firstFormGroup.get('emailFormControl')?.hasError('required')) {
+              <mat-error>Mail es <strong>es requerido</strong></mat-error>
+            }
+            @if (firstFormGroup.get('emailFormControl')?.hasError('email')) {
+              <mat-error>Por favor, ingrese un mail válido.</mat-error>
+            }
+          </mat-form-field>
+          <p style="margin: 0px; text-align: left; width: 90%;">¿No sabes cual es tu código postal? <a href="https://www.correoargentino.com.ar/formularios/cpa" target="_blank">Haz click aquí</a></p>
+          <mat-form-field class="example-full-width">
+            <mat-label>Código Postal</mat-label>
+            <input type="number" matInput formControlName="postalFormControl" placeholder="3000" name="postal">
+            @if (firstFormGroup.get('postalFormControl')?.hasError('required')) {
+              <mat-error>Código Postal <strong>es requerido</strong></mat-error>
+            }
+            @if (firstFormGroup.get('postalFormControl')?.hasError('pattern')) {
+              <mat-error>El código postal debe tener 4 dígitos.</mat-error>
+            }
+          </mat-form-field>
+          <div class="datos-del-destinatario">
+            <h2 class="titulo-seccion">Datos del destinatario</h2>
+            <mat-form-field class="example-full-width">
+              <mat-label>Nombre completo</mat-label>
+              <input type="string" matInput formControlName="nombreFormControl" placeholder="" name="nombre">
+              @if (firstFormGroup.get('nombreFormControl')?.hasError('required')) {
+                <mat-error>Nombre completo <strong>es requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Nro Teléfono</mat-label>
+              <input type="tel" matInput formControlName="phoneNumberFormControl" placeholder="Ej: 3421234567" name="telefono">
+              @if (firstFormGroup.get('phoneNumberFormControl')?.hasError('required')) {
+                <mat-error>Nro Teléfono <strong>es requerido</strong></mat-error>
+              }
+              @if (firstFormGroup.get('phoneNumberFormControl')?.hasError('invalidPhone')) {
+                <mat-error>Por favor, ingrese un número de teléfono válido.</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="domicilio-destinatario">
+            <h2 class="titulo-seccion">Domicilio del destinatario</h2>
+            <mat-form-field class="example-full-width">
+              <mat-label>Provincia</mat-label>
+              <mat-select formControlName="provinciaFormControl" (selectionChange)="cargarCiudades($event.value)" name="provincia">
+                <mat-option *ngFor="let provincia of provincias" [value]="provincia">
+                  {{ provincia }}
+                </mat-option>
+              </mat-select>
+              @if (firstFormGroup.get('provinciaFormControl')?.hasError('required')) {
+                <mat-error>Provincia <strong>es requerida</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Ciudad</mat-label>
+              <mat-select formControlName="ciudadFormControl" name="ciudad">
+                <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad">
+                  {{ ciudad }}
+                </mat-option>
+              </mat-select>
+              @if (firstFormGroup.get('ciudadFormControl')?.hasError('required')) {
+                <mat-error>Ciudad <strong>es requerida</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Dirección</mat-label>
+              <input type="string" matInput formControlName="direccionFormControl" placeholder="" name="direccion">
+              @if (firstFormGroup.get('direccionFormControl')?.hasError('required')) {
+                <mat-error>Dirección <strong>es requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Interno/Depto nro (opcional)</mat-label>
+              <input matInput placeholder="Ej: Interno 4 / Dpto 8" name="depto">
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- Paso 2 -->
+      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+        <form [formGroup]="secondFormGroup" class="example-form">
+          <ng-template matStepLabel>Pago</ng-template>
+          <h2 class="titulo-seccion" style="text-align: start;">Forma de pago</h2>
+          <mat-form-field class="example-full-width">
+            <mat-label>Forma de pago</mat-label>
+            <mat-select formControlName="formaPagoFormControl" (selectionChange)="formaDePago($event.value)" name="pago">
+              <mat-option *ngFor="let pago of metodosDePago" [value]="pago">
+                {{ pago }}
+              </mat-option>
+            </mat-select>
+            @if (secondFormGroup.get('formaPagoFormControl')?.hasError('required')) {
+              <mat-error>Forma de pago <strong>es requerida</strong></mat-error>
+            }
+          </mat-form-field>
+          <div style="gap: 6px; display: flex;">
+            <button mat-button matStepperPrevious (click)="onBack()">Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- Paso 3 -->
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>

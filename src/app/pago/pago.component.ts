@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -6,6 +6,7 @@ import {
   FormControl,
   FormGroupDirective,
   NgForm,
+  FormBuilder,
   Validators,
   FormsModule,
   ReactiveFormsModule,
@@ -17,17 +18,21 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { PagoService } from '../pago.service';
 import { CarritoService } from '../carrito.service';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 
 @Component({
   selector: 'app-pago',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule ],
-  templateUrl: './pago.component.html',
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule ],
+  templateUrl: './prueba.html',
   styleUrl: './pago.component.scss'
 })
 export class PagoComponent implements OnInit {
+
+  private _formBuilder = inject(FormBuilder);
+
 
   mostrarCartel: boolean = false;
   mostrarFormulario: boolean = true;
@@ -41,6 +46,26 @@ export class PagoComponent implements OnInit {
   postalFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d{4}$/)]);
   direccionFormControl = new FormControl('', [Validators.required]);
 
+  firstFormGroup = this._formBuilder.group({
+    emailFormControl: ['', [Validators.required, Validators.email]], // Validadores en un array
+    phoneNumberFormControl: ['', [Validators.required, this.argentinaPhoneValidator]], // Validadores en un array
+    nombreFormControl: ['', [Validators.required]], // Validadores en un array
+    provinciaFormControl: ['', [Validators.required]], // Validadores en un array
+    ciudadFormControl: ['', [Validators.required]], // Validadores en un array
+    postalFormControl: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]], // Validadores en un array
+    direccionFormControl: ['', [Validators.required]], // Validadores en un array
+  });
+  
+  secondFormGroup = this._formBuilder.group({
+    formaPagoFormControl: ['', [Validators.required]],
+  });
+  isEditable = true;
+
+  onBack() {
+    console.log('Botón Back clickeado');
+    console.log('Estado del formulario actual:', this.firstFormGroup.valid);
+  }
+  
   formaPago:string = "";
 
   cordobaCiudadesArray: any[] = []
