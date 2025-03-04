@@ -12,6 +12,18 @@
     font-weight: 400;
 }
 
+.container-del-formulario{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.productos-en-carrito{
+  display: none;
+}
+
 mat-stepper{
   width: 100%;
   background-color: transparent;
@@ -128,8 +140,85 @@ h2{
   }
     @media(min-width: 1024px){
 
+      .content{
+        flex-direction: row;
+      }
+
       .boton-compra{
         display: none;
+      }
+
+      .productos-en-carrito{
+        display: block;
+        width: 30%;
+        min-height: 102vh;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgb(255 255 255 / 40%));
+      }
+
+
+      .example-card{
+        padding: 0px 30px 0px 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: black;
+        //background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
+        background-color:transparent ;
+      }
+
+      img{
+        width: 80px;
+        height: 80px;
+      }
+
+      mat-card-content{
+        width: 90%;
+        height: auto;
+        display: flex;
+        padding-bottom: 0px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .mat-mdc-card-content:last-child {
+        padding-bottom: 0px;
+      }
+
+      .datos-productos{
+        height: auto;
+        width: 100%;
+      }
+
+      .container-h1-h2{
+        display: flex;
+        height: auto;
+        width: 100%;
+      }
+
+      .titulo-grande{
+        font-size: 18px;
+        margin: 0;
+        height: 30px;
+        font-family: "DM Serif Text", serif;
+        font-weight: 400;
+      }
+    
+      .titulo-chico{
+        font-size: 15px;
+        margin: 0;
+        height: 30px;
+        font-family: "DM Serif Text", serif;
+        font-weight: 400;
+      }
+
+      .contenedor-botones-suma-resta{
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
     }

@@ -1,4 +1,5 @@
 <div class="content">
+  <div *ngIf="mostrarFormulario === true" class="container-del-formulario">
     <button style="margin-top: 20px;" class="boton-compra">Ver mi compra</button>
   
     <mat-stepper linear #stepper>
@@ -81,7 +82,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Interno/Depto nro (opcional)</mat-label>
-              <input matInput placeholder="Ej: Interno 4 / Dpto 8" name="depto">
+              <input matInput formControlName="departamentoFormControl" placeholder="Ej: Interno 4 / Dpto 8" name="depto">
             </mat-form-field>
           </div>
           <div>
@@ -119,8 +120,48 @@
         <p>You are now done.</p>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button (click)="onSubmit()">Finalizar</button>
         </div>
       </mat-step>
     </mat-stepper>
+  </div>
+  <div *ngIf="mostrarFormulario === true" class="productos-en-carrito">
+    <h1 style="margin-left: 20px;">Mi carrito</h1>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of carrito">
+      <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+      <mat-card-content>
+          <div class="datos-productos">
+            <div class="container-h1-h2">
+                <h1 class="titulo-grande">{{producto.nombre}}</h1>
+                <h2 class="titulo-chico">${{producto.precio}}</h2> 
+              <!--<p>{{producto.descripcion}}</p>-->
+              </div>
+              <div class="contenedor-botones-suma-resta">
+                <p>cant: {{producto.cantidad}}</p>
+            </div>   
+          </div>
+      </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <h2 style="text-align: start; margin-left: 12px;">Subtotal: ${{subtotal}}</h2>
+  <mat-divider></mat-divider>
+  <h2 style="text-align: start; margin-left: 12px;">Envío: </h2>
+  <mat-divider></mat-divider>
+  <h2 style="text-align: start; margin-left: 12px;">Total: </h2>
+  </div>
+    <div *ngIf="mostrarCartel === true" class="cartel">
+      <h2>¡Gracias por su compra!</h2>
+      <p class="parrafo">En breve le llegará un mail a su correo, asegurese de verificar la carpeta de "correo no deseado".</p>
+      <a mat-list-item routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none; width: 0px;
+      display: flex
+  ;
+      text-align: center;
+      justify-content: center;
+      align-items: center;">
+        <div class="boton-tienda">
+          <p>Volver a la tienda</p>
+      </div>
+    </a>
+    </div>
   </div>

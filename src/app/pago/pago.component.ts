@@ -19,13 +19,15 @@ import {MatSelectModule} from '@angular/material/select';
 import { PagoService } from '../pago.service';
 import { CarritoService } from '../carrito.service';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
 @Component({
   selector: 'app-pago',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule ],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, MatCardModule, MatDividerModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule ],
   templateUrl: './prueba.html',
   styleUrl: './pago.component.scss'
 })
@@ -36,6 +38,9 @@ export class PagoComponent implements OnInit {
 
   mostrarCartel: boolean = false;
   mostrarFormulario: boolean = true;
+
+  carrito: any[] = [];
+  subtotal: number = 0;
 
   formaPagoFormControl = new FormControl('', [Validators.required]);
   nombreFormControl = new FormControl('', [Validators.required]);
@@ -54,6 +59,7 @@ export class PagoComponent implements OnInit {
     ciudadFormControl: ['', [Validators.required]], // Validadores en un array
     postalFormControl: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]], // Validadores en un array
     direccionFormControl: ['', [Validators.required]], // Validadores en un array
+    departamentoFormControl: ['']
   });
   
   secondFormGroup = this._formBuilder.group({
@@ -64,6 +70,15 @@ export class PagoComponent implements OnInit {
   onBack() {
     console.log('Botón Back clickeado');
     console.log('Estado del formulario actual:', this.firstFormGroup.valid);
+  }
+
+  obtenerProductosLocalStorage() {
+    this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    console.log(this.carrito);
+    for(let i = 0; i < this.carrito.length; i++){
+      this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad 
+    }
+    console.log(this.subtotal);
   }
   
   formaPago:string = "";
@@ -1307,120 +1322,97 @@ formaDePago(pago: string){
     this.ciudadesDeSantaCruz();
     this.ciudadesDeTierraDelFuego();
     this.ciudadesDeMisiones();
+    this.obtenerProductosLocalStorage();
   }
 
     constructor(private pagoService: PagoService, private carritoService: CarritoService) { }
 
     onSubmit(){
-
-      const formaPago = this.formaPago.trim(); 
-
-      console.log(formaPago)
-
-     if(formaPago === "Tarjeta"){
-      let carrito = this.carritoService.obtenerCarrito();
-
-
-      let carritoNombres = carrito.map(
-        (nombre) => `${nombre.nombre} X${nombre.cantidad}`
-      );
-      console.log(carritoNombres);
-
-      let id_productos = carrito.map(
-        (id) => `${id.id}`
-      )
-      console.log(id_productos);
-
-      if (
-        this.nombreFormControl.invalid ||
-        this.emailFormControl.invalid ||
-        this.phoneNumberFormControl.invalid ||
-        this.provinciaFormControl.invalid ||
-        this.ciudadFormControl.invalid ||
-        this.postalFormControl.invalid ||
-        this.direccionFormControl.invalid
-      ) {
-        return;
-      }
-
-      if (carritoNombres.length > 1) {
-        for (let i = 0; i < carritoNombres.length; i++) {
-          const datos = {
-            formaPago: this.formaPago,
-            nombre: this.nombreCliente,
-            email: this.emailCliente,
-            telefono: this.telefonoCliente,
-            provincia: this.provinciaCliente,
-            ciudad: this.ciudadCliente,
-            postal: this.codigoPostalCliente,
-            direccion: this.direccionCliente,
-            dept: this.internoDeptoCliente,
-            idProducto: id_productos[i],
-            productos: carritoNombres[i],
-          };
-          this.pagoService.datosClienteEnvio(datos);
-          this.carritoService.eliminarTodo();
-          this.mostrarFormulario= false;
-          this.mostrarCartel = true;
-        }
-      } else {
-        const datos = {
-          formaPago: this.formaPago,
-          nombre: this.nombreCliente,
-          email: this.emailCliente,
-          telefono: this.telefonoCliente,
-          provincia: this.provinciaCliente,
-          ciudad: this.ciudadCliente,
-          postal: this.codigoPostalCliente,
-          direccion: this.direccionCliente,
-          dept: this.internoDeptoCliente,
-          idProducto: id_productos,
-          productos: carritoNombres,
+      if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
+        const formData = {
+          ...this.firstFormGroup.value,
+          ...this.secondFormGroup.value,
         };
+        console.log('Datos del formulario:', formData.provinciaFormControl);
 
-        this.pagoService.datosClienteEnvio(datos);
-        this.carritoService.eliminarTodo();
-        this.mostrarFormulario= false;
-          this.mostrarCartel = true;
-        }
-      } else if(formaPago === "Transferencia") {
-        let carrito = this.carritoService.obtenerCarrito();
+        const formaPago = formData.formaPagoFormControl;
 
-      let carritoNombres = carrito.map(
-        (nombre) => `${nombre.nombre} X${nombre.cantidad}`
-      );
-      console.log(carritoNombres);
+        if (formaPago === 'Tarjeta') {
+          let carrito = this.carritoService.obtenerCarrito();
 
-      let id_productos = carrito.map(
-        (id) => `${id.id}`
-      )
-      console.log(id_productos);
+          let carritoNombres = carrito.map(
+            (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+          );
+          console.log(carritoNombres);
 
+          let id_productos = carrito.map((id) => `${id.id}`);
+          console.log(id_productos);
 
-      if (
-        this.nombreFormControl.invalid ||
-        this.emailFormControl.invalid ||
-        this.phoneNumberFormControl.invalid ||
-        this.provinciaFormControl.invalid ||
-        this.ciudadFormControl.invalid ||
-        this.postalFormControl.invalid ||
-        this.direccionFormControl.invalid
-      ) {
-        return;
-      }
+          if (carritoNombres.length > 1) {
+            for (let i = 0; i < carritoNombres.length; i++) {
+              const datos = {
+                formaPago: this.formaPago,
+                nombre: formData.nombreFormControl,
+                email: formData.emailFormControl,
+                telefono: formData.phoneNumberFormControl,
+                provincia: formData.provinciaFormControl,
+                ciudad: formData.ciudadFormControl,
+                postal: formData.postalFormControl,
+                direccion: formData.direccionFormControl,
+                dept: formData.departamentoFormControl,
+                idProducto: id_productos[i],
+                productos: carritoNombres[i],
+              };
+              this.pagoService.datosClienteEnvio(datos);
+              this.carritoService.eliminarTodo();
+              this.mostrarFormulario = false;
+              this.mostrarCartel = true;
+            }
+          } else {
+            const datos = {
+              formaPago: this.formaPago,
+              nombre: formData.nombreFormControl,
+              email: formData.emailFormControl,
+              telefono: formData.phoneNumberFormControl,
+              provincia: formData.provinciaFormControl,
+              ciudad: formData.ciudadFormControl,
+              postal: formData.postalFormControl,
+              direccion: formData.direccionFormControl,
+              dept: formData.departamentoFormControl,
+              idProducto: id_productos,
+              productos: carritoNombres,
+            };
 
-      if (carritoNombres.length > 1) {
+            this.pagoService.datosClienteEnvio(datos);
+            this.carritoService.eliminarTodo();
+            this.mostrarFormulario = false;
+            this.mostrarCartel = true;
+          }
+        } 
+           else if(formaPago === "Transferencia") {
+              let carrito = this.carritoService.obtenerCarrito();
+      
+            let carritoNombres = carrito.map(
+              (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+            );
+            console.log(carritoNombres);
+      
+            let id_productos = carrito.map(
+              (id) => `${id.id}`
+            )
+            console.log(id_productos);
+              if (carritoNombres.length > 1) {
         for (let i = 0; i < carritoNombres.length; i++) {
           const datos = {
             formaPago: this.formaPago,
-            nombre: this.nombreCliente,
-            email: this.emailCliente,
-            telefono: this.telefonoCliente,
-            provincia: this.provinciaCliente,
-            ciudad: this.ciudadCliente,
-            postal: this.codigoPostalCliente,
-            direccion: this.direccionCliente,
-            dept: this.internoDeptoCliente,
+            nombre: formData.nombreFormControl,
+            email: formData.emailFormControl,
+            telefono: formData.phoneNumberFormControl,
+            provincia: formData.provinciaFormControl,
+            ciudad: formData.ciudadFormControl,
+            postal: formData.postalFormControl,
+            direccion: formData.direccionFormControl,
+            dept: formData.departamentoFormControl,
             idProducto: id_productos[i],
             productos: carritoNombres[i],
           };
@@ -1432,16 +1424,16 @@ formaDePago(pago: string){
       } else {
         const datos = {
           formaPago: this.formaPago,
-          nombre: this.nombreCliente,
-          email: this.emailCliente,
-          telefono: this.telefonoCliente,
-          provincia: this.provinciaCliente,
-          ciudad: this.ciudadCliente,
-          postal: this.codigoPostalCliente,
-          direccion: this.direccionCliente,
-          dept: this.internoDeptoCliente,
-          idProducto: id_productos,
-          productos: carritoNombres,
+                nombre: formData.nombreFormControl,
+                email: formData.emailFormControl,
+                telefono: formData.phoneNumberFormControl,
+                provincia: formData.provinciaFormControl,
+                ciudad: formData.ciudadFormControl,
+                postal: formData.postalFormControl,
+                direccion: formData.direccionFormControl,
+                dept: formData.departamentoFormControl,
+                idProducto: id_productos,
+                productos: carritoNombres,
         };
 
         this.pagoService.pedidosPendientes(datos);
@@ -1451,5 +1443,154 @@ formaDePago(pago: string){
         }
       }
     }
+    // this.miServicio.guardarDatos(formData).subscribe(...);
+    else {
+      console.error('El formulario no es válido');
+    }
+  } 
+      
+
+    
+  
+    // onSubmit(){
+
+    //   const formaPago = this.formaPago.trim(); 
+
+    //   console.log(formaPago)
+
+    //  if(formaPago === "Tarjeta"){
+    //   let carrito = this.carritoService.obtenerCarrito();
+
+
+    //   let carritoNombres = carrito.map(
+    //     (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+    //   );
+    //   console.log(carritoNombres);
+
+    //   let id_productos = carrito.map(
+    //     (id) => `${id.id}`
+    //   )
+    //   console.log(id_productos);
+
+    //   if (
+    //     this.nombreFormControl.invalid ||
+    //     this.emailFormControl.invalid ||
+    //     this.phoneNumberFormControl.invalid ||
+    //     this.provinciaFormControl.invalid ||
+    //     this.ciudadFormControl.invalid ||
+    //     this.postalFormControl.invalid ||
+    //     this.direccionFormControl.invalid
+    //   ) {
+    //     return;
+    //   }
+
+    //   if (carritoNombres.length > 1) {
+    //     for (let i = 0; i < carritoNombres.length; i++) {
+    //       const datos = {
+    //         formaPago: this.formaPago,
+    //         nombre: this.nombreCliente,
+    //         email: this.emailCliente,
+    //         telefono: this.telefonoCliente,
+    //         provincia: this.provinciaCliente,
+    //         ciudad: this.ciudadCliente,
+    //         postal: this.codigoPostalCliente,
+    //         direccion: this.direccionCliente,
+    //         dept: this.internoDeptoCliente,
+    //         idProducto: id_productos[i],
+    //         productos: carritoNombres[i],
+    //       };
+    //       this.pagoService.datosClienteEnvio(datos);
+    //       this.carritoService.eliminarTodo();
+    //       this.mostrarFormulario= false;
+    //       this.mostrarCartel = true;
+    //     }
+    //   } else {
+    //     const datos = {
+    //       formaPago: this.formaPago,
+    //       nombre: this.nombreCliente,
+    //       email: this.emailCliente,
+    //       telefono: this.telefonoCliente,
+    //       provincia: this.provinciaCliente,
+    //       ciudad: this.ciudadCliente,
+    //       postal: this.codigoPostalCliente,
+    //       direccion: this.direccionCliente,
+    //       dept: this.internoDeptoCliente,
+    //       idProducto: id_productos,
+    //       productos: carritoNombres,
+    //     };
+
+    //     this.pagoService.datosClienteEnvio(datos);
+    //     this.carritoService.eliminarTodo();
+    //     this.mostrarFormulario= false;
+    //       this.mostrarCartel = true;
+    //     }
+    //   } else if(formaPago === "Transferencia") {
+    //     let carrito = this.carritoService.obtenerCarrito();
+
+    //   let carritoNombres = carrito.map(
+    //     (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+    //   );
+    //   console.log(carritoNombres);
+
+    //   let id_productos = carrito.map(
+    //     (id) => `${id.id}`
+    //   )
+    //   console.log(id_productos);
+
+
+    //   if (
+    //     this.nombreFormControl.invalid ||
+    //     this.emailFormControl.invalid ||
+    //     this.phoneNumberFormControl.invalid ||
+    //     this.provinciaFormControl.invalid ||
+    //     this.ciudadFormControl.invalid ||
+    //     this.postalFormControl.invalid ||
+    //     this.direccionFormControl.invalid
+    //   ) {
+    //     return;
+    //   }
+
+    //   if (carritoNombres.length > 1) {
+    //     for (let i = 0; i < carritoNombres.length; i++) {
+    //       const datos = {
+    //         formaPago: this.formaPago,
+    //         nombre: this.nombreCliente,
+    //         email: this.emailCliente,
+    //         telefono: this.telefonoCliente,
+    //         provincia: this.provinciaCliente,
+    //         ciudad: this.ciudadCliente,
+    //         postal: this.codigoPostalCliente,
+    //         direccion: this.direccionCliente,
+    //         dept: this.internoDeptoCliente,
+    //         idProducto: id_productos[i],
+    //         productos: carritoNombres[i],
+    //       };
+    //       this.pagoService.pedidosPendientes(datos);
+    //       this.carritoService.eliminarTodo();
+    //       this.mostrarFormulario= false;
+    //       this.mostrarCartel = true;
+    //     }
+    //   } else {
+    //     const datos = {
+    //       formaPago: this.formaPago,
+    //       nombre: this.nombreCliente,
+    //       email: this.emailCliente,
+    //       telefono: this.telefonoCliente,
+    //       provincia: this.provinciaCliente,
+    //       ciudad: this.ciudadCliente,
+    //       postal: this.codigoPostalCliente,
+    //       direccion: this.direccionCliente,
+    //       dept: this.internoDeptoCliente,
+    //       idProducto: id_productos,
+    //       productos: carritoNombres,
+    //     };
+
+    //     this.pagoService.pedidosPendientes(datos);
+    //     this.carritoService.eliminarTodo();
+    //     this.mostrarFormulario= false;
+    //       this.mostrarCartel = true;
+    //     }
+    //   }
+    // }
 
 }
