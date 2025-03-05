@@ -115,6 +115,16 @@ export class PagoComponent implements OnInit {
   direccionCliente: any = '';
   internoDeptoCliente: any;
 
+  revisionMail: any = '';
+  revisionCodigoPostal: any = '';
+  revisionNombre:any = '';
+  revisionTelefono: any = '';
+  revisionProvincia: any = '';
+  revisionCiudad: any = '';
+  revisionDireccion: any = '';
+  revisionDepto: any = '';
+  revisionMetodoPago: any = '';
+
  // Función de validación personalizada para números de teléfono argentinos
  argentinaPhoneValidator(control: AbstractControl) {
   const phoneRegex = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
@@ -1326,6 +1336,25 @@ formaDePago(pago: string){
   }
 
     constructor(private pagoService: PagoService, private carritoService: CarritoService) { }
+
+    revisionDatos(){
+      if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
+        const formData = {
+          ...this.firstFormGroup.value,
+          ...this.secondFormGroup.value,
+        };
+
+      this.revisionMail = formData.emailFormControl;
+      this.revisionCodigoPostal = formData.postalFormControl;
+      this.revisionNombre = formData.nombreFormControl;
+      this.revisionTelefono = formData.phoneNumberFormControl;
+      this.revisionProvincia = formData.provinciaFormControl;
+      this.revisionCiudad = formData.ciudadFormControl;
+      this.revisionDireccion= formData.direccionFormControl;
+      this.revisionDepto = formData.departamentoFormControl;
+      this.revisionMetodoPago = formData.formaPagoFormControl;
+    }
+  }
 
     onSubmit(){
       if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
