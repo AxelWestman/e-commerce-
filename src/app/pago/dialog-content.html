@@ -1,0 +1,25 @@
+<div class="productos-en-carrito">
+    <h1 style="margin-left: 20px;">Mi carrito</h1>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of carrito">
+      <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+      <mat-card-content>
+          <div class="datos-productos">
+            <div class="container-h1-h2">
+                <h1 class="titulo-grande">{{producto.nombre}}</h1>
+                <h2 class="titulo-chico">${{producto.precio}}</h2> 
+              <!--<p>{{producto.descripcion}}</p>-->
+              </div>
+              <div class="contenedor-botones-suma-resta">
+                <p>cant: {{producto.cantidad}}</p>
+            </div>   
+          </div>
+      </mat-card-content>
+  </mat-card>
+
+  <h2 style="text-align: start; margin-left: 12px;">Subtotal: ${{subtotal}}</h2>
+  <mat-divider></mat-divider>
+  <h2 style="text-align: start; margin-left: 12px;">Envío: </h2>
+  <mat-divider></mat-divider>
+  <h2 style="text-align: start; margin-left: 12px;">Total: </h2>
+  </div>

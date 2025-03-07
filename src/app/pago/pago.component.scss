@@ -8,8 +8,7 @@
     min-height: 100vh;
     gap: 15px;
     flex-direction: column;
-    font-family: "DM Serif Text", serif;
-    font-weight: 400;
+    font-family: "Roboto", sans-serif;
 }
 
 .container-del-formulario{
@@ -75,8 +74,8 @@ h2{
     width: 150px;
     font-size: medium;
     background-color: #F64A34;
-    font-family: "DM Serif Text", serif;
-    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
     color: white;
     cursor:pointer;
   }
@@ -99,7 +98,7 @@ h2{
     padding: 2px;
     background-color: #F64A34;
     cursor: pointer;
-    font-family: "DM Serif Text", serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
     color: white;
     width: 144px;
@@ -117,7 +116,39 @@ h2{
     text-align: center;
     /* background-color: white; */
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+
+  .container-cajas{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .container-envio{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    border: 1px solid gainsboro;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .container-pago{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    border: 1px solid gainsboro;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .campos-revision{
+    width: fit-content;
+     padding: 3px;
+     text-align: left;
+     font-weight: normal;
+   }
  
 
   @media (min-width: 768px) {
@@ -211,16 +242,16 @@ h2{
         font-size: 18px;
         margin: 0;
         height: 30px;
-        font-family: "DM Serif Text", serif;
-        font-weight: 400;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
       }
     
       .titulo-chico{
         font-size: 15px;
         margin: 0;
         height: 30px;
-        font-family: "DM Serif Text", serif;
-        font-weight: 400;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
       }
 
       .contenedor-botones-suma-resta{

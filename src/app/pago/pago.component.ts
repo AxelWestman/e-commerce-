@@ -21,13 +21,14 @@ import { CarritoService } from '../carrito.service';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 
 
 @Component({
   selector: 'app-pago',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, MatCardModule, MatDividerModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule ],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule ],
   templateUrl: './prueba.html',
   styleUrl: './pago.component.scss'
 })
@@ -80,6 +81,16 @@ export class PagoComponent implements OnInit {
     }
     console.log(this.subtotal);
   }
+
+  readonly dialog = inject(MatDialog);
+
+    openDialog() {
+      const dialogRef = this.dialog.open(DialogContent);
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    }
   
   formaPago:string = "";
 
@@ -133,6 +144,8 @@ export class PagoComponent implements OnInit {
   }
   return null;
 }
+
+
 
 // Lista de provincias de Argentina
 provincias = [
@@ -1621,5 +1634,38 @@ formaDePago(pago: string){
     //     }
     //   }
     // }
-
 }
+
+    @Component({
+      selector: 'dialog-content',
+      standalone: true,
+      templateUrl: 'dialog-content.html',
+      imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule],
+      styleUrl: './dialog-style.scss'
+    })
+    export class DialogContent{
+      productoData: any;
+    
+      carrito: any[] = []; 
+      subtotal: number = 0;
+
+      constructor(private pagoService: PagoService, private carritoService: CarritoService) {}
+    
+     
+      ngOnInit() {
+        this.obtenerProductosLocalStorage();
+      }
+
+      obtenerProductosLocalStorage() {
+        this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+        console.log(this.carrito);
+        for(let i = 0; i < this.carrito.length; i++){
+          this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad 
+        }
+        console.log(this.subtotal);
+      }
+    
+    
+    }
+
+

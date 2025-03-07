@@ -1,6 +1,6 @@
 <div class="content">
   <div *ngIf="mostrarFormulario === true" class="container-del-formulario">
-    <button style="margin-top: 20px;" class="boton-compra">Ver mi compra</button>
+    <button style="margin-top: 20px;" class="boton-compra" (click)="openDialog();">Ver mi compra</button>
   
     <mat-stepper linear #stepper>
       <!-- Paso 1 -->
@@ -86,7 +86,7 @@
             </mat-form-field>
           </div>
           <div>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperNext style="color: white;">Siguiente</button>
           </div>
         </form>
       </mat-step>
@@ -108,8 +108,8 @@
             }
           </mat-form-field>
           <div style="gap: 6px; display: flex;">
-            <button mat-button matStepperPrevious (click)="onBack()">Back</button>
-            <button mat-button matStepperNext (click)="revisionDatos()">Next</button>
+            <button mat-button matStepperPrevious (click)="onBack()" style="color: white;">Volver</button>
+            <button mat-button matStepperNext (click)="revisionDatos()" style="color: white;">Siguiente</button>
           </div>
         </form>
       </mat-step>
@@ -119,19 +119,27 @@
         <ng-template matStepLabel>Revisión</ng-template>
         <div class="container-revision-datos">
           <h2>Revisa tus datos</h2>
-          <p>Mail: {{revisionMail}}</p>
-          <p>Código Postal: {{revisionCodigoPostal}}</p>
-          <p>Nombre Completo: {{revisionNombre}}</p>
-          <p>Teléfono: {{revisionTelefono}}</p>
-          <p>Provincia: {{revisionProvincia}}</p>
-          <p>Ciudad: {{revisionCiudad}}</p>
-          <p>Dirección: {{revisionDireccion}}</p>
-          <p>Depto: {{revisionDepto}}</p>
-          <p>Método de Pago: {{revisionMetodoPago}}</p>
+          <div class="container-cajas">
+            <h2>Envío</h2>
+            <div class="container-envio">
+          <p class="campos-revision">Mail <br> {{revisionMail}}</p>
+          <p class="campos-revision">Código Postal <br> {{revisionCodigoPostal}}</p>
+          <p class="campos-revision">Nombre Completo <br> {{revisionNombre}}</p>
+          <p class="campos-revision">Teléfono <br> {{revisionTelefono}}</p>
+          <p class="campos-revision">Provincia <br> {{revisionProvincia}}</p>
+          <p class="campos-revision">Ciudad <br> {{revisionCiudad}}</p>
+          <p class="campos-revision">Dirección <br> {{revisionDireccion}}</p>
+          <p class="campos-revision">Depto <br> {{revisionDepto}}</p>
+          </div>
+          <h2>Pago</h2>
+          <div class="container-pago">
+          <p class="campos-revision">Método de Pago <br> {{revisionMetodoPago}}</p>
+        </div>
+        </div>
         <div style="gap: 6px; display: flex; width: 100%;
     justify-content: center;">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="onSubmit()">Finalizar</button>
+          <button mat-button matStepperPrevious style="color: white;">Volver</button>
+          <button mat-button (click)="onSubmit()" style="color: white;">Finalizar</button>
         </div>
       </div>
       </mat-step>

@@ -17,7 +17,8 @@ export class CarritoService {
 
   cantidadProducto:number = 0;
 
-  
+  carrito: any[] = []; 
+  subtotal: number = 0;
 
   obtenerCarrito(): any[] {
     // Verifica si localStorage está disponible
@@ -83,6 +84,15 @@ export class CarritoService {
         alert ("No hay mas de esta cantidad en existencia")
         return cantidadActual;
       }
+  }
+
+  obtenerProductosLocalStorage() {
+    this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    console.log(this.carrito);
+    for(let i = 0; i < this.carrito.length; i++){
+      this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad 
+    }
+    console.log(this.subtotal);
   }
 
   disminuirCantidadDeProducto(producto:any){
