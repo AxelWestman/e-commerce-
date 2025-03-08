@@ -22,7 +22,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';  // Importa HttpClientModule
 
+declare var MercadoPago: any; // Declara MercadoPago como una variable global// Declara MercadoPago para TypeScript
 
 
 @Component({
@@ -1348,7 +1350,7 @@ formaDePago(pago: string){
     this.obtenerProductosLocalStorage();
   }
 
-    constructor(private pagoService: PagoService, private carritoService: CarritoService) { }
+    constructor(private pagoService: PagoService, private carritoService: CarritoService, private http: HttpClient) { }
 
     revisionDatos(){
       if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
@@ -1367,6 +1369,30 @@ formaDePago(pago: string){
       this.revisionDepto = formData.departamentoFormControl;
       this.revisionMetodoPago = formData.formaPagoFormControl;
     }
+  }
+
+  pagoMercadoPago(){
+    const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
+      locale: 'es-AR',
+    });
+
+    this.http.post('http://192.168.0.77:3000/create-order', {
+      title: 'Producto de prueba',
+      price: 2000,
+      quantity: 1,
+    }).subscribe((response: any) => {
+      const preferenceId = response.id;
+
+      mp.checkout({
+        preference: {
+          id: preferenceId,
+        },
+        render: {
+          container: '.checkout-container', // Contenedor donde se renderizará el botón
+          label: 'Pagar con MercadoPago',
+        },
+      });
+    });
   }
 
     onSubmit(){
@@ -1634,6 +1660,7 @@ formaDePago(pago: string){
     //     }
     //   }
     // }
+  
 }
 
     @Component({
@@ -1655,6 +1682,7 @@ formaDePago(pago: string){
       ngOnInit() {
         this.obtenerProductosLocalStorage();
       }
+
 
       obtenerProductosLocalStorage() {
         this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
