@@ -1376,7 +1376,7 @@ formaDePago(pago: string){
       locale: 'es-AR',
     });
 
-    this.http.post('http://192.168.0.77:3000/create-order', {
+    this.http.post('http://192.168.0.163:3000/create-order', {
       title: 'Producto de prueba',
       price: 2000,
       quantity: 1,
