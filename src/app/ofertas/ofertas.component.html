@@ -35,10 +35,16 @@
     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray | paginate: { itemsPerPage: 12, currentPage: page }">
         <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+        <div class="precio-oferta">
+            <h2 style="background-color: #F64A34; border-radius: 10px;">{{producto.oferta}}% OFF</h2>
+        </div>
         <mat-card-content>
             <div class="datos-productos">
                 <h1>{{producto.nombre}}</h1>
-                <h2>${{producto.precio}}</h2> 
+                <div style="display: flex; gap: 20px; align-items: center; justify-content: center;">
+                    <h2 style="text-decoration: line-through">${{producto.precio}}</h2> 
+                    <h2>${{producto.precio -  ((producto.precio * producto.oferta) / 100)}}</h2> 
+                </div>
                 <!--<h2>Stock: {{producto.stock}}</h2> 
                 <p>{{producto.descripcion}}</p>-->
             </div>

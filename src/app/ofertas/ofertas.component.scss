@@ -113,6 +113,11 @@
     width: 30%;
   }
 
+  .precio-oferta{
+    width: 100%;
+    text-align: center;
+  }
+
   @keyframes slideIn {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }

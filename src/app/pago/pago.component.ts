@@ -1371,28 +1371,39 @@ formaDePago(pago: string){
     }
   }
 
-  pagoMercadoPago(){
+  pagoMercadoPago(carrito: any){
     const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
       locale: 'es-AR',
     });
+  
+    // Preparar los items del carrito para MercadoPago
+    console.log(carrito)
+    const items = carrito.map((producto: any) => ({
+      title: producto.nombre,
+      quantity: producto.cantidad,
+      unit_price: producto.precio,
+    }));
 
+    console.log(items);
+  
     this.http.post('http://192.168.0.163:3000/create-order', {
-      title: 'Producto de prueba',
-      price: 2000,
-      quantity: 1,
-    }).subscribe((response: any) => {
-      const preferenceId = response.id;
-
-      mp.checkout({
-        preference: {
-          id: preferenceId,
-        },
-        render: {
-          container: '.checkout-container', // Contenedor donde se renderizará el botón
-          label: 'Pagar con MercadoPago',
-        },
-      });
-    });
+      items: items, // Enviar los items del carrito
+    }).subscribe(
+      (response: any) => {
+        const initPoint = response.init_point;
+        console.log('initPoint:', initPoint);
+  
+        // Abrir el init_point en una nueva ventana
+        if (initPoint) {
+          window.open(initPoint, '_blank');
+        } else {
+          console.error('No se recibió un init_point válido.');
+        }
+      },
+      (error) => {
+        console.error('Error en la solicitud:', error);
+      }
+    );
   }
 
     onSubmit(){
@@ -1436,6 +1447,7 @@ formaDePago(pago: string){
               this.mostrarFormulario = false;
               this.mostrarCartel = true;
             }
+            //this.pagoMercadoPago(carrito);
           } else {
             const datos = {
               formaPago: this.formaPago,
@@ -1452,10 +1464,14 @@ formaDePago(pago: string){
             };
 
             this.pagoService.datosClienteEnvio(datos);
-            this.carritoService.eliminarTodo();
-            this.mostrarFormulario = false;
-            this.mostrarCartel = true;
+            // this.carritoService.eliminarTodo();
+            // this.mostrarFormulario = false;
+            // this.mostrarCartel = true;
           }
+          this.pagoMercadoPago(carrito);
+          this.carritoService.eliminarTodo();
+          this.mostrarFormulario = false;
+          this.mostrarCartel = true;
         } 
            else if(formaPago === "Transferencia") {
               let carrito = this.carritoService.obtenerCarrito();
