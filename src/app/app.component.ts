@@ -37,8 +37,6 @@ const TREE_DATA: FoodNode[] = [
       },{
         name: 'Decoración',
         children: [{name: 'Toda la decoración'}, {name: 'Manta'}, {name: 'Corazón individual'}, {name: 'Corazón doble'}, {name: 'Corazón triple'}, {name: 'Tira colgante India'} ]
-      },{
-        name: 'Ofertas'
       }
     ],
   },

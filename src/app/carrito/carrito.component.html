@@ -7,7 +7,7 @@
         <mat-card-content>
             <div class="datos-productos">
                 <h1>{{producto.nombre}}</h1>
-                <h2>${{producto.precio}}</h2> 
+                <h2>${{producto.oferta > 0 ? producto.precio_oferta : producto.precio}}</h2> 
                 <!--<p>{{producto.descripcion}}</p>-->
                 <div class="contenedor-botones-suma-resta">
                     <button (click)="disminuirCantidadProducto(producto)">-</button><p>cant: {{producto.cantidad}}</p><button (click)="agregarCantidadProducto(producto)">+</button>
