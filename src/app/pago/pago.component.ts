@@ -1786,7 +1786,11 @@ formaDePago(pago: string){
         this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
         console.log(this.carrito);
         for(let i = 0; i < this.carrito.length; i++){
-          this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad 
+          if(this.carrito[i].oferta > 0){
+            this.subtotal += this.carrito[i].precio_oferta * this.carrito[i].cantidad;
+          } else {
+            this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad 
+          }
         }
         console.log(this.subtotal);
       }

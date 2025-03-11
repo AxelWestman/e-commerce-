@@ -7,7 +7,7 @@
           <div class="datos-productos">
             <div class="container-h1-h2">
                 <h1 class="titulo-grande">{{producto.nombre}}</h1>
-                <h2 class="titulo-chico">${{producto.precio}}</h2> 
+                <h2 class="titulo-chico">${{producto.oferta > 0 ? producto.precio_oferta : producto.precio}}</h2> 
               <!--<p>{{producto.descripcion}}</p>-->
               </div>
               <div class="contenedor-botones-suma-resta">
