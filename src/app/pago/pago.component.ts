@@ -1377,112 +1377,150 @@ formaDePago(pago: string){
     }
   }
 
-  // pagoMercadoPago(carrito: any){
-  //   const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
-  //     locale: 'es-AR',
-  //   });
-  
-  //   // Preparar los items del carrito para MercadoPago
-  //   console.log(carrito)
-  //   const items = carrito.map((producto: any) => ({
-  //     title: producto.nombre,
-  //     quantity: producto.cantidad,
-  //     unit_price: producto.oferta > 0 ? producto.precio_oferta : producto.precio,
-  //   }));
 
-  //   console.log(items);
+
+  // pagoMercadoPago(carrito: any): Promise<void> {
+  //   return new Promise((resolve, reject) => {
+  //     const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
+  //       locale: 'es-AR',
+  //     });
   
-  //   this.http.post('http://192.168.0.163:3000/create-order', {
-  //     items: items, // Enviar los items del carrito
-  //   }).subscribe(
-  //     (response: any) => {
-  //       const initPoint = response.init_point;
-  //       console.log('initPoint:', initPoint);
+  //     // Preparar los items del carrito para MercadoPago
+  //     console.log(carrito);
+  //     const items = carrito.map((producto: any) => ({
+  //       title: producto.nombre,
+  //       quantity: producto.cantidad,
+  //       unit_price: producto.oferta > 0 ? producto.precio_oferta : producto.precio,
+  //     }));
   
-  //       // Abrir el init_point en una nueva ventana
-  //       if (initPoint) {
-  //         window.open(initPoint, '_blank');
-  //       } else {
-  //         console.error('No se recibió un init_point válido.');
+  //     console.log(items);
+  
+  //     this.http.post('http://192.168.0.163:3000/create-order', {
+  //       items: items, // Enviar los items del carrito
+  //     }).subscribe(
+  //       (response: any) => {
+  //         console.log(response);
+  //         this.preference_id = response.id
+  //         const initPoint = response.init_point;
+  //         console.log('initPoint:', initPoint);
+  
+  //         // Abrir el init_point en una nueva ventana
+  //         if (initPoint) {
+  //           const nuevaVentana = window.open(initPoint, '_blank');
+  
+  //           // Verificar si la ventana se abrió correctamente
+  //           if (!nuevaVentana) {
+  //             reject(new Error('No se pudo abrir la ventana de pago.'));
+  //             return;
+  //           }
+  
+  //           // Escuchar eventos en la nueva ventana para detectar cuando se completa el pago
+  //           const verificarPago = setInterval(() => {
+  //             if (nuevaVentana.closed) {
+  //               clearInterval(verificarPago);
+  
+  //               // Hacer una solicitud al servidor para obtener el estado del pago
+  //               this.http.get(`http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`) // Puedes cambiar a /pending o /failure según sea necesario
+  //                 .subscribe(
+  //                   (paymentResponse: any) => {
+  //                     console.log(paymentResponse)
+  //                     const paymentStatus = paymentResponse.data[0].status;
+  //                     console.log(paymentStatus)
+  //                     console.log('Estado del pago:', paymentStatus);
+  
+  //                     if (paymentStatus === 'approved') {
+  //                       resolve(); // Pago exitoso
+  //                     } else {
+  //                       reject(new Error(`El pago no fue aprobado. Estado: ${paymentStatus}`));
+  //                     }
+  //                   },
+  //                   (error) => {
+  //                     reject(new Error('Error al verificar el estado del pago.'));
+  //                   }
+  //                 );
+  //             }
+  //           }, 1000); // Verificar cada segundo si la ventana se cerró
+  //         } else {
+  //           reject(new Error('No se recibió un init_point válido.'));
+  //         }
+  //       },
+  //       (error) => {
+  //         reject(new Error('Error en la solicitud: ' + error.message));
   //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error en la solicitud:', error);
-  //     }
-  //   );
+  //     );
+  //   });
   // }
 
   pagoMercadoPago(carrito: any): Promise<void> {
     return new Promise((resolve, reject) => {
-      const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
-        locale: 'es-AR',
-      });
-  
-      // Preparar los items del carrito para MercadoPago
-      console.log(carrito);
-      const items = carrito.map((producto: any) => ({
-        title: producto.nombre,
-        quantity: producto.cantidad,
-        unit_price: producto.oferta > 0 ? producto.precio_oferta : producto.precio,
-      }));
-  
-      console.log(items);
-  
-      this.http.post('http://192.168.0.163:3000/create-order', {
-        items: items, // Enviar los items del carrito
-      }).subscribe(
-        (response: any) => {
-          console.log(response);
-          this.preference_id = response.id
-          const initPoint = response.init_point;
-          console.log('initPoint:', initPoint);
-  
-          // Abrir el init_point en una nueva ventana
-          if (initPoint) {
-            const nuevaVentana = window.open(initPoint, '_blank');
-  
-            // Verificar si la ventana se abrió correctamente
-            if (!nuevaVentana) {
-              reject(new Error('No se pudo abrir la ventana de pago.'));
-              return;
-            }
-  
-            // Escuchar eventos en la nueva ventana para detectar cuando se completa el pago
-            const verificarPago = setInterval(() => {
-              if (nuevaVentana.closed) {
-                clearInterval(verificarPago);
-  
-                // Hacer una solicitud al servidor para obtener el estado del pago
-                this.http.get(`http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`) // Puedes cambiar a /pending o /failure según sea necesario
-                  .subscribe(
-                    (paymentResponse: any) => {
-                      console.log(paymentResponse)
-                      const paymentStatus = paymentResponse.data[0].status;
-                      console.log(paymentStatus)
-                      console.log('Estado del pago:', paymentStatus);
-  
-                      if (paymentStatus === 'approved') {
-                        resolve(); // Pago exitoso
-                      } else {
-                        reject(new Error(`El pago no fue aprobado. Estado: ${paymentStatus}`));
-                      }
-                    },
-                    (error) => {
-                      reject(new Error('Error al verificar el estado del pago.'));
+        const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
+            locale: 'es-AR',
+        });
+
+        // Preparar los items del carrito para MercadoPago
+        console.log(carrito);
+        const items = carrito.map((producto: any) => ({
+            title: producto.nombre,
+            quantity: producto.cantidad,
+            unit_price: producto.oferta > 0 ? producto.precio_oferta : producto.precio,
+        }));
+
+        console.log(items);
+
+        this.http.post('http://192.168.0.163:3000/create-order', {
+            items: items, // Enviar los items del carrito
+        }).subscribe(
+            (response: any) => {
+                console.log(response);
+                this.preference_id = response.id;
+                const initPoint = response.init_point;
+                console.log('initPoint:', initPoint);
+
+                // Abrir el init_point en una nueva ventana
+                if (initPoint) {
+                    const nuevaVentana = window.open(initPoint, '_blank');
+
+                    // Verificar si la ventana se abrió correctamente
+                    if (!nuevaVentana) {
+                        reject(new Error('No se pudo abrir la ventana de pago.'));
+                        return;
                     }
-                  );
-              }
-            }, 1000); // Verificar cada segundo si la ventana se cerró
-          } else {
-            reject(new Error('No se recibió un init_point válido.'));
-          }
-        },
-        (error) => {
-          reject(new Error('Error en la solicitud: ' + error.message));
-        }
-      );
+
+                    // Verificar el estado del pago cada segundo
+                    const verificarPago = setInterval(() => {
+                        this.http.get(`http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`)
+                            .subscribe(
+                                (paymentResponse: any) => {
+                                    console.log(paymentResponse);
+                                    const paymentStatus = paymentResponse.data[0].status;
+                                    console.log(paymentStatus);
+                                    console.log('Estado del pago:', paymentStatus);
+
+                                    if (paymentStatus === 'approved') {
+                                        clearInterval(verificarPago); // Detener la verificación
+                                        resolve(); // Pago exitoso
+                                    } else if (paymentStatus === 'rejected' || paymentStatus === 'cancelled') {
+                                        clearInterval(verificarPago); // Detener la verificación
+                                        reject(new Error(`El pago no fue aprobado. Estado: ${paymentStatus}`));
+                                    }
+                                    // Si el estado sigue siendo "pending", no hacemos nada y seguimos verificando
+                                },
+                                (error) => {
+                                    clearInterval(verificarPago); // Detener la verificación en caso de error
+                                    reject(new Error('Error al verificar el estado del pago.'));
+                                }
+                            );
+                    }, 1000); // Verificar cada segundo
+                } else {
+                    reject(new Error('No se recibió un init_point válido.'));
+                }
+            },
+            (error) => {
+                reject(new Error('Error en la solicitud: ' + error.message));
+            }
+        );
     });
-  }
+}
 
     async onSubmit(){
       if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
