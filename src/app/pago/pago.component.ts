@@ -1487,7 +1487,7 @@ formaDePago(pago: string){
                     }
 
                     // Verificar el estado del pago cada segundo
-                    const verificarPago = setInterval(() => {
+                    const verificarPago = setInterval(() => { 
                         this.http.get(`http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`)
                             .subscribe(
                                 (paymentResponse: any) => {
