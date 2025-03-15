@@ -50,6 +50,32 @@
             </mat-form-field>
           </div>
           <div class="domicilio-destinatario">
+            <h2 class="titulo-seccion">Opciones de envío</h2>
+            <mat-form-field class="example-full-width">
+              <mat-label>Forma de envío</mat-label>
+              <mat-select formControlName="formaEnvioFormControl"  (selectionChange)="cargarFormasDeEnvio($event.value)"  name="envio">
+                <mat-option *ngFor="let envio of metodosEnvio" [value]="envio">
+                  {{ envio }}
+                </mat-option>
+              </mat-select>
+              @if (firstFormGroup.get('formaEnvioFormControl')?.hasError('required')) {
+                <mat-error>Método de envío <strong>es requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <div class="example-full-width" *ngIf="formaEnvio === 'Envío a domicilio'">
+              <h2 style="background-color: white; border-radius: 10px;">Se usará la información del domicilio para enviar el producto a su hogar</h2>  
+            </div>
+            <mat-form-field class="example-full-width" *ngIf="formaEnvio === 'Envío a sucursal Correo Argentino'">
+              <mat-label>Ingrese la dirección de la sucursal donde se enviará el producto</mat-label>
+              
+                <input type="string" matInput formControlName="direccionSucursal" placeholder="" name="direccion sucursal Correo Argentino">
+              
+              @if (firstFormGroup.get('formaEnvioFormControl')?.hasError('required')) {
+                <mat-error>Método de envío <strong>es requerido</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="domicilio-destinatario">
             <h2 class="titulo-seccion">Domicilio del destinatario</h2>
             <mat-form-field class="example-full-width">
               <mat-label>Provincia</mat-label>
@@ -126,6 +152,8 @@
           <p class="campos-revision">Código Postal <br> {{revisionCodigoPostal}}</p>
           <p class="campos-revision">Nombre Completo <br> {{revisionNombre}}</p>
           <p class="campos-revision">Teléfono <br> {{revisionTelefono}}</p>
+          <p class="campos-revision">Envio <br> {{revisionEnvio}}</p>
+          <p class="campos-revision" *ngIf="revisionSucursal.length > 0">Sucursal <br> {{revisionSucursal}}</p>
           <p class="campos-revision">Provincia <br> {{revisionProvincia}}</p>
           <p class="campos-revision">Ciudad <br> {{revisionCiudad}}</p>
           <p class="campos-revision">Dirección <br> {{revisionDireccion}}</p>

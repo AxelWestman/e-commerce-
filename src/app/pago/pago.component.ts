@@ -56,10 +56,15 @@ export class PagoComponent implements OnInit {
   postalFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d{4}$/)]);
   direccionFormControl = new FormControl('', [Validators.required]);
 
+  formaEnvio: string = "";
+
   firstFormGroup = this._formBuilder.group({
     emailFormControl: ['', [Validators.required, Validators.email]], // Validadores en un array
     phoneNumberFormControl: ['', [Validators.required, this.argentinaPhoneValidator]], // Validadores en un array
     nombreFormControl: ['', [Validators.required]], // Validadores en un array
+    formaEnvioFormControl:['', [Validators.required]],
+    direccionSucursal: [''],
+    // direccionSucursal:  ['', [Validators.required]],
     provinciaFormControl: ['', [Validators.required]], // Validadores en un array
     ciudadFormControl: ['', [Validators.required]], // Validadores en un array
     postalFormControl: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]], // Validadores en un array
@@ -101,6 +106,7 @@ export class PagoComponent implements OnInit {
     }
   
   formaPago:string = "";
+ 
 
   cordobaCiudadesArray: any[] = []
   santaFeCiudadesArray: any[] = []
@@ -138,6 +144,8 @@ export class PagoComponent implements OnInit {
   revisionCodigoPostal: any = '';
   revisionNombre:any = '';
   revisionTelefono: any = '';
+  revisionEnvio: any = '';
+  revisionSucursal: any = ''
   revisionProvincia: any = '';
   revisionCiudad: any = '';
   revisionDireccion: any = '';
@@ -161,6 +169,8 @@ provincias = [
   'San Juan', 'Jujuy', 'Río Negro', 'Neuquén', 'Formosa', 'Chubut', 'San Luis', 'Catamarca', 'La Rioja', 'La Pampa', 'Santa Cruz',
   'Tierra del Fuego', 'Misiones'
 ];
+
+metodosEnvio = ['Envío a domicilio', 'Envío a sucursal Correo Argentino', 'Retiro por showroom']
 
 metodosDePago = ["Transferencia", "Tarjeta"]
 
@@ -1318,6 +1328,33 @@ ciudadesDeMisiones(){
   this.ciudadFormControl.reset(); // Reinicia el campo de ciudad al cambiar la provincia
 }
 
+cargarFormasDeEnvio(envio: string) {
+  if (envio === "Envío a domicilio") {
+    this.formaEnvio = "Envío a domicilio";
+    let direccionSucursalControl = this.firstFormGroup.get('direccionSucursal');
+    if (direccionSucursalControl) {
+      this.revisionSucursal = '';
+      direccionSucursalControl.clearValidators();
+      direccionSucursalControl.updateValueAndValidity(); // Actualiza el estado del control
+    }
+  } else if (envio === 'Envío a sucursal Correo Argentino') {
+    this.formaEnvio = "Envío a sucursal Correo Argentino";
+    let direccionSucursalControl = this.firstFormGroup.get('direccionSucursal');
+    if (direccionSucursalControl) {
+      direccionSucursalControl.setValidators([Validators.required]);
+      direccionSucursalControl.updateValueAndValidity(); // Actualiza el estado del control
+    }
+  } else if (envio === "Retiro por showroom") {
+    this.formaEnvio = "Retiro por showroom";
+    let direccionSucursalControl = this.firstFormGroup.get('direccionSucursal');
+    if (direccionSucursalControl) {
+      this.revisionSucursal = '';
+      direccionSucursalControl.clearValidators();
+      direccionSucursalControl.updateValueAndValidity(); // Actualiza el estado del control
+    }
+  }
+}
+
 formaDePago(pago: string){
   if(pago === "Transferencia"){
     this.formaPago = "Transferencia"
@@ -1369,6 +1406,8 @@ formaDePago(pago: string){
       this.revisionCodigoPostal = formData.postalFormControl;
       this.revisionNombre = formData.nombreFormControl;
       this.revisionTelefono = formData.phoneNumberFormControl;
+      this.revisionEnvio = formData.formaEnvioFormControl;
+      this.revisionSucursal = formData.direccionSucursal; 
       this.revisionProvincia = formData.provinciaFormControl;
       this.revisionCiudad = formData.ciudadFormControl;
       this.revisionDireccion= formData.direccionFormControl;
@@ -1554,6 +1593,8 @@ formaDePago(pago: string){
                 nombre: formData.nombreFormControl,
                 email: formData.emailFormControl,
                 telefono: formData.phoneNumberFormControl,
+                metodoEnvio: formData.formaEnvioFormControl,
+                sucursal: formData.direccionSucursal,
                 provincia: formData.provinciaFormControl,
                 ciudad: formData.ciudadFormControl,
                 postal: formData.postalFormControl,
@@ -1574,6 +1615,8 @@ formaDePago(pago: string){
               nombre: formData.nombreFormControl,
               email: formData.emailFormControl,
               telefono: formData.phoneNumberFormControl,
+              metodoEnvio: formData.formaEnvioFormControl,
+              sucursal: formData.direccionSucursal,
               provincia: formData.provinciaFormControl,
               ciudad: formData.ciudadFormControl,
               postal: formData.postalFormControl,
@@ -1612,6 +1655,8 @@ formaDePago(pago: string){
             nombre: formData.nombreFormControl,
             email: formData.emailFormControl,
             telefono: formData.phoneNumberFormControl,
+            metodoEnvio: formData.formaEnvioFormControl,
+            sucursal: formData.direccionSucursal,
             provincia: formData.provinciaFormControl,
             ciudad: formData.ciudadFormControl,
             postal: formData.postalFormControl,
@@ -1631,6 +1676,8 @@ formaDePago(pago: string){
                 nombre: formData.nombreFormControl,
                 email: formData.emailFormControl,
                 telefono: formData.phoneNumberFormControl,
+                metodoEnvio: formData.formaEnvioFormControl,
+                sucursal: formData.direccionSucursal,
                 provincia: formData.provinciaFormControl,
                 ciudad: formData.ciudadFormControl,
                 postal: formData.postalFormControl,

@@ -50,11 +50,15 @@ export class CarritoService {
       let posicionEnArray = carrito.findIndex(item => item.nombre === producto.nombre);
       console.log(posicionEnArray);
       let cantidadActual = carrito[posicionEnArray].cantidad;
+      if(cantidadActual < carrito[posicionEnArray].stock){
       let cantidadActualizada = cantidadActual + 1;
       console.log("ahora es: " + cantidadActualizada)
       carrito[posicionEnArray].cantidad = cantidadActualizada;
       localStorage.setItem('carrito', JSON.stringify(carrito));
       this.carritoSubject.next(carrito);
+      } else {
+        alert("No puedes agregar mas veces este producto porque ya has agregado el máximo de existencia de este producto")
+      }
     }
     else {
     producto = {cantidad: 1, ...producto}
