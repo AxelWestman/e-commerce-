@@ -48,6 +48,18 @@
                 <mat-error>Por favor, ingrese un número de teléfono válido.</mat-error>
               }
             </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>DNI</mat-label>
+              <input type="number" matInput formControlName="dniFormControl" placeholder="Ej: 41273652" name="dni">
+              @if (firstFormGroup.get('dniFormControl')?.hasError('required')) {
+                <mat-error>El DNI <strong>es requerido</strong></mat-error>
+              }
+              @if (firstFormGroup.get('dniFormControl')?.hasError('invalidDNI')) {
+                <mat-error>Por favor, ingrese un número de DNI válido.</mat-error>
+              }
+            </mat-form-field>
+
           </div>
           <div class="domicilio-destinatario">
             <h2 class="titulo-seccion">Opciones de envío</h2>
@@ -133,6 +145,17 @@
               <mat-error>Forma de pago <strong>es requerida</strong></mat-error>
             }
           </mat-form-field>
+          <mat-form-field class="example-full-width" *ngIf="tarjetaDeCredito === true">
+            <mat-label>Forma de pago</mat-label>
+            <mat-select formControlName="tarjetaCreditoFormControl" (selectionChange)="cantidadCuotas($event.value)" name="pago">
+              <mat-option *ngFor="let cuotas of cantidadDeCuotas" [value]="cuotas">
+                {{ cuotas }}
+              </mat-option>
+            </mat-select>
+            @if (secondFormGroup.get('tarjetaCreditoFormControl')?.hasError('required')) {
+              <mat-error>La cantidad de cuotas <strong>es requerida</strong></mat-error>
+            }
+          </mat-form-field>
           <div style="gap: 6px; display: flex;">
             <button mat-button matStepperPrevious (click)="onBack()" style="color: white;">Volver</button>
             <button mat-button matStepperNext (click)="revisionDatos()" style="color: white;">Siguiente</button>
@@ -152,16 +175,19 @@
           <p class="campos-revision">Código Postal <br> {{revisionCodigoPostal}}</p>
           <p class="campos-revision">Nombre Completo <br> {{revisionNombre}}</p>
           <p class="campos-revision">Teléfono <br> {{revisionTelefono}}</p>
+          <p class="campos-revision">DNI <br> {{revisionDni}}</p>
           <p class="campos-revision">Envio <br> {{revisionEnvio}}</p>
           <p class="campos-revision" *ngIf="revisionSucursal.length > 0">Sucursal <br> {{revisionSucursal}}</p>
           <p class="campos-revision">Provincia <br> {{revisionProvincia}}</p>
           <p class="campos-revision">Ciudad <br> {{revisionCiudad}}</p>
           <p class="campos-revision">Dirección <br> {{revisionDireccion}}</p>
-          <p class="campos-revision">Depto <br> {{revisionDepto}}</p>
+          <p class="campos-revision" *ngIf="revisionDepto.length > 0">Depto <br> {{revisionDepto}}</p>
           </div>
           <h2>Pago</h2>
           <div class="container-pago">
           <p class="campos-revision">Método de Pago <br> {{revisionMetodoPago}}</p>
+          <p class="campos-revision" *ngIf="tarjetaDeCredito === true">Cantidad de Cuotas <br> {{revisionCuotas}}</p>
+
         </div>
         </div>
         <div style="gap: 6px; display: flex; width: 100%;

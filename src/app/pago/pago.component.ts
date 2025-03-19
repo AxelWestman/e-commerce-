@@ -11,6 +11,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
   AbstractControl,
+  ValidatorFn
 } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
@@ -46,6 +47,7 @@ export class PagoComponent implements OnInit {
 
   carrito: any[] = [];
   subtotal: number = 0;
+  tarjetaDeCredito: boolean = false;
 
   formaPagoFormControl = new FormControl('', [Validators.required]);
   nombreFormControl = new FormControl('', [Validators.required]);
@@ -61,6 +63,7 @@ export class PagoComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({
     emailFormControl: ['', [Validators.required, Validators.email]], // Validadores en un array
     phoneNumberFormControl: ['', [Validators.required, this.argentinaPhoneValidator]], // Validadores en un array
+    dniFormControl: ['', [Validators.required, this.argentinaDniValidator()]], // Validadores en un array
     nombreFormControl: ['', [Validators.required]], // Validadores en un array
     formaEnvioFormControl:['', [Validators.required]],
     direccionSucursal: [''],
@@ -74,6 +77,7 @@ export class PagoComponent implements OnInit {
   
   secondFormGroup = this._formBuilder.group({
     formaPagoFormControl: ['', [Validators.required]],
+    tarjetaCreditoFormControl: ['']
   });
   isEditable = true;
 
@@ -144,6 +148,7 @@ export class PagoComponent implements OnInit {
   revisionCodigoPostal: any = '';
   revisionNombre:any = '';
   revisionTelefono: any = '';
+  revisionDni: any = '';
   revisionEnvio: any = '';
   revisionSucursal: any = ''
   revisionProvincia: any = '';
@@ -151,6 +156,7 @@ export class PagoComponent implements OnInit {
   revisionDireccion: any = '';
   revisionDepto: any = '';
   revisionMetodoPago: any = '';
+  revisionCuotas: any = ''
 
  // Función de validación personalizada para números de teléfono argentinos
  argentinaPhoneValidator(control: AbstractControl) {
@@ -159,6 +165,16 @@ export class PagoComponent implements OnInit {
     return { invalidPhone: true };
   }
   return null;
+}
+
+argentinaDniValidator(): ValidatorFn{
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const dniRegex = /^\d{7,8}$/; // Expresión regular para 7 u 8 dígitos
+    if (control.value && !dniRegex.test(control.value)) {
+      return { invalidDNI: true }; // Retorna un error si el DNI no es válido
+    }
+    return null; // Retorna null si el DNI es válido
+  };
 }
 
 
@@ -172,7 +188,8 @@ provincias = [
 
 metodosEnvio = ['Envío a domicilio', 'Envío a sucursal Correo Argentino', 'Retiro por showroom']
 
-metodosDePago = ["Transferencia", "Tarjeta"]
+metodosDePago = ["Transferencia", "Tarjeta de Crédito", "Tarjeta de Débito"]
+cantidadDeCuotas = ["1 cuota", "3 cuotas simples"]
 
 // Lista de ciudades (puedes cargarla dinámicamente según la provincia seleccionada)
 ciudades: string[] = [];
@@ -1358,12 +1375,37 @@ cargarFormasDeEnvio(envio: string) {
 formaDePago(pago: string){
   if(pago === "Transferencia"){
     this.formaPago = "Transferencia"
+    this.tarjetaDeCredito = false;
+    let tarjetaCreditoControl = this.secondFormGroup.get('tarjetaCreditoFormControl');
+      if (tarjetaCreditoControl) {
+        this.revisionCuotas = '';
+        tarjetaCreditoControl.clearValidators();
+        tarjetaCreditoControl.updateValueAndValidity(); 
+  } 
   }
-  else if(pago === "Tarjeta"){
-    this.formaPago = "Tarjeta"
-  } else{
-    this.formaPago= "";
+  else if(pago === "Tarjeta de Crédito"){
+    this.formaPago = "Tarjeta de Crédito"
+    this.tarjetaDeCredito = true;
+    let tarjetaCreditoControl = this.secondFormGroup.get('tarjetaCreditoFormControl');
+      if (tarjetaCreditoControl) {
+        tarjetaCreditoControl.setValidators([Validators.required]);
+        tarjetaCreditoControl.updateValueAndValidity(); 
+  } 
+}
+  else if(pago === "Tarjeta de Débito"){
+    this.formaPago= "Tarjeta de Débito";
+    this.tarjetaDeCredito = false;
+    let tarjetaCreditoControl = this.secondFormGroup.get('tarjetaCreditoFormControl');
+      if (tarjetaCreditoControl) {
+        this.revisionCuotas = '';
+        tarjetaCreditoControl.clearValidators();
+        tarjetaCreditoControl.updateValueAndValidity(); 
+    }
   }
+}
+
+cantidadCuotas(cuotas: string){
+
 }
 
 
@@ -1406,6 +1448,7 @@ formaDePago(pago: string){
       this.revisionCodigoPostal = formData.postalFormControl;
       this.revisionNombre = formData.nombreFormControl;
       this.revisionTelefono = formData.phoneNumberFormControl;
+      this.revisionDni = formData.dniFormControl;
       this.revisionEnvio = formData.formaEnvioFormControl;
       this.revisionSucursal = formData.direccionSucursal; 
       this.revisionProvincia = formData.provinciaFormControl;
@@ -1413,6 +1456,7 @@ formaDePago(pago: string){
       this.revisionDireccion= formData.direccionFormControl;
       this.revisionDepto = formData.departamentoFormControl;
       this.revisionMetodoPago = formData.formaPagoFormControl;
+      this.revisionCuotas = formData.tarjetaCreditoFormControl;
     }
   }
 
@@ -1490,7 +1534,7 @@ formaDePago(pago: string){
   //   });
   // }
 
-  pagoMercadoPago(carrito: any): Promise<void> {
+  pagoMercadoPagoDebito(carrito: any): Promise<void> {
     return new Promise((resolve, reject) => {
         const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
             locale: 'es-AR',
@@ -1561,6 +1605,148 @@ formaDePago(pago: string){
     });
 }
 
+pagoMercadoPagoCredito(carrito: any): Promise<void> {
+  return new Promise((resolve, reject) => {
+      const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
+          locale: 'es-AR',
+      });
+
+      // Preparar los items del carrito para MercadoPago
+      console.log(carrito);
+      const items = carrito.map((producto: any) => ({
+          title: producto.nombre,
+          quantity: producto.cantidad,
+          unit_price: producto.oferta > 0 ? producto.precio_oferta : producto.precio,
+      }));
+
+      console.log(items);
+
+      this.http.post('http://192.168.0.163:3000/create-order-una-cuota', {
+          items: items, // Enviar los items del carrito
+      }).subscribe(
+          (response: any) => {
+              console.log(response);
+              this.preference_id = response.id;
+              const initPoint = response.init_point;
+              console.log('initPoint:', initPoint);
+
+              // Abrir el init_point en una nueva ventana
+              if (initPoint) {
+                  const nuevaVentana = window.open(initPoint, '_blank');
+
+                  // Verificar si la ventana se abrió correctamente
+                  if (!nuevaVentana) {
+                      reject(new Error('No se pudo abrir la ventana de pago.'));
+                      return;
+                  }
+
+                  // Verificar el estado del pago cada segundo
+                  const verificarPago = setInterval(() => { 
+                      this.http.get(`http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`)
+                          .subscribe(
+                              (paymentResponse: any) => {
+                                  console.log(paymentResponse);
+                                  const paymentStatus = paymentResponse.data[0].status;
+                                  console.log(paymentStatus);
+                                  console.log('Estado del pago:', paymentStatus);
+
+                                  if (paymentStatus === 'approved') {
+                                      clearInterval(verificarPago); // Detener la verificación
+                                      resolve(); // Pago exitoso
+                                  } else if (paymentStatus === 'rejected' || paymentStatus === 'cancelled') {
+                                      clearInterval(verificarPago); // Detener la verificación
+                                      reject(new Error(`El pago no fue aprobado. Estado: ${paymentStatus}`));
+                                  }
+                                  // Si el estado sigue siendo "pending", no hacemos nada y seguimos verificando
+                              },
+                              (error) => {
+                                  clearInterval(verificarPago); // Detener la verificación en caso de error
+                                  reject(new Error('Error al verificar el estado del pago.'));
+                              }
+                          );
+                  }, 1000); // Verificar cada segundo
+              } else {
+                  reject(new Error('No se recibió un init_point válido.'));
+              }
+          },
+          (error) => {
+              reject(new Error('Error en la solicitud: ' + error.message));
+          }
+      );
+  });
+}
+
+pagoMercadoPagoCreditoTresCuotas(carrito: any): Promise<void> {
+  return new Promise((resolve, reject) => {
+      const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
+          locale: 'es-AR',
+      });
+
+      // Preparar los items del carrito para MercadoPago
+      console.log(carrito);
+      const items = carrito.map((producto: any) => ({
+          title: producto.nombre,
+          quantity: producto.cantidad,
+          unit_price: producto.oferta > 0 ? producto.precio_oferta : producto.precio,
+      }));
+
+      console.log(items);
+
+      this.http.post('http://192.168.0.163:3000/create-order-tres-cuotas', {
+          items: items, // Enviar los items del carrito
+      }).subscribe(
+          (response: any) => {
+              console.log(response);
+              this.preference_id = response.id;
+              const initPoint = response.init_point;
+              console.log('initPoint:', initPoint);
+
+              // Abrir el init_point en una nueva ventana
+              if (initPoint) {
+                  const nuevaVentana = window.open(initPoint, '_blank');
+
+                  // Verificar si la ventana se abrió correctamente
+                  if (!nuevaVentana) {
+                      reject(new Error('No se pudo abrir la ventana de pago.'));
+                      return;
+                  }
+
+                  // Verificar el estado del pago cada segundo
+                  const verificarPago = setInterval(() => { 
+                      this.http.get(`http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`)
+                          .subscribe(
+                              (paymentResponse: any) => {
+                                  console.log(paymentResponse);
+                                  const paymentStatus = paymentResponse.data[0].status;
+                                  console.log(paymentStatus);
+                                  console.log('Estado del pago:', paymentStatus);
+
+                                  if (paymentStatus === 'approved') {
+                                      clearInterval(verificarPago); // Detener la verificación
+                                      resolve(); // Pago exitoso
+                                  } else if (paymentStatus === 'rejected' || paymentStatus === 'cancelled') {
+                                      clearInterval(verificarPago); // Detener la verificación
+                                      reject(new Error(`El pago no fue aprobado. Estado: ${paymentStatus}`));
+                                  }
+                                  // Si el estado sigue siendo "pending", no hacemos nada y seguimos verificando
+                              },
+                              (error) => {
+                                  clearInterval(verificarPago); // Detener la verificación en caso de error
+                                  reject(new Error('Error al verificar el estado del pago.'));
+                              }
+                          );
+                  }, 1000); // Verificar cada segundo
+              } else {
+                  reject(new Error('No se recibió un init_point válido.'));
+              }
+          },
+          (error) => {
+              reject(new Error('Error en la solicitud: ' + error.message));
+          }
+      );
+  });
+}
+
     async onSubmit(){
       if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
         const formData = {
@@ -1571,18 +1757,19 @@ formaDePago(pago: string){
 
         const formaPago = formData.formaPagoFormControl;
 
-        if (formaPago === 'Tarjeta') {
+        if (formaPago === 'Tarjeta de Crédito') {
+          if(this.revisionCuotas === "1 cuota"){
           let carrito = this.carritoService.obtenerCarrito();
 
           let carritoNombres = carrito.map(
             (nombre) => `${nombre.nombre} X${nombre.cantidad}`
           );
-          console.log(carritoNombres);
+          console.log("aca pruebaaa" + carritoNombres);
 
           let id_productos = carrito.map((id) => `${id.id}`);
           console.log(id_productos);
 
-          await this.pagoMercadoPago(carrito);
+          await this.pagoMercadoPagoCredito(carrito);
 
           console.log("se pasó aqui")
 
@@ -1590,9 +1777,11 @@ formaDePago(pago: string){
             for (let i = 0; i < carritoNombres.length; i++) {
               const datos = {
                 formaPago: this.formaPago,
+                cantCuotas: this.revisionCuotas,
                 nombre: formData.nombreFormControl,
                 email: formData.emailFormControl,
                 telefono: formData.phoneNumberFormControl,
+                dni: formData.dniFormControl,
                 metodoEnvio: formData.formaEnvioFormControl,
                 sucursal: formData.direccionSucursal,
                 provincia: formData.provinciaFormControl,
@@ -1612,9 +1801,11 @@ formaDePago(pago: string){
           } else {
             const datos = {
               formaPago: this.formaPago,
+              cantCuotas: this.revisionCuotas,
               nombre: formData.nombreFormControl,
               email: formData.emailFormControl,
               telefono: formData.phoneNumberFormControl,
+              dni: formData.dniFormControl,
               metodoEnvio: formData.formaEnvioFormControl,
               sucursal: formData.direccionSucursal,
               provincia: formData.provinciaFormControl,
@@ -1623,7 +1814,7 @@ formaDePago(pago: string){
               direccion: formData.direccionFormControl,
               dept: formData.departamentoFormControl,
               idProducto: id_productos,
-              productos: carritoNombres,
+              productos: carritoNombres[0],
             };
 
             this.pagoService.datosClienteEnvio(datos);
@@ -1636,6 +1827,145 @@ formaDePago(pago: string){
           this.mostrarFormulario = false;
           this.mostrarCartel = true;
         } 
+        else if(this.revisionCuotas === "3 cuotas simples"){
+          let carrito = this.carritoService.obtenerCarrito();
+
+          let carritoNombres = carrito.map(
+            (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+          );
+          console.log(carritoNombres);
+
+          let id_productos = carrito.map((id) => `${id.id}`);
+          console.log(id_productos);
+
+          await this.pagoMercadoPagoCreditoTresCuotas(carrito);
+
+          console.log("se pasó aqui")
+
+          if (carritoNombres.length > 1) {
+            for (let i = 0; i < carritoNombres.length; i++) {
+              const datos = {
+                formaPago: this.formaPago,
+                cantCuotas: this.revisionCuotas,
+                nombre: formData.nombreFormControl,
+                email: formData.emailFormControl,
+                telefono: formData.phoneNumberFormControl,
+                dni: formData.dniFormControl,
+                metodoEnvio: formData.formaEnvioFormControl,
+                sucursal: formData.direccionSucursal,
+                provincia: formData.provinciaFormControl,
+                ciudad: formData.ciudadFormControl,
+                postal: formData.postalFormControl,
+                direccion: formData.direccionFormControl,
+                dept: formData.departamentoFormControl,
+                idProducto: id_productos[i],
+                productos: carritoNombres[i],
+              };
+              this.pagoService.datosClienteEnvio(datos);
+              this.carritoService.eliminarTodo();
+              this.mostrarFormulario = false;
+              this.mostrarCartel = true;
+            }
+            //this.pagoMercadoPago(carrito);
+          } else {
+            const datos = {
+              formaPago: this.formaPago,
+              cantCuotas: this.revisionCuotas,
+              nombre: formData.nombreFormControl,
+              email: formData.emailFormControl,
+              telefono: formData.phoneNumberFormControl,
+              dni: formData.dniFormControl,
+              metodoEnvio: formData.formaEnvioFormControl,
+              sucursal: formData.direccionSucursal,
+              provincia: formData.provinciaFormControl,
+              ciudad: formData.ciudadFormControl,
+              postal: formData.postalFormControl,
+              direccion: formData.direccionFormControl,
+              dept: formData.departamentoFormControl,
+              idProducto: id_productos,
+              productos: carritoNombres[0],
+            };
+
+            this.pagoService.datosClienteEnvio(datos);
+            // this.carritoService.eliminarTodo();
+            // this.mostrarFormulario = false;
+            // this.mostrarCartel = true;
+          }
+          //this.pagoMercadoPago(carrito);
+          this.carritoService.eliminarTodo();
+          this.mostrarFormulario = false;
+          this.mostrarCartel = true;
+        }
+      }
+        else if (formaPago === "Tarjeta de Débito"){
+          let carrito = this.carritoService.obtenerCarrito();
+
+          let carritoNombres = carrito.map(
+            (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+          );
+          console.log(carritoNombres);
+
+          let id_productos = carrito.map((id) => `${id.id}`);
+          console.log(id_productos);
+
+          await this.pagoMercadoPagoDebito(carrito);
+
+          console.log("se pasó aqui")
+
+          if (carritoNombres.length > 1) {
+            for (let i = 0; i < carritoNombres.length; i++) {
+              const datos = {
+                formaPago: this.formaPago,
+                cantCuotas: this.revisionCuotas,
+                nombre: formData.nombreFormControl,
+                email: formData.emailFormControl,
+                telefono: formData.phoneNumberFormControl,
+                dni: formData.dniFormControl,
+                metodoEnvio: formData.formaEnvioFormControl,
+                sucursal: formData.direccionSucursal,
+                provincia: formData.provinciaFormControl,
+                ciudad: formData.ciudadFormControl,
+                postal: formData.postalFormControl,
+                direccion: formData.direccionFormControl,
+                dept: formData.departamentoFormControl,
+                idProducto: id_productos[i],
+                productos: carritoNombres[i],
+              };
+              this.pagoService.datosClienteEnvio(datos);
+              this.carritoService.eliminarTodo();
+              this.mostrarFormulario = false;
+              this.mostrarCartel = true;
+            }
+            //this.pagoMercadoPago(carrito);
+          } else {
+            const datos = {
+              formaPago: this.formaPago,
+              cantCuotas: this.revisionCuotas,
+              nombre: formData.nombreFormControl,
+              email: formData.emailFormControl,
+              telefono: formData.phoneNumberFormControl,
+              dni: formData.dniFormControl,
+              metodoEnvio: formData.formaEnvioFormControl,
+              sucursal: formData.direccionSucursal,
+              provincia: formData.provinciaFormControl,
+              ciudad: formData.ciudadFormControl,
+              postal: formData.postalFormControl,
+              direccion: formData.direccionFormControl,
+              dept: formData.departamentoFormControl,
+              idProducto: id_productos,
+              productos: carritoNombres[0],
+            };
+
+            this.pagoService.datosClienteEnvio(datos);
+            // this.carritoService.eliminarTodo();
+            // this.mostrarFormulario = false;
+            // this.mostrarCartel = true;
+          }
+          //this.pagoMercadoPago(carrito);
+          this.carritoService.eliminarTodo();
+          this.mostrarFormulario = false;
+          this.mostrarCartel = true;
+        }
            else if(formaPago === "Transferencia") {
               let carrito = this.carritoService.obtenerCarrito();
       
@@ -1652,9 +1982,11 @@ formaDePago(pago: string){
         for (let i = 0; i < carritoNombres.length; i++) {
           const datos = {
             formaPago: this.formaPago,
+            cantCuotas: this.revisionCuotas,
             nombre: formData.nombreFormControl,
             email: formData.emailFormControl,
             telefono: formData.phoneNumberFormControl,
+            dni: formData.dniFormControl,
             metodoEnvio: formData.formaEnvioFormControl,
             sucursal: formData.direccionSucursal,
             provincia: formData.provinciaFormControl,
@@ -1672,10 +2004,12 @@ formaDePago(pago: string){
         }
       } else {
         const datos = {
-          formaPago: this.formaPago,
+                formaPago: this.formaPago,
+                cantCuotas: this.revisionCuotas,
                 nombre: formData.nombreFormControl,
                 email: formData.emailFormControl,
                 telefono: formData.phoneNumberFormControl,
+                dni: formData.dniFormControl,
                 metodoEnvio: formData.formaEnvioFormControl,
                 sucursal: formData.direccionSucursal,
                 provincia: formData.provinciaFormControl,
@@ -1699,150 +2033,6 @@ formaDePago(pago: string){
       console.error('El formulario no es válido');
     }
   } 
-      
-
-    
-  
-    // onSubmit(){
-
-    //   const formaPago = this.formaPago.trim(); 
-
-    //   console.log(formaPago)
-
-    //  if(formaPago === "Tarjeta"){
-    //   let carrito = this.carritoService.obtenerCarrito();
-
-
-    //   let carritoNombres = carrito.map(
-    //     (nombre) => `${nombre.nombre} X${nombre.cantidad}`
-    //   );
-    //   console.log(carritoNombres);
-
-    //   let id_productos = carrito.map(
-    //     (id) => `${id.id}`
-    //   )
-    //   console.log(id_productos);
-
-    //   if (
-    //     this.nombreFormControl.invalid ||
-    //     this.emailFormControl.invalid ||
-    //     this.phoneNumberFormControl.invalid ||
-    //     this.provinciaFormControl.invalid ||
-    //     this.ciudadFormControl.invalid ||
-    //     this.postalFormControl.invalid ||
-    //     this.direccionFormControl.invalid
-    //   ) {
-    //     return;
-    //   }
-
-    //   if (carritoNombres.length > 1) {
-    //     for (let i = 0; i < carritoNombres.length; i++) {
-    //       const datos = {
-    //         formaPago: this.formaPago,
-    //         nombre: this.nombreCliente,
-    //         email: this.emailCliente,
-    //         telefono: this.telefonoCliente,
-    //         provincia: this.provinciaCliente,
-    //         ciudad: this.ciudadCliente,
-    //         postal: this.codigoPostalCliente,
-    //         direccion: this.direccionCliente,
-    //         dept: this.internoDeptoCliente,
-    //         idProducto: id_productos[i],
-    //         productos: carritoNombres[i],
-    //       };
-    //       this.pagoService.datosClienteEnvio(datos);
-    //       this.carritoService.eliminarTodo();
-    //       this.mostrarFormulario= false;
-    //       this.mostrarCartel = true;
-    //     }
-    //   } else {
-    //     const datos = {
-    //       formaPago: this.formaPago,
-    //       nombre: this.nombreCliente,
-    //       email: this.emailCliente,
-    //       telefono: this.telefonoCliente,
-    //       provincia: this.provinciaCliente,
-    //       ciudad: this.ciudadCliente,
-    //       postal: this.codigoPostalCliente,
-    //       direccion: this.direccionCliente,
-    //       dept: this.internoDeptoCliente,
-    //       idProducto: id_productos,
-    //       productos: carritoNombres,
-    //     };
-
-    //     this.pagoService.datosClienteEnvio(datos);
-    //     this.carritoService.eliminarTodo();
-    //     this.mostrarFormulario= false;
-    //       this.mostrarCartel = true;
-    //     }
-    //   } else if(formaPago === "Transferencia") {
-    //     let carrito = this.carritoService.obtenerCarrito();
-
-    //   let carritoNombres = carrito.map(
-    //     (nombre) => `${nombre.nombre} X${nombre.cantidad}`
-    //   );
-    //   console.log(carritoNombres);
-
-    //   let id_productos = carrito.map(
-    //     (id) => `${id.id}`
-    //   )
-    //   console.log(id_productos);
-
-
-    //   if (
-    //     this.nombreFormControl.invalid ||
-    //     this.emailFormControl.invalid ||
-    //     this.phoneNumberFormControl.invalid ||
-    //     this.provinciaFormControl.invalid ||
-    //     this.ciudadFormControl.invalid ||
-    //     this.postalFormControl.invalid ||
-    //     this.direccionFormControl.invalid
-    //   ) {
-    //     return;
-    //   }
-
-    //   if (carritoNombres.length > 1) {
-    //     for (let i = 0; i < carritoNombres.length; i++) {
-    //       const datos = {
-    //         formaPago: this.formaPago,
-    //         nombre: this.nombreCliente,
-    //         email: this.emailCliente,
-    //         telefono: this.telefonoCliente,
-    //         provincia: this.provinciaCliente,
-    //         ciudad: this.ciudadCliente,
-    //         postal: this.codigoPostalCliente,
-    //         direccion: this.direccionCliente,
-    //         dept: this.internoDeptoCliente,
-    //         idProducto: id_productos[i],
-    //         productos: carritoNombres[i],
-    //       };
-    //       this.pagoService.pedidosPendientes(datos);
-    //       this.carritoService.eliminarTodo();
-    //       this.mostrarFormulario= false;
-    //       this.mostrarCartel = true;
-    //     }
-    //   } else {
-    //     const datos = {
-    //       formaPago: this.formaPago,
-    //       nombre: this.nombreCliente,
-    //       email: this.emailCliente,
-    //       telefono: this.telefonoCliente,
-    //       provincia: this.provinciaCliente,
-    //       ciudad: this.ciudadCliente,
-    //       postal: this.codigoPostalCliente,
-    //       direccion: this.direccionCliente,
-    //       dept: this.internoDeptoCliente,
-    //       idProducto: id_productos,
-    //       productos: carritoNombres,
-    //     };
-
-    //     this.pagoService.pedidosPendientes(datos);
-    //     this.carritoService.eliminarTodo();
-    //     this.mostrarFormulario= false;
-    //       this.mostrarCartel = true;
-    //     }
-    //   }
-    // }
   
 }
 
