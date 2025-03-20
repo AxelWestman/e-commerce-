@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
+
 .content{
     width: 100%;
     min-height: 100vh;
@@ -18,11 +20,33 @@
 }
 
 .container-parrafo h1{
-    font-family: "Roboto", sans-serif;
+    font-family: "charm", sans-serif;
+    font-weight: 700;
     
 }
 
 .container-parrafo p{
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+}
+
+@media(min-width: 768px){
+
+    .content{
+        justify-content: center;
+    }
+
+    .container-parrafo h1{
+        font-size: 50px;
+        
+    }
+
+}
+
+@media(min-width: 1024px){
+
+    .container-parrafo{
+        width: 40%;
+    }
+
 }

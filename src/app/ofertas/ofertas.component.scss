@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
+
 .content{
     width: 100%;
     display: flex;
@@ -47,6 +49,11 @@
     animation: slideIn 1s ease-in-out;
   }
 
+  .titulo{
+    font-size: 30px;
+    font-weight: 700;
+  }
+
   .mat-mdc-card-content {
     display: block;
     padding: 0px;
@@ -78,14 +85,14 @@
     font-size: 18px;
     margin: 0;
     height: 30px;
-    font-family: "DM Serif Text", serif;
-    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
   }
 
   h2{
     font-size: 15px;
     margin: 0;
-    font-family: "DM Serif Text", serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
   }
 
@@ -142,6 +149,11 @@
     .matform-container{
       flex-direction: row;
       gap: 20px;
+    }
+
+    .titulo{
+      font-size: 50px;
+      font-weight: 700;
     }
 
   }

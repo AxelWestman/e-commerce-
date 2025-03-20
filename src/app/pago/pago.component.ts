@@ -108,6 +108,13 @@ export class PagoComponent implements OnInit {
         console.log(`Dialog result: ${result}`);
       });
     }
+
+    openAdvertencia(){
+      const dialogRef = this.dialog.open(AdvertenciaContent);
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    }
   
   formaPago:string = "";
  
@@ -1433,6 +1440,7 @@ cantidadCuotas(cuotas: string){
     this.ciudadesDeTierraDelFuego();
     this.ciudadesDeMisiones();
     this.obtenerProductosLocalStorage();
+    this.openAdvertencia();
   }
 
     constructor(private pagoService: PagoService, private carritoService: CarritoService, private http: HttpClient) { }
@@ -2071,6 +2079,24 @@ pagoMercadoPagoCreditoTresCuotas(carrito: any): Promise<void> {
       }
     
     
+    }
+
+    @Component({
+      selector: 'advertencia-content',
+      standalone: true,
+      templateUrl: 'advertencia.html',
+      imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatStepperModule],
+      styleUrl: './advertencia-style.scss'
+    })
+    export class AdvertenciaContent{
+
+      readonly dialog = inject(MatDialog);
+
+      closeDialog(){
+        this.dialog.closeAll();
+  
+      }
+
     }
 
 

@@ -7,6 +7,7 @@ import { PagoComponent } from './pago/pago.component';
 import { SomosComponent } from './somos/somos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
+import { ComoPagarComponent } from './como-pagar/como-pagar.component';
 
 export const routes: Routes = [
     {path: 'content/:category', component: ContentComponent},
@@ -18,5 +19,6 @@ export const routes: Routes = [
     {path: 'somos', component: SomosComponent},
     {path: 'contacto', component: ContactoComponent},
     {path: 'productos/ofertas', component: OfertasComponent},
+    {path: 'como-comprar', component: ComoPagarComponent},
     {path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
