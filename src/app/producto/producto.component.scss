@@ -8,8 +8,9 @@
     --opacidad-rojo: 0.9;
     //background-image: linear-gradient(rgba(246, 74, 52, var(--opacidad-rojo)), rgba(246, 74, 52, var(--opacidad-rojo)));
     background-image:linear-gradient(rgb(243 234 233 / 70%), rgb(163 50 35 / 70%));
-    height: 100vh;
+    min-height: 100vh;
 }
+
 
 .content div{
   display: flex;
@@ -23,12 +24,12 @@
     flex-direction: column;
     text-align: start;    
     margin-top: 20px;
+    margin-bottom: 20px;
     align-items: center;
     background-image: linear-gradient(rgb(255 255 255 / 40%), rgb(255 255 255 / 40%));
-    width: 90%;
     border-top-right-radius: 20px ;
     border-top-left-radius: 20px ;
-
+    height: auto;
 }
 
 .mat-divider{
@@ -153,6 +154,13 @@ img{
 .contenedor-descripcion mat-icon{
   line-height: 25px;
 }
+
+.tarjetas{
+  width: 100%;
+  text-align: start;
+}
+
+
 
 
 
