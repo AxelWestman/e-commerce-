@@ -1,3 +1,4 @@
+
 <mat-sidenav-container class="sidenav-container">
   <!-- Sidenav para móvil y escritorio -->
   <mat-sidenav #sidenav mode="side" class="sidenav" [opened]="false">
@@ -33,7 +34,9 @@
 
   <mat-sidenav-content>
     <!-- Botón para abrir el sidenav en dispositivos móviles -->
+    <div style="width: 100%; background-color: #FDCA40; height: 30px; text-align: center;"><p>prueba</p></div>
     <mat-toolbar color="primary" style="padding: 0px !important; background-color: #F64A34;">
+      
       <div class="contenedor-navbar">
         <div class="header-desktop">
           <a mat-list-item routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer; "><button mat-button>Inicio</button></a>
