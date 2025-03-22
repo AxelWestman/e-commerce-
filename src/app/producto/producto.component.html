@@ -1,13 +1,15 @@
 <div class="content">
-    <div class="segundo-content"  *ngFor="let producto of producto">
+    <div class="segundo-content" style="width: 100%;"   *ngFor="let producto of producto">
     <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
     <div class="contenedor-info">
         <div class="contenedor-h1">
-        <h1>{{producto.nombre}}</h1>
+        <h1 style="margin-top: 10px;">{{producto.nombre}}</h1>
          </div>
         <div style="margin-top: 10px;">
-        <div class="container-precio">
-        <h2 style="font-weight: 100;">${{producto.oferta > 0 ? producto.precio_oferta : producto.precio}}<br>{{producto.precioTransferencia}}<br>{{producto.precioEfectivo}}</h2>
+        <div style="flex-direction: column;">
+        <div style="display: flex; align-items: center; width: 100%;"><h2 style="font-weight: 100; display: flex;">${{producto.oferta > 0 ? producto.precio_oferta : producto.precio}}</h2> <p style="font-size: 10px;">Precio base</p></div>
+        <div style="display: flex; align-items: center; width: 100%;"><h2 style="font-weight: 100; display: flex;">${{producto.precioTransferencia}}</h2> <p style="font-size: 10px;">Precio transferencia</p></div>
+        <div style="display: flex; align-items: center; width: 100%;"><h2 style="font-weight: 100; display: flex;">${{producto.precioEfectivo}} </h2><p style="font-size: 10px;">Precio efectivo</p></div>
         <!--<h2>{{producto.stock}}</h2>
         <h2>{{producto.color}}</h2>-->
         </div>
@@ -20,18 +22,18 @@
      </div>
         <mat-divider></mat-divider>
         <div class="contenedor-descripcion" *ngIf="producto.stock === 0">
-            <p>Disponibilidad: Sin existencias</p>
+            <p style="font-size: 14px;">Disponibilidad: Sin existencias</p>
         </div>  
         <mat-divider></mat-divider>
         <div class="contenedor-descripcion">
-            <p>Calcular envío</p><mat-icon> local_shipping</mat-icon>
+            <p style="font-size: 14px;">Calcular envío</p><mat-icon style="font-size: 16px;"> local_shipping</mat-icon>
         </div>    
         <mat-divider></mat-divider>
-        <div class="descripcion">
-            <p>{{producto.descripcion}}</p>
+        <div  style="min-height: 34px; height: auto; overflow-wrap: break-word; white-space: pre-wrap;" >
+            <p style="font-size: 14px; width: 89%;">{{producto.descripcion}}</p>
         </div> 
         <mat-divider></mat-divider>
-        <div class="tarjetas" style="flex-direction: column; align-items: start;" >
+        <div class="tarjetas" style="flex-direction: column; align-items: start; height: auto;" >
             <p style="text-align: start;">Comprá con:</p>
             <div >
                 <img src="mastercard.jpg" alt="" style="width: 50px; height: 30px; margin-left: 20px; margin-bottom: 20px; margin-top: 10px;" >

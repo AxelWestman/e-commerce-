@@ -195,8 +195,8 @@ provincias = [
 
 metodosEnvio = ['Envío a domicilio', 'Envío a sucursal Correo Argentino', 'Retiro por showroom']
 
-metodosDePago = ["Transferencia", "Tarjeta de Crédito", "Tarjeta de Débito"]
-cantidadDeCuotas = ["1 cuota", "3 cuotas simples"]
+metodosDePago = ["Transferencia", "Efectivo", "Tarjeta de Crédito", "Tarjeta de Débito"]
+cantidadDeCuotas = ["1 cuota", "3 cuotas sin interés"]
 
 // Lista de ciudades (puedes cargarla dinámicamente según la provincia seleccionada)
 ciudades: string[] = [];
@@ -1835,7 +1835,7 @@ pagoMercadoPagoCreditoTresCuotas(carrito: any): Promise<void> {
           this.mostrarFormulario = false;
           this.mostrarCartel = true;
         } 
-        else if(this.revisionCuotas === "3 cuotas simples"){
+        else if(this.revisionCuotas === "3 cuotas sin interés"){
           let carrito = this.carritoService.obtenerCarrito();
 
           let carritoNombres = carrito.map(
