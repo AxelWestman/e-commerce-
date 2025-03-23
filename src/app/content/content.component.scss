@@ -47,6 +47,12 @@
     animation: slideIn 1s ease-in-out;
   }
 
+  .link-matcard{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+  }
+
   .mat-mdc-card-content {
     display: block;
     padding: 0px;
@@ -75,22 +81,22 @@
   }
 
   h1{
-    font-size: 18px;
+    font-size: 10px;
     margin: 0;
-    height: 30px;
+    height: auto;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
   }
 
   h2{
-    font-size: 15px;
+    font-size: 10px;
     margin: 0;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
   }
 
   p{
-    font-size: 15px;
+    font-size: 10px;
     margin: 0;
   }
   
@@ -104,6 +110,21 @@
   .datos-productos{
     height: auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+  }
+
+  .distintos-precios{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .distintos-precios div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
   }
 
   .boton-carrito{
@@ -112,6 +133,7 @@
     align-items: center;
     width: 30%;
   }
+
 
   @keyframes slideIn {
     from { transform: translateY(20px); opacity: 0; }
@@ -143,14 +165,33 @@
 
   @media (min-width: 1024px) {
 
+    .content{
+      flex-direction: column;
+    }
+
+    .contenedor-contenedores{
+      max-width: 70%;
+    }
+
     .example-card {
       width: 300px;
     }
 
     img{
-      
       width: 100%;
       height: 250px;
+    }
+
+    h1{
+      font-size: 15px;
+    }
+
+    h2{
+      font-size: 15px;
+    }
+
+    p{
+      font-size: 15px;
     }
 
   }

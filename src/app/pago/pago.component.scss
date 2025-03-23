@@ -181,6 +181,7 @@ h2{
 
       .content{
         flex-direction: row;
+        align-items: normal;
       }
 
       .boton-compra{
@@ -190,7 +191,7 @@ h2{
       .productos-en-carrito{
         display: block;
         width: 30%;
-        min-height: 102vh;
+        min-height: auto;
         background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgb(255 255 255 / 40%));
       }
 
@@ -241,7 +242,7 @@ h2{
       .titulo-grande{
         font-size: 18px;
         margin: 0;
-        height: 30px;
+        height: auto;
         font-family: "Roboto", sans-serif;
         font-weight: 500;
       }

@@ -16,12 +16,26 @@
       <div *ngIf="valuee$ != '' " class="contenedor-busqueda">
         <div class="cards-styles" >
         <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of productosNombre | paginate: { itemsPerPage: 12, currentPage: page }">
-            <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
+            <a class="link-matcard" [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
             <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
             <mat-card-content>
                 <div class="datos-productos">
                     <h1>{{producto.nombre}}</h1>
-                    <h2>${{producto.precio}}</h2> 
+                    <div class="distintos-precios">
+                        <div>
+                            <h2>${{producto.precio}}</h2> 
+                            <p>Débito/Crédito</p>
+                        </div>
+                        <div>
+                            <h2>${{producto.precioTransferencia}}</h2> 
+                            <p>Transferencia</p>
+                        </div>
+                        <div>
+                            <h2>${{producto.precioEfectivo}}</h2> 
+                            <p>Efectivo</p>
+                        </div>
+                    </div>
+                    
                     <!--<h2>Stock: {{producto.stock}}</h2> 
                     <p>{{producto.descripcion}}</p>-->
                 </div>
@@ -33,12 +47,25 @@
       <div *ngIf="valuee$ == '' " class="contenedor-contenedores">
     <div class="cards-styles" *ngIf="filtroValor === 'Destacados'">
     <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of receivedDataArray | paginate: { itemsPerPage: 12, currentPage: page }">
-        <a [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
+        <a class="link-matcard" [routerLink]="['/producto', producto.id, producto.nombre]" routerLinkActive="true" ariaCurrentWhenActive="page">
         <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
         <mat-card-content>
             <div class="datos-productos">
                 <h1>{{producto.nombre}}</h1>
-                <h2>${{producto.precio}}</h2> 
+                <div class="distintos-precios">
+                    <div>
+                        <h2>${{producto.precio}}</h2> 
+                        <p>Débito/Crédito</p>
+                    </div>
+                    <div>
+                        <h2>${{producto.precioTransferencia}}</h2> 
+                        <p>Transferencia</p>
+                    </div>
+                    <div>
+                        <h2>${{producto.precioEfectivo}}</h2> 
+                        <p>Efectivo</p>
+                    </div>
+                </div>
                 <!--<h2>Stock: {{producto.stock}}</h2> 
                 <p>{{producto.descripcion}}</p>-->
             </div>
@@ -53,7 +80,20 @@
             <mat-card-content>
                 <div class="datos-productos">
                     <h1>{{producto.nombre}}</h1>
-                    <h2>${{producto.precio}}</h2> 
+                    <div class="distintos-precios">
+                        <div>
+                            <h2>${{producto.precio}}</h2> 
+                            <p>Débito/Crédito</p>
+                        </div>
+                        <div>
+                            <h2>${{producto.precioTransferencia}}</h2> 
+                            <p>Transferencia</p>
+                        </div>
+                        <div>
+                            <h2>${{producto.precioEfectivo}}</h2> 
+                            <p>Efectivo</p>
+                        </div>
+                    </div>
                     <!--<h2>Stock: {{producto.stock}}</h2> 
                     <p>{{producto.descripcion}}</p>-->
                 </div>
@@ -83,7 +123,20 @@
                     <mat-card-content>
                         <div class="datos-productos">
                             <h1>{{producto.nombre}}</h1>
-                            <h2>${{producto.precio}}</h2> 
+                            <div class="distintos-precios">
+                                <div>
+                                    <h2>${{producto.precio}}</h2> 
+                                    <p>Débito/Crédito</p>
+                                </div>
+                                <div>
+                                    <h2>${{producto.precioTransferencia}}</h2> 
+                                    <p>Transferencia</p>
+                                </div>
+                                <div>
+                                    <h2>${{producto.precioEfectivo}}</h2> 
+                                    <p>Efectivo</p>
+                                </div>
+                            </div>
                             <!--<h2>Stock: {{producto.stock}}</h2> 
                             <p>{{producto.descripcion}}</p>-->
                         </div>
@@ -98,7 +151,20 @@
                         <mat-card-content>
                             <div class="datos-productos">
                                 <h1>{{producto.nombre}}</h1>
-                                <h2>${{producto.precio}}</h2> 
+                                <div class="distintos-precios">
+                                    <div>
+                                        <h2>${{producto.precio}}</h2> 
+                                        <p>Débito/Crédito</p>
+                                    </div>
+                                    <div>
+                                        <h2>${{producto.precioTransferencia}}</h2> 
+                                        <p>Transferencia</p>
+                                    </div>
+                                    <div>
+                                        <h2>${{producto.precioEfectivo}}</h2> 
+                                        <p>Efectivo</p>
+                                    </div>
+                                </div>
                                 <!--<h2>Stock: {{producto.stock}}</h2> 
                                 <p>{{producto.descripcion}}</p>-->
                             </div>

@@ -1,89 +1,169 @@
 <div class="content">
   <div *ngIf="mostrarFormulario === true" class="container-del-formulario">
-    <button style="margin-top: 20px;" class="boton-compra" (click)="openDialog();">Ver mi compra</button>
-  
+    <button
+      style="margin-top: 20px"
+      class="boton-compra"
+      (click)="openDialog();"
+    >
+      Ver mi compra
+    </button>
+
     <mat-stepper linear #stepper>
       <!-- Paso 1 -->
       <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
         <form [formGroup]="firstFormGroup" class="example-form">
           <ng-template matStepLabel>Envío</ng-template>
-          <h2 class="titulo-seccion" style="text-align: start;">Contacto</h2>
+          <h2 class="titulo-seccion" style="text-align: start">Contacto</h2>
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="emailFormControl" placeholder="Ej: pat@example.com" name="mail">
+            <input
+              type="email"
+              matInput
+              formControlName="emailFormControl"
+              placeholder="Ej: pat@example.com"
+              name="mail"
+            />
             @if (firstFormGroup.get('emailFormControl')?.hasError('required')) {
-              <mat-error>Mail es <strong>es requerido</strong></mat-error>
-            }
-            @if (firstFormGroup.get('emailFormControl')?.hasError('email')) {
-              <mat-error>Por favor, ingrese un mail válido.</mat-error>
+            <mat-error>Mail es <strong>es requerido</strong></mat-error>
+            } @if (firstFormGroup.get('emailFormControl')?.hasError('email')) {
+            <mat-error>Por favor, ingrese un mail válido.</mat-error>
             }
           </mat-form-field>
-          <p style="margin: 0px; text-align: left; width: 90%;">¿No sabes cual es tu código postal? <a href="https://www.correoargentino.com.ar/formularios/cpa" target="_blank">Haz click aquí</a></p>
+          <p style="margin: 0px; text-align: left; width: 90%">
+            ¿No sabes cual es tu código postal?
+            <a
+              href="https://www.correoargentino.com.ar/formularios/cpa"
+              target="_blank"
+              >Haz click aquí</a
+            >
+          </p>
           <mat-form-field class="example-full-width">
             <mat-label>Código Postal</mat-label>
-            <input type="number" matInput formControlName="postalFormControl" placeholder="3000" name="postal">
-            @if (firstFormGroup.get('postalFormControl')?.hasError('required')) {
-              <mat-error>Código Postal <strong>es requerido</strong></mat-error>
-            }
-            @if (firstFormGroup.get('postalFormControl')?.hasError('pattern')) {
-              <mat-error>El código postal debe tener 4 dígitos.</mat-error>
+            <input
+              type="number"
+              matInput
+              formControlName="postalFormControl"
+              placeholder="3000"
+              name="postal"
+            />
+            @if (firstFormGroup.get('postalFormControl')?.hasError('required'))
+            {
+            <mat-error>Código Postal <strong>es requerido</strong></mat-error>
+            } @if (firstFormGroup.get('postalFormControl')?.hasError('pattern'))
+            {
+            <mat-error>El código postal debe tener 4 dígitos.</mat-error>
             }
           </mat-form-field>
           <div class="datos-del-destinatario">
             <h2 class="titulo-seccion">Datos del destinatario</h2>
             <mat-form-field class="example-full-width">
               <mat-label>Nombre completo</mat-label>
-              <input type="string" matInput formControlName="nombreFormControl" placeholder="" name="nombre">
-              @if (firstFormGroup.get('nombreFormControl')?.hasError('required')) {
-                <mat-error>Nombre completo <strong>es requerido</strong></mat-error>
+              <input
+                type="string"
+                matInput
+                formControlName="nombreFormControl"
+                placeholder=""
+                name="nombre"
+              />
+              @if
+              (firstFormGroup.get('nombreFormControl')?.hasError('required')) {
+              <mat-error
+                >Nombre completo <strong>es requerido</strong></mat-error
+              >
               }
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Nro Teléfono</mat-label>
-              <input type="tel" matInput formControlName="phoneNumberFormControl" placeholder="Ej: 3421234567" name="telefono">
-              @if (firstFormGroup.get('phoneNumberFormControl')?.hasError('required')) {
-                <mat-error>Nro Teléfono <strong>es requerido</strong></mat-error>
-              }
-              @if (firstFormGroup.get('phoneNumberFormControl')?.hasError('invalidPhone')) {
-                <mat-error>Por favor, ingrese un número de teléfono válido.</mat-error>
+              <input
+                type="tel"
+                matInput
+                formControlName="phoneNumberFormControl"
+                placeholder="Ej: 3421234567"
+                name="telefono"
+              />
+              @if
+              (firstFormGroup.get('phoneNumberFormControl')?.hasError('required'))
+              {
+              <mat-error>Nro Teléfono <strong>es requerido</strong></mat-error>
+              } @if
+              (firstFormGroup.get('phoneNumberFormControl')?.hasError('invalidPhone'))
+              {
+              <mat-error
+                >Por favor, ingrese un número de teléfono válido.</mat-error
+              >
               }
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>DNI</mat-label>
-              <input type="number" matInput formControlName="dniFormControl" placeholder="Ej: 41273652" name="dni">
+              <input
+                type="number"
+                matInput
+                formControlName="dniFormControl"
+                placeholder="Ej: 41273652"
+                name="dni"
+              />
               @if (firstFormGroup.get('dniFormControl')?.hasError('required')) {
-                <mat-error>El DNI <strong>es requerido</strong></mat-error>
-              }
-              @if (firstFormGroup.get('dniFormControl')?.hasError('invalidDNI')) {
-                <mat-error>Por favor, ingrese un número de DNI válido.</mat-error>
+              <mat-error>El DNI <strong>es requerido</strong></mat-error>
+              } @if
+              (firstFormGroup.get('dniFormControl')?.hasError('invalidDNI')) {
+              <mat-error>Por favor, ingrese un número de DNI válido.</mat-error>
               }
             </mat-form-field>
-
           </div>
           <div class="domicilio-destinatario">
             <h2 class="titulo-seccion">Opciones de envío</h2>
             <mat-form-field class="example-full-width">
               <mat-label>Forma de envío</mat-label>
-              <mat-select formControlName="formaEnvioFormControl"  (selectionChange)="cargarFormasDeEnvio($event.value)"  name="envio">
+              <mat-select
+                formControlName="formaEnvioFormControl"
+                (selectionChange)="cargarFormasDeEnvio($event.value)"
+                name="envio"
+              >
                 <mat-option *ngFor="let envio of metodosEnvio" [value]="envio">
                   {{ envio }}
                 </mat-option>
               </mat-select>
-              @if (firstFormGroup.get('formaEnvioFormControl')?.hasError('required')) {
-                <mat-error>Método de envío <strong>es requerido</strong></mat-error>
+              @if
+              (firstFormGroup.get('formaEnvioFormControl')?.hasError('required'))
+              {
+              <mat-error
+                >Método de envío <strong>es requerido</strong></mat-error
+              >
               }
             </mat-form-field>
-            <div class="example-full-width" *ngIf="formaEnvio === 'Envío a domicilio'">
-              <h2 style="background-color: white; border-radius: 10px;">Se usará la información del domicilio para enviar el producto a su hogar</h2>  
+            <div
+              class="example-full-width"
+              *ngIf="formaEnvio === 'Envío a domicilio'"
+            >
+              <h2 style="background-color: white; border-radius: 10px">
+                Se usará la información del domicilio para enviar el producto a
+                su hogar
+              </h2>
             </div>
-            <mat-form-field class="example-full-width" *ngIf="formaEnvio === 'Envío a sucursal Correo Argentino'">
-              <mat-label>Ingrese la dirección de la sucursal donde se enviará el producto</mat-label>
-              
-                <input type="string" matInput formControlName="direccionSucursal" placeholder="" name="direccion sucursal Correo Argentino">
-              
-              @if (firstFormGroup.get('formaEnvioFormControl')?.hasError('required')) {
-                <mat-error>Método de envío <strong>es requerido</strong></mat-error>
+            <mat-form-field
+              class="example-full-width"
+              *ngIf="formaEnvio === 'Envío a sucursal Correo Argentino'"
+            >
+              <mat-label
+                >Ingrese la dirección de la sucursal donde se enviará el
+                producto</mat-label
+              >
+
+              <input
+                type="string"
+                matInput
+                formControlName="direccionSucursal"
+                placeholder=""
+                name="direccion sucursal Correo Argentino"
+              />
+
+              @if
+              (firstFormGroup.get('formaEnvioFormControl')?.hasError('required'))
+              {
+              <mat-error
+                >Método de envío <strong>es requerido</strong></mat-error
+              >
               }
             </mat-form-field>
           </div>
@@ -91,13 +171,22 @@
             <h2 class="titulo-seccion">Domicilio del destinatario</h2>
             <mat-form-field class="example-full-width">
               <mat-label>Provincia</mat-label>
-              <mat-select formControlName="provinciaFormControl" (selectionChange)="cargarCiudades($event.value)" name="provincia">
-                <mat-option *ngFor="let provincia of provincias" [value]="provincia">
+              <mat-select
+                formControlName="provinciaFormControl"
+                (selectionChange)="cargarCiudades($event.value)"
+                name="provincia"
+              >
+                <mat-option
+                  *ngFor="let provincia of provincias"
+                  [value]="provincia"
+                >
                   {{ provincia }}
                 </mat-option>
               </mat-select>
-              @if (firstFormGroup.get('provinciaFormControl')?.hasError('required')) {
-                <mat-error>Provincia <strong>es requerida</strong></mat-error>
+              @if
+              (firstFormGroup.get('provinciaFormControl')?.hasError('required'))
+              {
+              <mat-error>Provincia <strong>es requerida</strong></mat-error>
               }
             </mat-form-field>
             <mat-form-field class="example-full-width">
@@ -107,62 +196,114 @@
                   {{ ciudad }}
                 </mat-option>
               </mat-select>
-              @if (firstFormGroup.get('ciudadFormControl')?.hasError('required')) {
-                <mat-error>Ciudad <strong>es requerida</strong></mat-error>
+              @if
+              (firstFormGroup.get('ciudadFormControl')?.hasError('required')) {
+              <mat-error>Ciudad <strong>es requerida</strong></mat-error>
               }
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Dirección</mat-label>
-              <input type="string" matInput formControlName="direccionFormControl" placeholder="" name="direccion">
-              @if (firstFormGroup.get('direccionFormControl')?.hasError('required')) {
-                <mat-error>Dirección <strong>es requerido</strong></mat-error>
+              <input
+                type="string"
+                matInput
+                formControlName="direccionFormControl"
+                placeholder=""
+                name="direccion"
+              />
+              @if
+              (firstFormGroup.get('direccionFormControl')?.hasError('required'))
+              {
+              <mat-error>Dirección <strong>es requerido</strong></mat-error>
               }
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Interno/Depto nro (opcional)</mat-label>
-              <input matInput formControlName="departamentoFormControl" placeholder="Ej: Interno 4 / Dpto 8" name="depto">
+              <input
+                matInput
+                formControlName="departamentoFormControl"
+                placeholder="Ej: Interno 4 / Dpto 8"
+                name="depto"
+              />
             </mat-form-field>
           </div>
           <div>
-            <button mat-button matStepperNext style="color: white;">Siguiente</button>
+            <button mat-button matStepperNext style="color: white">
+              Siguiente
+            </button>
           </div>
         </form>
       </mat-step>
-  
+
       <!-- Paso 2 -->
       <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
         <form [formGroup]="secondFormGroup" class="example-form">
           <ng-template matStepLabel>Pago</ng-template>
-          <h2 class="titulo-seccion" style="text-align: start;">Forma de pago</h2>
+          <h2 class="titulo-seccion" style="text-align: start">
+            Forma de pago
+          </h2>
           <mat-form-field class="example-full-width">
             <mat-label>Forma de pago</mat-label>
-            <mat-select formControlName="formaPagoFormControl" (selectionChange)="formaDePago($event.value)" name="pago">
+            <mat-select
+              formControlName="formaPagoFormControl"
+              (selectionChange)="formaDePago($event.value)"
+              name="pago"
+            >
               <mat-option *ngFor="let pago of metodosDePago" [value]="pago">
                 {{ pago }}
               </mat-option>
             </mat-select>
-            @if (secondFormGroup.get('formaPagoFormControl')?.hasError('required')) {
-              <mat-error>Forma de pago <strong>es requerida</strong></mat-error>
+            @if
+            (secondFormGroup.get('formaPagoFormControl')?.hasError('required'))
+            {
+            <mat-error>Forma de pago <strong>es requerida</strong></mat-error>
             }
           </mat-form-field>
-          <mat-form-field class="example-full-width" *ngIf="tarjetaDeCredito === true">
+          <mat-form-field
+            class="example-full-width"
+            *ngIf="tarjetaDeCredito === true"
+          >
             <mat-label>Forma de pago</mat-label>
-            <mat-select formControlName="tarjetaCreditoFormControl" (selectionChange)="cantidadCuotas($event.value)" name="pago">
-              <mat-option *ngFor="let cuotas of cantidadDeCuotas" [value]="cuotas">
+            <mat-select
+              formControlName="tarjetaCreditoFormControl"
+              (selectionChange)="cantidadCuotas($event.value)"
+              name="pago"
+            >
+              <mat-option
+                *ngFor="let cuotas of cantidadDeCuotas"
+                [value]="cuotas"
+              >
                 {{ cuotas }}
               </mat-option>
             </mat-select>
-            @if (secondFormGroup.get('tarjetaCreditoFormControl')?.hasError('required')) {
-              <mat-error>La cantidad de cuotas <strong>es requerida</strong></mat-error>
+            @if
+            (secondFormGroup.get('tarjetaCreditoFormControl')?.hasError('required'))
+            {
+            <mat-error
+              >La cantidad de cuotas <strong>es requerida</strong></mat-error
+            >
             }
           </mat-form-field>
-          <div style="gap: 6px; display: flex;">
-            <button mat-button matStepperPrevious (click)="onBack()" style="color: white;">Volver</button>
-            <button mat-button matStepperNext (click)="revisionDatos()" style="color: white;">Siguiente</button>
+          <div style="gap: 6px; display: flex">
+            <button
+              mat-button
+              matStepperPrevious
+              (click)="onBack()"
+              style="color: white"
+            >
+              Volver
+            </button>
+            <button
+              mat-button
+              matStepperNext
+              (click)="revisionDatos()"
+              style="color: white"
+            >
+              Siguiente
+            </button>
           </div>
         </form>
       </mat-step>
-  
+
       <!-- Paso 3 -->
       <mat-step>
         <ng-template matStepLabel>Revisión</ng-template>
@@ -171,71 +312,141 @@
           <div class="container-cajas">
             <h2>Envío</h2>
             <div class="container-envio">
-          <p class="campos-revision">Mail <br> {{revisionMail}}</p>
-          <p class="campos-revision">Código Postal <br> {{revisionCodigoPostal}}</p>
-          <p class="campos-revision">Nombre Completo <br> {{revisionNombre}}</p>
-          <p class="campos-revision">Teléfono <br> {{revisionTelefono}}</p>
-          <p class="campos-revision">DNI <br> {{revisionDni}}</p>
-          <p class="campos-revision">Envio <br> {{revisionEnvio}}</p>
-          <p class="campos-revision" *ngIf="revisionSucursal.length > 0">Sucursal <br> {{revisionSucursal}}</p>
-          <p class="campos-revision">Provincia <br> {{revisionProvincia}}</p>
-          <p class="campos-revision">Ciudad <br> {{revisionCiudad}}</p>
-          <p class="campos-revision">Dirección <br> {{revisionDireccion}}</p>
-          <p class="campos-revision" *ngIf="revisionDepto.length > 0">Depto <br> {{revisionDepto}}</p>
+              <p class="campos-revision">
+                Mail <br />
+                {{revisionMail}}
+              </p>
+              <p class="campos-revision">
+                Código Postal <br />
+                {{revisionCodigoPostal}}
+              </p>
+              <p class="campos-revision">
+                Nombre Completo <br />
+                {{revisionNombre}}
+              </p>
+              <p class="campos-revision">
+                Teléfono <br />
+                {{revisionTelefono}}
+              </p>
+              <p class="campos-revision">
+                DNI <br />
+                {{revisionDni}}
+              </p>
+              <p class="campos-revision">
+                Envio <br />
+                {{revisionEnvio}}
+              </p>
+              <p class="campos-revision" *ngIf="revisionSucursal.length > 0">
+                Sucursal <br />
+                {{revisionSucursal}}
+              </p>
+              <p class="campos-revision">
+                Provincia <br />
+                {{revisionProvincia}}
+              </p>
+              <p class="campos-revision">
+                Ciudad <br />
+                {{revisionCiudad}}
+              </p>
+              <p class="campos-revision">
+                Dirección <br />
+                {{revisionDireccion}}
+              </p>
+              <p class="campos-revision" *ngIf="revisionDepto.length > 0">
+                Depto <br />
+                {{revisionDepto}}
+              </p>
+            </div>
+            <h2>Pago</h2>
+            <div class="container-pago">
+              <p class="campos-revision">
+                Método de Pago <br />
+                {{revisionMetodoPago}}
+              </p>
+              <p class="campos-revision" *ngIf="tarjetaDeCredito === true">
+                Cantidad de Cuotas <br />
+                {{revisionCuotas}}
+              </p>
+            </div>
           </div>
-          <h2>Pago</h2>
-          <div class="container-pago">
-          <p class="campos-revision">Método de Pago <br> {{revisionMetodoPago}}</p>
-          <p class="campos-revision" *ngIf="tarjetaDeCredito === true">Cantidad de Cuotas <br> {{revisionCuotas}}</p>
-
+          <div
+            style="
+              gap: 6px;
+              display: flex;
+              width: 100%;
+              justify-content: center;
+            "
+          >
+            <button mat-button matStepperPrevious style="color: white">
+              Volver
+            </button>
+            <button mat-button (click)="onSubmit()" style="color: white">
+              Finalizar
+            </button>
+          </div>
         </div>
-        </div>
-        <div style="gap: 6px; display: flex; width: 100%;
-    justify-content: center;">
-          <button mat-button matStepperPrevious style="color: white;">Volver</button>
-          <button mat-button (click)="onSubmit()" style="color: white;">Finalizar</button>
-        </div>
-      </div>
       </mat-step>
     </mat-stepper>
   </div>
   <div *ngIf="mostrarFormulario === true" class="productos-en-carrito">
-    <h1 style="margin-left: 20px;">Mi carrito</h1>
+    <h1 style="margin-left: 20px">Mi carrito</h1>
     <mat-divider></mat-divider>
-    <mat-card class="example-card" appearance="outlined"  *ngFor="let producto of carrito">
-      <img mat-card-image src={{producto.imagen}} alt={{producto.nombre}}>
+    <mat-card
+      class="example-card"
+      appearance="outlined"
+      *ngFor="let producto of carrito"
+    >
+      <img mat-card-image src="{{producto.imagen}}" alt="{{producto.nombre}}" />
       <mat-card-content>
-          <div class="datos-productos">
-            <div class="container-h1-h2">
-                <h1 class="titulo-grande">{{producto.nombre}}</h1>
-                <h2 class="titulo-chico">${{producto.oferta > 0 ? producto.precio_oferta : producto.precio}}</h2> 
-              <!--<p>{{producto.descripcion}}</p>-->
-              </div>
-              <div class="contenedor-botones-suma-resta">
-                <p>cant: {{producto.cantidad}}</p>
-            </div>   
+        <div class="datos-productos">
+          <div class="container-h1-h2">
+            <h1 class="titulo-grande">{{producto.nombre}}</h1>
+            <h2 class="titulo-chico">
+              ${{producto.oferta > 0 ? producto.precio_oferta :
+              producto.precio}}
+            </h2>
+            <!--<p>{{producto.descripcion}}</p>-->
           </div>
+          <div class="contenedor-botones-suma-resta">
+            <p>cant: {{producto.cantidad}}</p>
+          </div>
+        </div>
       </mat-card-content>
-  </mat-card>
-  <mat-divider></mat-divider>
-  <h2 style="text-align: start; margin-left: 12px;">Subtotal: ${{subtotal}}</h2>
-  <mat-divider></mat-divider>
-  <h2 style="text-align: start; margin-left: 12px;">Envío: </h2>
-  <mat-divider></mat-divider>
-  <h2 style="text-align: start; margin-left: 12px;">Total: </h2>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <h2 style="text-align: start; margin-left: 12px">
+      Subtotal: ${{subtotal}}
+    </h2>
+    <!-- <h2  style="text-align: start; margin-left: 12px"> Subtotal Transferencia: ${{subtotalTransferencia}}</h2>
+    <h2  style="text-align: start; margin-left: 12px"> Subtotal Efectivo: ${{subtotalEfectivo}}</h2> -->
+    <mat-divider></mat-divider>
+    <h2 style="text-align: start; margin-left: 12px">Envío:</h2>
+    <mat-divider></mat-divider>
+    <h2 style="text-align: start; margin-left: 12px">Total:</h2>
   </div>
-    <div *ngIf="mostrarCartel === true" class="cartel">
-      <h2>¡Gracias por su compra!</h2>
-      <p class="parrafo">En breve le llegará un mail a su correo, asegurese de verificar la carpeta de "correo no deseado".</p>
-      <a mat-list-item routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" style="text-decoration: none; width: 0px;
-      display: flex
-  ;
-      text-align: center;
-      justify-content: center;
-      align-items: center;">
-        <div class="boton-tienda">
-          <p>Volver a la tienda</p>
+  <div *ngIf="mostrarCartel === true" class="cartel">
+    <h2>¡Gracias por su compra!</h2>
+    <p class="parrafo">
+      En breve le llegará un mail a su correo, asegurese de verificar la carpeta
+      de "correo no deseado".
+    </p>
+    <a
+      mat-list-item
+      routerLink="/home"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      style="
+        text-decoration: none;
+        width: 0px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="boton-tienda">
+        <p>Volver a la tienda</p>
       </div>
     </a>
-    </div>
   </div>
+</div>
