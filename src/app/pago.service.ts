@@ -21,6 +21,8 @@ export class PagoService {
   internoDeptoCliente: '',
   }
 
+  precioSubtotal: number = 0;
+
    getCordobaCiudades= async () => {
     const response = await fetch('/cordobaCiudades.json', {
       method: "get",
@@ -34,6 +36,10 @@ export class PagoService {
       console.log(err);
       throw err; // Relanza el error para manejarlo en el componente
     }
+  }
+
+  precioSubtotalFunction(valor: number){
+    this.precioSubtotal = valor;
   }
 
   getSantaFeCiudades = async () => {

@@ -127,11 +127,13 @@ export class PagoComponent implements OnInit {
         this.subtotalTarjetas += this.carrito[i].precio_oferta * this.carrito[i].cantidad;
         this.subtotalTransferencia += this.carrito[i].precio_oferta * this.carrito[i].cantidad;
         this.subtotalEfectivo += this.carrito[i].precio_oferta * this.carrito[i].cantidad;
+        this.pagoService.precioSubtotal += this.carrito[i].precio_oferta * this.carrito[i].cantidad;
       } else {
         this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad;
         this.subtotalTarjetas += this.carrito[i].precio * this.carrito[i].cantidad;
         this.subtotalTransferencia += this.carrito[i].precioTransferencia * this.carrito[i].cantidad;
         this.subtotalEfectivo += this.carrito[i].precioEfectivo * this.carrito[i].cantidad;
+        this.pagoService.precioSubtotal += this.carrito[i].precio * this.carrito[i].cantidad;
       }
     }
     console.log(this.subtotal);
@@ -1480,6 +1482,7 @@ export class PagoComponent implements OnInit {
     if (pago === 'Transferencia') {
       this.formaPago = 'Transferencia';
       this.subtotal = this.subtotalTransferencia;
+      this.pagoService.precioSubtotalFunction(this.subtotalTransferencia);
       //alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1494,6 +1497,7 @@ export class PagoComponent implements OnInit {
     else if (pago === 'Efectivo') {
       this.formaPago = 'Efectivo';
       this.subtotal = this.subtotalEfectivo;
+      this.pagoService.precioSubtotalFunction(this.subtotalEfectivo)
       // alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1508,6 +1512,7 @@ export class PagoComponent implements OnInit {
     else if (pago === 'Tarjeta de Crédito') {
       this.formaPago = 'Tarjeta de Crédito';
       this.subtotal = this.subtotalTarjetas;
+      this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
       this.tarjetaDeCredito = true;
       let tarjetaCreditoControl = this.secondFormGroup.get(
         'tarjetaCreditoFormControl'
@@ -1519,6 +1524,7 @@ export class PagoComponent implements OnInit {
     } else if (pago === 'Tarjeta de Débito') {
       this.formaPago = 'Tarjeta de Débito';
       this.subtotal = this.subtotalTarjetas;
+      this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
         'tarjetaCreditoFormControl'
@@ -2157,6 +2163,7 @@ export class DialogContent {
 
   carrito: any[] = [];
   subtotal: number = 0;
+  subtotalVerdadero: number = 0;
 
   constructor(
     private pagoService: PagoService,
@@ -2168,17 +2175,9 @@ export class DialogContent {
   }
 
   obtenerProductosLocalStorage() {
+    console.log(this.subtotalVerdadero + "valor")
     this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    console.log(this.carrito);
-    for (let i = 0; i < this.carrito.length; i++) {
-      if (this.carrito[i].oferta > 0) {
-        this.subtotal +=
-          this.carrito[i].precio_oferta * this.carrito[i].cantidad;
-      } else {
-        this.subtotal += this.carrito[i].precio * this.carrito[i].cantidad;
-      }
-    }
-    console.log(this.subtotal);
+    this.subtotalVerdadero = this.pagoService.precioSubtotal
   }
 }
 
