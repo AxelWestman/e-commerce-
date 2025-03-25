@@ -26,7 +26,7 @@ const TREE_DATA: FoodNode[] = [
     children: [
       {
         name: 'Ropa',
-        children: [ {name: 'Toda la ropa'}, {name: 'Remeras'}, {name: 'Blusas'}, {name: 'Camisas'}, {name: 'Camisolas'}, {name: 'Túnicas'}, {name: 'Vestidos'} , {name: 'Soleros'}, {name: 'Palazos'}, {name: 'Babuchas'} , {name: 'Leggings'}, {name: 'Calza'}, {name: 'Shorts'}, {name: 'Bermudas'}, {name: 'Polleras'}, {name: 'Faldas'}],
+        children: [ {name: 'Toda la ropa'}, {name: 'Remeras'}, {name: 'Blusas'}, {name: 'Camisas'}, {name: 'Camisolas'}, {name: 'Sweters'}, {name: 'Túnicas'}, {name: 'Vestidos'} , {name: 'Soleros'}, {name: 'Palazos'}, {name: 'Babuchas'} , {name: 'Leggings'}, {name: 'Calza'}, {name: 'Shorts'}, {name: 'Bermudas'}, {name: 'Polleras'}, {name: 'Faldas'}],
       },
       {
         name: 'Accesorios',
