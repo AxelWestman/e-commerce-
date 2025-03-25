@@ -27,6 +27,14 @@
         <mat-divider></mat-divider>
         <div class="contenedor-descripcion">
             <p style="font-size: 14px;">Calcular envío</p><mat-icon style="font-size: 16px;"> local_shipping</mat-icon>
+            <input style="width: 50px;"
+            type="number"
+            matInput
+            placeholder="Ej: 3000"
+            name="number"
+            [(ngModel)]="codigoPostal"
+          />
+          <button style="height: 25px; width: auto; background-color: green; border-radius: 10px;">Calcular</button>
         </div>    
         <mat-divider></mat-divider>
         <div  style="min-height: 34px; height: auto; overflow-wrap: break-word; white-space: pre-wrap;" >

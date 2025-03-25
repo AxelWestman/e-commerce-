@@ -1563,7 +1563,7 @@ export class PagoComponent implements OnInit {
     this.ciudadesDeTierraDelFuego();
     this.ciudadesDeMisiones();
     this.obtenerProductosLocalStorage();
-    this.openAdvertencia();
+    // this.openAdvertencia();
   }
 
   constructor(

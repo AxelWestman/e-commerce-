@@ -155,8 +155,11 @@ img{
   text-align: start;
 }
 
-
-
+@media (min-width: 375px){
+  .contenedor-descripcion{
+    height: 34px;
+  }
+}
 
 
 @media (min-width: 768px){

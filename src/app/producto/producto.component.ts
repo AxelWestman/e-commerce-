@@ -9,11 +9,15 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBar, MatSnackBarAction, MatSnackBarActions, MatSnackBarLabel, MatSnackBarRef, } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-producto',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent,RouterLink, RouterLinkActive, MatButtonModule, CommonModule, MatIconModule, MatDividerModule],
+  imports: [RouterOutlet, FooterComponent,RouterLink, RouterLinkActive, MatButtonModule, CommonModule, MatIconModule, MatDividerModule, MatFormFieldModule,  MatInputModule, MatSelectModule, FormsModule],
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.scss'
 })
@@ -22,6 +26,8 @@ export class ProductoComponent implements OnInit {
   private _snackBar = inject(MatSnackBar);
 
   durationInSeconds = 5;
+
+  codigoPostal = 0;
 
   openSnackBar() {
     this._snackBar.openFromComponent(PizzaPartyAnnotatedComponent, {

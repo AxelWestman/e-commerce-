@@ -92,6 +92,22 @@ export class DatosService {
     }
   }
 
+  calcularEnvio = async () => {
+    const response = await fetch('http://localhost:3000/api/andreani/calcular-envio', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contrato: "TU_CONTRATO_ANDREANI",
+        origen: { codigoPostal: "1602" },
+        destino: { codigoPostal: "2000" },
+        bultos: [{ kilos: 2, volumenCm3: 5000 }]
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Costo de envío:', data))
+    .catch(error => console.error('Error:', error));
+  }
+
   /*productoDetallado(producto: string){
     let contenido = producto;
     console.log(contenido)
