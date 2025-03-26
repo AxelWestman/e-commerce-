@@ -52,7 +52,7 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   paramsUrl: boolean | undefined;
 
-  filtros = ["Destacados", "Precio menor a mayor", "Precio mayor a menor"]
+  filtros = ["Precio menor a mayor", "Precio mayor a menor"]
 
   filtroValor: string = '';
   filtroArrayMasNuevoAMasViejo:any[] = [];
@@ -127,21 +127,21 @@ export class ContentComponent implements OnInit, OnDestroy  {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.filtroValor = 'Destacados'
+      this.filtroValor = 'Precio menor a mayor'
       console.log(params['category'])
       if(params['categoria'] === undefined){
         this.paramsUrl = false;
         this.receivedData = params['category'];
        this.datosService.getProductosGeneral(this.receivedData, this.filtroValor).subscribe(data => {
-        this.receivedDataArray = data.data;
+        this.filtroArrayPrecioMenorAMayor = data.data;
        })
       } else{
         this.paramsUrl = true;
       this.receivedData = params['categoria'];
       console.log("aca " + this.receivedData);
       this.datosService.getProductosPorCategoria(this.receivedData, this.filtroValor).subscribe(data => {
-        this.receivedDataArray = data.data;
-        console.log(this.receivedDataArray);
+        this.filtroArrayPrecioMenorAMayor = data.data;
+        console.log(this.filtroArrayPrecioMenorAMayor);
       });
     }
     });
