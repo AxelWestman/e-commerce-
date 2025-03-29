@@ -137,7 +137,7 @@
               *ngIf="formaEnvio === 'Envío a domicilio'"
             >
               <h2 style="background-color: white; border-radius: 10px">
-                Se usará la información del domicilio para enviar el producto a
+                Se usará la información del domicilio del destinatario para enviar el producto a
                 su hogar
               </h2>
             </div>
@@ -191,7 +191,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Ciudad</mat-label>
-              <mat-select formControlName="ciudadFormControl" name="ciudad">
+              <mat-select formControlName="ciudadFormControl" (selectionChange)="enviosEnSantaFe($event.value)" name="ciudad">
                 <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad">
                   {{ ciudad }}
                 </mat-option>
@@ -310,7 +310,7 @@
         <div class="container-revision-datos">
           <h2>Revisa tus datos</h2>
           <div class="container-cajas">
-            <h2>Envío</h2>
+            <h2>Datos personales</h2>
             <div class="container-envio">
               <p class="campos-revision">
                 Mail <br />
@@ -420,9 +420,9 @@
     <!-- <h2  style="text-align: start; margin-left: 12px"> Subtotal Transferencia: ${{subtotalTransferencia}}</h2>
     <h2  style="text-align: start; margin-left: 12px"> Subtotal Efectivo: ${{subtotalEfectivo}}</h2> -->
     <mat-divider></mat-divider>
-    <h2 style="text-align: start; margin-left: 12px">Envío:</h2>
+    <h2 style="text-align: start; margin-left: 12px">Envío: ${{precioEnvio}}</h2>
     <mat-divider></mat-divider>
-    <h2 style="text-align: start; margin-left: 12px">Total:</h2>
+    <h2 style="text-align: start; margin-left: 12px">Total: ${{precioTotal}}</h2>
   </div>
   <div *ngIf="mostrarCartel === true" class="cartel">
     <h2>¡Gracias por su compra!</h2>

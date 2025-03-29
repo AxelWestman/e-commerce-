@@ -63,6 +63,10 @@ export class PagoComponent implements OnInit {
   subtotalTransferencia: number = 0;
   subtotalEfectivo: number = 0;
   tarjetaDeCredito: boolean = false;
+  precioEnvio: any;
+  precioEnvioBug: any;
+  precioTotal: any;
+  provincia: string = "";
 
 
 
@@ -253,13 +257,13 @@ export class PagoComponent implements OnInit {
 
   metodosEnvio = [
     'Envío a domicilio',
-    'Envío a sucursal Correo Argentino',
+    //'Envío a sucursal Correo Argentino',
     'Retiro por showroom',
   ];
 
   metodosDePago = [
     'Transferencia (10% de Descuento)', 
-    'Efectivo (20% de descuento, solo pago en showroom)',
+    //'Efectivo (20% de descuento, solo pago en showroom)',
     'Tarjeta de Crédito',
     'Tarjeta de Débito',
   ];
@@ -523,6 +527,12 @@ export class PagoComponent implements OnInit {
     // Aquí puedes cargar las ciudades correspondientes a la provincia seleccionada
     // Por simplicidad, este ejemplo usa una lista estática
     if (provincia === 'Buenos Aires') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 8000;
+        this.precioEnvioBug = 8000;
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = [
         'Abasto',
         'Abbott',
@@ -1398,59 +1408,241 @@ export class PagoComponent implements OnInit {
         '9 De Abril',
         '9 De Julio',
       ];
+      this.provincia = 'Buenos Aires';
     } else if (provincia === 'Córdoba') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 8000;
+        this.precioEnvioBug = 8000;
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.cordobaCiudadesArray;
+      this.provincia = 'Córdoba';
     } else if (provincia === 'Santa Fe') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 4000;
+        this.precioEnvioBug = 4000;
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.santaFeCiudadesArray;
+      this.provincia = 'Santa Fe';
     } else if (provincia === 'Mendoza') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000;
+        this.precioEnvioBug = 10000;
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.mendozaCiudadesArray;
+      this.provincia = 'Mendoza';
     } else if (provincia === 'Tucumán') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000;
+        this.precioEnvioBug = 10000;
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.tucumanCiudadesArray;
+      this.provincia = 'Tucumán';
     } else if (provincia === 'Entre Ríos') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 8000;
+        this.precioEnvioBug = 8000;
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.entreRiosCiudadesArray;
+      this.provincia = 'Entre Ríos';
     } else if (provincia === 'Salta') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.saltaCiudadesArray;
+      this.provincia = 'Salta';
     } else if (provincia === 'Chaco') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 8000
+        this.precioEnvioBug = 8000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.chacoCiudadesArray;
+      this.provincia = 'Chaco';
     } else if (provincia === 'Corrientes') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 8000
+        this.precioEnvioBug = 8000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.corrientesCiudadesArray;
+      this.provincia = 'Corrientes';
     } else if (provincia === 'Santiago del Estero') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 8000
+        this.precioEnvioBug = 8000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.santiagoDelEsteroCiudadesArray;
+      this.provincia = 'Santiago del Estero';
     } else if (provincia === 'San Juan') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.sanJuanCiudadesArray;
+      this.provincia = 'San Juan';
     } else if (provincia === 'Jujuy') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.jujuyCiudadesArray;
+      this.provincia = 'Jujuy';
     } else if (provincia === 'Río Negro') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.rioNegroCiudadesArray;
+      this.provincia = 'Río Negro';
     } else if (provincia === 'Neuquén') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.neuquenCiudadesArray;
+      this.provincia = 'Neuquén';
     } else if (provincia === 'Formosa') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.formosaCiudadesArray;
+      this.provincia = 'Formosa';
     } else if (provincia === 'Chubut') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.chubutCiudadesArray;
+      this.provincia = 'Chubut';
     } else if (provincia === 'San Luis') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.sanLuisCiudadesArray;
+      this.provincia = 'San Luis';
     } else if (provincia === 'Catamarca') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.catamarcaCiudadesArray;
+      this.provincia = 'Catamarca';
     } else if (provincia === 'La Rioja') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.laRiojaCiudadesArray;
+      this.provincia = 'La Rioja';
     } else if (provincia === 'La Pampa') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.laPampaCiudadesArray;
+      this.provincia = 'La Pampa';
     } else if (provincia === 'Santa Cruz') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.santaCruzCiudadesArray;
+      this.provincia = 'Santa Cruz';
     } else if (provincia === 'Tierra del Fuego') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.tierraDelFuegoCiudadesArray;
+      this.provincia = 'Tierra del Fuego';
     } else if (provincia === 'Misiones') {
+      if(this.formaEnvio === "Envío a domicilio"){
+        this.precioEnvio = 10000
+        this.precioEnvioBug = 10000
+      } else if(this.formaEnvio === "Retiro por showroom"){
+        this.precioEnvio = 0
+      }
       this.ciudades = this.misionesCiudadesArray;
+      this.provincia = 'Misiones';
     } else {
       this.ciudades = [];
     }
     this.ciudadFormControl.reset(); // Reinicia el campo de ciudad al cambiar la provincia
   }
 
+  enviosEnSantaFe(ciudad: string){
+    console.log(this.provincia)
+    if(this.provincia === "Santa Fe" && this.formaEnvio === "Envío a domicilio"){
+    // if(this.provincia)
+    const ciudadesConPrecio7000 = this.ciudades
+    console.log(ciudadesConPrecio7000)
+
+  if (ciudad === "Santa Fe") {
+      this.precioEnvio = 4000;
+      this.precioEnvioBug = 4000;
+  } else if (ciudadesConPrecio7000.includes(ciudad)) {
+      this.precioEnvio = 7000;
+      this.precioEnvioBug = 7000;
+      }
+    } 
+  }
+
   cargarFormasDeEnvio(envio: string) {
     if (envio === 'Envío a domicilio') {
+      this.precioTotal = "";
       this.formaEnvio = 'Envío a domicilio';
+      this.firstFormGroup.get('ciudadFormControl')?.reset();
+      this.firstFormGroup.get('provinciaFormControl')?.reset();
+      this.metodosDePago = [
+        'Transferencia (10% de Descuento)', 
+        //'Efectivo (20% de descuento, solo pago en showroom)',
+        'Tarjeta de Crédito',
+        'Tarjeta de Débito',
+      ];
+      console.log("ahora están estas opciones " + this.metodosDePago)
       let direccionSucursalControl =
         this.firstFormGroup.get('direccionSucursal');
       if (direccionSucursalControl) {
@@ -1458,6 +1650,7 @@ export class PagoComponent implements OnInit {
         direccionSucursalControl.clearValidators();
         direccionSucursalControl.updateValueAndValidity(); // Actualiza el estado del control
       }
+    
     } else if (envio === 'Envío a sucursal Correo Argentino') {
       this.formaEnvio = 'Envío a sucursal Correo Argentino';
       let direccionSucursalControl =
@@ -1467,6 +1660,12 @@ export class PagoComponent implements OnInit {
         direccionSucursalControl.updateValueAndValidity(); // Actualiza el estado del control
       }
     } else if (envio === 'Retiro por showroom') {
+      this.precioTotal = "";
+      this.firstFormGroup.get('ciudadFormControl')?.reset();
+      this.firstFormGroup.get('provinciaFormControl')?.reset();
+      this.metodosDePago.splice(1, 0, 'Efectivo (20% de descuento, solo pago en showroom)')
+      console.log("ahora están estas opciones " + this.metodosDePago)
+      this.precioEnvio = 0;
       this.formaEnvio = 'Retiro por showroom';
       let direccionSucursalControl =
         this.firstFormGroup.get('direccionSucursal');
@@ -1482,6 +1681,7 @@ export class PagoComponent implements OnInit {
     if (pago === 'Transferencia (10% de Descuento)') {
       this.formaPago = 'Transferencia';
       this.subtotal = this.subtotalTransferencia;
+      this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalTransferencia);
       //alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
@@ -1497,6 +1697,7 @@ export class PagoComponent implements OnInit {
     else if (pago === 'Efectivo (20% de descuento, solo pago en showroom)') {
       this.formaPago = 'Efectivo';
       this.subtotal = this.subtotalEfectivo;
+      this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalEfectivo)
       // alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
@@ -1512,6 +1713,7 @@ export class PagoComponent implements OnInit {
     else if (pago === 'Tarjeta de Crédito') {
       this.formaPago = 'Tarjeta de Crédito';
       this.subtotal = this.subtotalTarjetas;
+      this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
       this.tarjetaDeCredito = true;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1524,6 +1726,7 @@ export class PagoComponent implements OnInit {
     } else if (pago === 'Tarjeta de Débito') {
       this.formaPago = 'Tarjeta de Débito';
       this.subtotal = this.subtotalTarjetas;
+      this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1536,6 +1739,8 @@ export class PagoComponent implements OnInit {
       }
     }
   }
+
+
 
   cantidadCuotas(cuotas: string) {}
 
