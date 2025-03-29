@@ -258,8 +258,8 @@ export class PagoComponent implements OnInit {
   ];
 
   metodosDePago = [
-    'Transferencia',
-    'Efectivo',
+    'Transferencia (10% de Descuento)', 
+    'Efectivo (20% de descuento, solo pago en showroom)',
     'Tarjeta de Crédito',
     'Tarjeta de Débito',
   ];
@@ -1479,7 +1479,7 @@ export class PagoComponent implements OnInit {
   }
 
   formaDePago(pago: string) {
-    if (pago === 'Transferencia') {
+    if (pago === 'Transferencia (10% de Descuento)') {
       this.formaPago = 'Transferencia';
       this.subtotal = this.subtotalTransferencia;
       this.pagoService.precioSubtotalFunction(this.subtotalTransferencia);
@@ -1494,7 +1494,7 @@ export class PagoComponent implements OnInit {
         tarjetaCreditoControl.updateValueAndValidity();
       }
     }
-    else if (pago === 'Efectivo') {
+    else if (pago === 'Efectivo (20% de descuento, solo pago en showroom)') {
       this.formaPago = 'Efectivo';
       this.subtotal = this.subtotalEfectivo;
       this.pagoService.precioSubtotalFunction(this.subtotalEfectivo)
@@ -1613,7 +1613,7 @@ export class PagoComponent implements OnInit {
       console.log(items);
 
       this.http
-        .post('http://192.168.0.163:3000/create-order', {
+        .post('http://192.168.0.243:3000/create-order', {
           items: items, // Enviar los items del carrito
         })
         .subscribe(
@@ -1637,7 +1637,7 @@ export class PagoComponent implements OnInit {
               const verificarPago = setInterval(() => {
                 this.http
                   .get(
-                    `http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`
+                    `http://192.168.0.121:3000/obtener-id-compra/${this.preference_id}`
                   )
                   .subscribe(
                     (paymentResponse: any) => {
@@ -1699,7 +1699,7 @@ export class PagoComponent implements OnInit {
       console.log(items);
 
       this.http
-        .post('http://192.168.0.163:3000/create-order-una-cuota', {
+        .post('http://192.168.0.243:3000/create-order-una-cuota', {
           items: items, // Enviar los items del carrito
         })
         .subscribe(
@@ -1723,7 +1723,7 @@ export class PagoComponent implements OnInit {
               const verificarPago = setInterval(() => {
                 this.http
                   .get(
-                    `http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`
+                    `http://192.168.0.243:3000/obtener-id-compra/${this.preference_id}`
                   )
                   .subscribe(
                     (paymentResponse: any) => {
@@ -1785,7 +1785,7 @@ export class PagoComponent implements OnInit {
       console.log(items);
 
       this.http
-        .post('http://192.168.0.163:3000/create-order-tres-cuotas', {
+        .post('http://192.168.0.243:3000/create-order-tres-cuotas', {
           items: items, // Enviar los items del carrito
         })
         .subscribe(
@@ -1809,7 +1809,7 @@ export class PagoComponent implements OnInit {
               const verificarPago = setInterval(() => {
                 this.http
                   .get(
-                    `http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`
+                    `http://192.168.0.243:3000/obtener-id-compra/${this.preference_id}`
                   )
                   .subscribe(
                     (paymentResponse: any) => {
