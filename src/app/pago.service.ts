@@ -25,6 +25,10 @@ export class PagoService {
   precioEnvio: number = 0;
   precioTotal: number = 0;
 
+  precioTarjetas: boolean = true;
+  precioTransferencia: boolean = false;
+  precioEfectivo: boolean = false;
+
    getCordobaCiudades= async () => {
     const response = await fetch('/cordobaCiudades.json', {
       method: "get",
@@ -50,6 +54,12 @@ export class PagoService {
 
   obtenerPrecioTotal(valor: number){
     this.precioTotal = valor;
+  }
+
+  cambioDePrecios(tarjeta: boolean, transferencia: boolean, efectivo: boolean){
+    this.precioTarjetas = tarjeta;
+    this.precioTransferencia = transferencia;
+    this.precioEfectivo = efectivo;
   }
 
   getSantaFeCiudades = async () => {

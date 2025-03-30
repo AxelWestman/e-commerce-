@@ -8,8 +8,8 @@
         <div style="margin-top: 10px;">
         <div style="flex-direction: column;">
         <div style="display: flex; align-items: center; width: 100%;"><h2 style="font-weight: 100; display: flex;">${{producto.oferta > 0 ? producto.precio_oferta : producto.precio}}</h2> <p style="font-size: 10px;">Precio base</p></div>
-        <div style="display: flex; align-items: center; width: 100%;"><h2 style="font-weight: 100; display: flex;">${{producto.precioTransferencia}}</h2> <p style="font-size: 10px;">Precio transferencia</p></div>
-        <div style="display: flex; align-items: center; width: 100%;"><h2 style="font-weight: 100; display: flex;">${{producto.precioEfectivo}} </h2><p style="font-size: 10px;">Precio efectivo</p></div>
+        <div style="display: flex; align-items: center; width: 100%;" *ngIf="producto.precioTransferencia > 0"><h2 style="font-weight: 100; display: flex;">${{producto.precioTransferencia}}</h2> <p style="font-size: 10px;">Precio transferencia</p></div>
+        <div style="display: flex; align-items: center; width: 100%;" *ngIf="producto.precioEfectivo> 0"><h2 style="font-weight: 100; display: flex;">${{producto.precioEfectivo}} </h2><p style="font-size: 10px;">Precio efectivo</p></div>
         <!--<h2>{{producto.stock}}</h2>
         <h2>{{producto.color}}</h2>-->
         </div>

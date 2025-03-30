@@ -67,7 +67,9 @@ export class PagoComponent implements OnInit {
   precioEnvioBug: any;
   precioTotal: any;
   provincia: string = "";
-
+  precioTarjetas: boolean = true;
+  precioTransferencia: boolean = false;
+  precioEfectivo: boolean = false;
 
 
   formaPagoFormControl = new FormControl('', [Validators.required]);
@@ -1730,8 +1732,12 @@ export class PagoComponent implements OnInit {
       this.formaPago = 'Transferencia';
       this.subtotal = this.subtotalTransferencia;
       this.precioTotal = this.subtotal + this.precioEnvio;
+      this.precioTarjetas = false;
+      this.precioEfectivo = false;
+      this.precioTransferencia = true;
       this.pagoService.precioSubtotalFunction(this.subtotalTransferencia);
       this.pagoService.obtenerPrecioTotal(this.precioTotal);
+      this.pagoService.cambioDePrecios(this.precioTarjetas, this.precioTransferencia, this.precioEfectivo)
       //alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1747,8 +1753,12 @@ export class PagoComponent implements OnInit {
       this.formaPago = 'Efectivo';
       this.subtotal = this.subtotalEfectivo;
       this.precioTotal = this.subtotal + this.precioEnvio;
+      this.precioTarjetas = false;
+      this.precioEfectivo = true;
+      this.precioTransferencia = false;
       this.pagoService.precioSubtotalFunction(this.subtotalEfectivo)
       this.pagoService.obtenerPrecioTotal(this.precioTotal);
+      this.pagoService.cambioDePrecios(this.precioTarjetas, this.precioTransferencia, this.precioEfectivo)
       // alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1764,8 +1774,12 @@ export class PagoComponent implements OnInit {
       this.formaPago = 'Tarjeta de Crédito';
       this.subtotal = this.subtotalTarjetas;
       this.precioTotal = this.subtotal + this.precioEnvio;
+      this.precioTarjetas = true;
+      this.precioEfectivo = false;
+      this.precioTransferencia = false;
       this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
       this.pagoService.obtenerPrecioTotal(this.precioTotal);
+      this.pagoService.cambioDePrecios(this.precioTarjetas, this.precioTransferencia, this.precioEfectivo)
       this.tarjetaDeCredito = true;
       let tarjetaCreditoControl = this.secondFormGroup.get(
         'tarjetaCreditoFormControl'
@@ -1778,8 +1792,12 @@ export class PagoComponent implements OnInit {
       this.formaPago = 'Tarjeta de Débito';
       this.subtotal = this.subtotalTarjetas;
       this.precioTotal = this.subtotal + this.precioEnvio;
+      this.precioTarjetas = true;
+      this.precioEfectivo = false;
+      this.precioTransferencia = false;
       this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
       this.pagoService.obtenerPrecioTotal(this.precioTotal);
+      this.pagoService.cambioDePrecios(this.precioTarjetas, this.precioTransferencia, this.precioEfectivo)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
         'tarjetaCreditoFormControl'
@@ -2446,6 +2464,10 @@ export class DialogContent {
   envioPrecio: number = 0;
   precioTotal: number = 0;
 
+  precioTarjetas: boolean = true;
+  precioTransferencia: boolean = false;
+  precioEfectivo: boolean = false;
+
   constructor(
     private pagoService: PagoService,
     private carritoService: CarritoService
@@ -2461,6 +2483,9 @@ export class DialogContent {
     this.subtotalVerdadero = this.pagoService.precioSubtotal;
     this.envioPrecio = this.pagoService.precioEnvio;
     this.precioTotal = this.pagoService.precioTotal
+    this.precioTarjetas = this.pagoService.precioTarjetas;
+    this.precioTransferencia = this.pagoService.precioTransferencia;
+    this.precioEfectivo = this.pagoService.precioEfectivo;
   }
 }
 
