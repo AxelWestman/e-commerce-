@@ -22,6 +22,8 @@ export class PagoService {
   }
 
   precioSubtotal: number = 0;
+  precioEnvio: number = 0;
+  precioTotal: number = 0;
 
    getCordobaCiudades= async () => {
     const response = await fetch('/cordobaCiudades.json', {
@@ -40,6 +42,14 @@ export class PagoService {
 
   precioSubtotalFunction(valor: number){
     this.precioSubtotal = valor;
+  }
+
+  obtenerPrecioEnvio(valor: number){
+    this.precioEnvio = valor;
+  }
+
+  obtenerPrecioTotal(valor: number){
+    this.precioTotal = valor;
   }
 
   getSantaFeCiudades = async () => {

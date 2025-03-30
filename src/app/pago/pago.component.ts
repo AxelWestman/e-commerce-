@@ -530,8 +530,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 8000;
         this.precioEnvioBug = 8000;
+        this.pagoService.obtenerPrecioEnvio(8000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = [
         'Abasto',
@@ -1413,8 +1415,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 8000;
         this.precioEnvioBug = 8000;
+        this.pagoService.obtenerPrecioEnvio(8000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.cordobaCiudadesArray;
       this.provincia = 'Córdoba';
@@ -1422,8 +1426,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 4000;
         this.precioEnvioBug = 4000;
+        this.pagoService.obtenerPrecioEnvio(4000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.santaFeCiudadesArray;
       this.provincia = 'Santa Fe';
@@ -1431,8 +1437,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000;
         this.precioEnvioBug = 10000;
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.mendozaCiudadesArray;
       this.provincia = 'Mendoza';
@@ -1440,8 +1448,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000;
         this.precioEnvioBug = 10000;
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.tucumanCiudadesArray;
       this.provincia = 'Tucumán';
@@ -1449,8 +1459,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 8000;
         this.precioEnvioBug = 8000;
+        this.pagoService.obtenerPrecioEnvio(8000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.entreRiosCiudadesArray;
       this.provincia = 'Entre Ríos';
@@ -1458,8 +1470,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.saltaCiudadesArray;
       this.provincia = 'Salta';
@@ -1467,8 +1481,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 8000
         this.precioEnvioBug = 8000
+        this.pagoService.obtenerPrecioEnvio(8000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.chacoCiudadesArray;
       this.provincia = 'Chaco';
@@ -1476,8 +1492,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 8000
         this.precioEnvioBug = 8000
+        this.pagoService.obtenerPrecioEnvio(8000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.corrientesCiudadesArray;
       this.provincia = 'Corrientes';
@@ -1485,8 +1503,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 8000
         this.precioEnvioBug = 8000
+        this.pagoService.obtenerPrecioEnvio(8000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.santiagoDelEsteroCiudadesArray;
       this.provincia = 'Santiago del Estero';
@@ -1494,8 +1514,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.sanJuanCiudadesArray;
       this.provincia = 'San Juan';
@@ -1503,8 +1525,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.jujuyCiudadesArray;
       this.provincia = 'Jujuy';
@@ -1512,8 +1536,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.rioNegroCiudadesArray;
       this.provincia = 'Río Negro';
@@ -1521,8 +1547,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.neuquenCiudadesArray;
       this.provincia = 'Neuquén';
@@ -1530,8 +1558,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.formosaCiudadesArray;
       this.provincia = 'Formosa';
@@ -1539,8 +1569,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.chubutCiudadesArray;
       this.provincia = 'Chubut';
@@ -1548,8 +1580,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.sanLuisCiudadesArray;
       this.provincia = 'San Luis';
@@ -1557,8 +1591,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.catamarcaCiudadesArray;
       this.provincia = 'Catamarca';
@@ -1566,8 +1602,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.laRiojaCiudadesArray;
       this.provincia = 'La Rioja';
@@ -1575,8 +1613,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.laPampaCiudadesArray;
       this.provincia = 'La Pampa';
@@ -1584,8 +1624,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.santaCruzCiudadesArray;
       this.provincia = 'Santa Cruz';
@@ -1593,8 +1635,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.tierraDelFuegoCiudadesArray;
       this.provincia = 'Tierra del Fuego';
@@ -1602,8 +1646,10 @@ export class PagoComponent implements OnInit {
       if(this.formaEnvio === "Envío a domicilio"){
         this.precioEnvio = 10000
         this.precioEnvioBug = 10000
+        this.pagoService.obtenerPrecioEnvio(10000);
       } else if(this.formaEnvio === "Retiro por showroom"){
         this.precioEnvio = 0
+        this.pagoService.obtenerPrecioEnvio(0);
       }
       this.ciudades = this.misionesCiudadesArray;
       this.provincia = 'Misiones';
@@ -1623,9 +1669,11 @@ export class PagoComponent implements OnInit {
   if (ciudad === "Santa Fe") {
       this.precioEnvio = 4000;
       this.precioEnvioBug = 4000;
+      this.pagoService.obtenerPrecioEnvio(4000);
   } else if (ciudadesConPrecio7000.includes(ciudad)) {
       this.precioEnvio = 7000;
       this.precioEnvioBug = 7000;
+      this.pagoService.obtenerPrecioEnvio(7000);
       }
     } 
   }
@@ -1683,6 +1731,7 @@ export class PagoComponent implements OnInit {
       this.subtotal = this.subtotalTransferencia;
       this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalTransferencia);
+      this.pagoService.obtenerPrecioTotal(this.precioTotal);
       //alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1699,6 +1748,7 @@ export class PagoComponent implements OnInit {
       this.subtotal = this.subtotalEfectivo;
       this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalEfectivo)
+      this.pagoService.obtenerPrecioTotal(this.precioTotal);
       // alert("El subtotal cambio a" + this.subtotal)
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
@@ -1715,6 +1765,7 @@ export class PagoComponent implements OnInit {
       this.subtotal = this.subtotalTarjetas;
       this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
+      this.pagoService.obtenerPrecioTotal(this.precioTotal);
       this.tarjetaDeCredito = true;
       let tarjetaCreditoControl = this.secondFormGroup.get(
         'tarjetaCreditoFormControl'
@@ -1728,6 +1779,7 @@ export class PagoComponent implements OnInit {
       this.subtotal = this.subtotalTarjetas;
       this.precioTotal = this.subtotal + this.precioEnvio;
       this.pagoService.precioSubtotalFunction(this.subtotalTarjetas)
+      this.pagoService.obtenerPrecioTotal(this.precioTotal);
       this.tarjetaDeCredito = false;
       let tarjetaCreditoControl = this.secondFormGroup.get(
         'tarjetaCreditoFormControl'
@@ -2391,6 +2443,8 @@ export class DialogContent {
   carrito: any[] = [];
   subtotal: number = 0;
   subtotalVerdadero: number = 0;
+  envioPrecio: number = 0;
+  precioTotal: number = 0;
 
   constructor(
     private pagoService: PagoService,
@@ -2404,7 +2458,9 @@ export class DialogContent {
   obtenerProductosLocalStorage() {
     console.log(this.subtotalVerdadero + "valor")
     this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    this.subtotalVerdadero = this.pagoService.precioSubtotal
+    this.subtotalVerdadero = this.pagoService.precioSubtotal;
+    this.envioPrecio = this.pagoService.precioEnvio;
+    this.precioTotal = this.pagoService.precioTotal
   }
 }
 
