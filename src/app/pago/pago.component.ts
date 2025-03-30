@@ -1806,6 +1806,9 @@ export class PagoComponent implements OnInit {
         locale: 'es-AR',
       });
 
+      
+      let shippingCost  = this.precioEnvio;
+
       // Preparar los items del carrito para MercadoPago
       console.log(carrito);
       const items = carrito.map((producto: any) => ({
@@ -1815,11 +1818,16 @@ export class PagoComponent implements OnInit {
           producto.oferta > 0 ? producto.precio_oferta : producto.precio,
       }));
 
+      const checkoutData = {
+        items,
+        shippingCost , // Enviamos el costo de envío por separado
+      };
+
       console.log(items);
 
       this.http
-        .post('http://192.168.0.243:3000/create-order', {
-          items: items, // Enviar los items del carrito
+        .post('http://192.168.0.163:3000/create-order', {
+          items: checkoutData, // Enviar los items del carrito
         })
         .subscribe(
           (response: any) => {
@@ -1842,7 +1850,7 @@ export class PagoComponent implements OnInit {
               const verificarPago = setInterval(() => {
                 this.http
                   .get(
-                    `http://192.168.0.121:3000/obtener-id-compra/${this.preference_id}`
+                    `http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`
                   )
                   .subscribe(
                     (paymentResponse: any) => {
@@ -1892,6 +1900,8 @@ export class PagoComponent implements OnInit {
         locale: 'es-AR',
       });
 
+      let shippingCost  = this.precioEnvio;
+
       // Preparar los items del carrito para MercadoPago
       console.log(carrito);
       const items = carrito.map((producto: any) => ({
@@ -1901,11 +1911,16 @@ export class PagoComponent implements OnInit {
           producto.oferta > 0 ? producto.precio_oferta : producto.precio,
       }));
 
+      const checkoutData = {
+        items,
+        shippingCost , // Enviamos el costo de envío por separado
+      };
+
       console.log(items);
 
       this.http
-        .post('http://192.168.0.243:3000/create-order-una-cuota', {
-          items: items, // Enviar los items del carrito
+        .post('http://192.168.0.163:3000/create-order-una-cuota', {
+          items: checkoutData, // Enviar los items del carrito
         })
         .subscribe(
           (response: any) => {
@@ -1928,7 +1943,7 @@ export class PagoComponent implements OnInit {
               const verificarPago = setInterval(() => {
                 this.http
                   .get(
-                    `http://192.168.0.243:3000/obtener-id-compra/${this.preference_id}`
+                    `http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`
                   )
                   .subscribe(
                     (paymentResponse: any) => {
@@ -1972,26 +1987,33 @@ export class PagoComponent implements OnInit {
     });
   }
 
-  pagoMercadoPagoCreditoTresCuotas(carrito: any): Promise<void> {
+  pagoMercadoPagoCreditoTresCuotas(carrito: any): Promise<void> { 
     return new Promise((resolve, reject) => {
       const mp = new MercadoPago('TEST-4b2851e9-7cdc-4444-9091-b2816f1a8bf0', {
         locale: 'es-AR',
       });
 
+      let shippingCost  = this.precioEnvio;
+
       // Preparar los items del carrito para MercadoPago
       console.log(carrito);
-      const items = carrito.map((producto: any) => ({
-        title: producto.nombre,
-        quantity: producto.cantidad,
-        unit_price:
-          producto.oferta > 0 ? producto.precio_oferta : producto.precio,
-      }));
+    const items = carrito.map((producto: any) => ({
+      title: producto.nombre,
+      quantity: producto.cantidad,
+      unit_price:
+        producto.oferta > 0 ? producto.precio_oferta : producto.precio,
+    }));
+
+    const checkoutData = {
+      items,
+      shippingCost , // Enviamos el costo de envío por separado
+    };
 
       console.log(items);
 
       this.http
-        .post('http://192.168.0.243:3000/create-order-tres-cuotas', {
-          items: items, // Enviar los items del carrito
+        .post('http://192.168.0.163:3000/create-order-tres-cuotas', {
+          items: checkoutData, // Enviar los items del carrito
         })
         .subscribe(
           (response: any) => {
@@ -2014,7 +2036,7 @@ export class PagoComponent implements OnInit {
               const verificarPago = setInterval(() => {
                 this.http
                   .get(
-                    `http://192.168.0.243:3000/obtener-id-compra/${this.preference_id}`
+                    `http://192.168.0.163:3000/obtener-id-compra/${this.preference_id}`
                   )
                   .subscribe(
                     (paymentResponse: any) => {
@@ -2274,7 +2296,7 @@ export class PagoComponent implements OnInit {
         this.carritoService.eliminarTodo();
         this.mostrarFormulario = false;
         this.mostrarCartel = true;
-      } else if (formaPago === 'Transferencia') {
+      } else if (formaPago === 'Transferencia (10% de Descuento)') {
         let carrito = this.carritoService.obtenerCarrito();
 
         let carritoNombres = carrito.map(

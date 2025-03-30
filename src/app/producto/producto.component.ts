@@ -29,13 +29,23 @@ export class ProductoComponent implements OnInit {
 
   codigoPostal = 0;
 
+  calcularEnvio = false;
+
   openSnackBar() {
     this._snackBar.openFromComponent(PizzaPartyAnnotatedComponent, {
       duration: this.durationInSeconds * 1000,
     });
   }
 
-  
+  calcularEnvioFunction(){
+    if(this.calcularEnvio === false){
+      this.calcularEnvio = true;
+    }
+    else{
+      this.calcularEnvio = false;
+    }
+
+  }
   
   constructor(private datosService: DatosService, private carritoService: CarritoService, private route:ActivatedRoute ) {}
   

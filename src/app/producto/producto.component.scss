@@ -134,6 +134,17 @@ img{
     cursor: pointer;
   }
 
+  .todos-precios-envio{
+    margin: 10px 0px 10px 0px;
+    display: flex;
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .todos-precios-envio p{
+    font-size: 14px;
+  }
+
 .divider-container{
   width: 100%;
   height: auto;
@@ -154,6 +165,8 @@ img{
   width: 100%;
   text-align: start;
 }
+
+
 
 @media (min-width: 375px){
   .contenedor-descripcion{
