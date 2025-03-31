@@ -17,7 +17,7 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent },
     {path: 'pago', component: PagoComponent},
     {path: 'somos', component: SomosComponent},
-    {path: 'contacto', component: ContactoComponent},
+    // {path: 'contacto', component: ContactoComponent},
     {path: 'productos/ofertas', component: OfertasComponent},
     // {path: 'como-comprar', component: ComoPagarComponent},
     {path: '', redirectTo: '/home', pathMatch: 'full'},

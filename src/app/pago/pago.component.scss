@@ -156,7 +156,7 @@ h2{
 
    .cartel-importante{
     border: 1px solid black;
-    width: auto;
+    width: 90%;
     height: auto;
     border-radius: 10px;
     background-color: #CDC1DE;
@@ -165,16 +165,18 @@ h2{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
    .cartel-importante h2{
     margin: 5px 0px 0px 0px;
-    font-size: 19px;
+    font-size: 15px;
    }
 
    .cartel-importante p{
     margin: 0px 0px 10px 0px;
-    width: 271px;
+    // width: 271px;
+    font-size: 13px;
    }
  
 
@@ -202,7 +204,6 @@ h2{
       // font-size: 21px;
       width: auto;
       border-radius: 10px;
-    background-color: #CDC1DE;
     }
 
   }

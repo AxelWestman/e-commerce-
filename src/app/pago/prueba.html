@@ -132,11 +132,15 @@
               >
               }
             </mat-form-field>
+            <div class="cartel-importante" *ngIf="formaEnvio === 'Envío a domicilio'">
+              <h2>INFORMACIÓN IMPORTANTE:</h2>
+              <p>Para despacho por correo los tiempos de preparación son de 24 a 48Hs. hábiles más el tiempo de entrega a domicilio.</p>
+            </div>
             <div
               class="example-full-width"
               *ngIf="formaEnvio === 'Envío a domicilio'"
             >
-              <h2 style="background-color: white; border-radius: 10px">
+              <h2 style="background-color: white; border-radius: 10px; font-size: 15px">
                 Se usará la información del domicilio del destinatario para enviar el producto a
                 su hogar
               </h2>
@@ -432,16 +436,78 @@
     <mat-divider></mat-divider>
     <h2 style="text-align: start; margin-left: 12px">Total: ${{precioTotal}}</h2>
   </div>
-  <div *ngIf="mostrarCartel === true" class="cartel">
+  <div *ngIf="mostrarCartel === true && revisionMetodoPago === 'Transferencia (10% de Descuento)'" class="cartel">
     <h2>¡Gracias por su compra!</h2>
     <p class="parrafo">
-      Si pagó con transferencia, en breve le llegará un mail a su correo, asegurese de verificar la carpeta
+      En breve le llegará un mail a su correo con el alias para realizar la transferencia, asegurese de verificar la carpeta
       de "correo no deseado".
     </p>
-    <div class="cartel-importante">
-      <h2>INFORMACIÓN IMPORTANTE:</h2>
-      <p>Para despacho por correo los tiempos de preparación son de 24 a 48Hs. hábiles más el tiempo de entrega a domicilio.</p>
-    </div>
+    <a
+      mat-list-item
+      routerLink="/home"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      style="
+        text-decoration: none;
+        width: 0px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="boton-tienda">
+        <p>Volver a la tienda</p>
+      </div>
+    </a>
+  </div>
+  <div *ngIf="mostrarCartel === true && revisionMetodoPago === 'Efectivo (20% de descuento, solo pago en showroom)'" class="cartel">
+    <h2>¡Gracias por su compra!</h2>
+    <p class="parrafo">
+      ¡Contáctenos para coordinar el retiro por el showroom!
+    </p>
+    <a
+      mat-list-item
+      routerLink="/home"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      style="
+        text-decoration: none;
+        width: 0px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="boton-tienda">
+        <p>Volver a la tienda</p>
+      </div>
+    </a>
+  </div>
+  <div *ngIf="mostrarCartel === true && revisionMetodoPago === 'Tarjeta de Crédito'" class="cartel">
+    <h2>¡Gracias por su compra!</h2>
+    <a
+      mat-list-item
+      routerLink="/home"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      style="
+        text-decoration: none;
+        width: 0px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="boton-tienda">
+        <p>Volver a la tienda</p>
+      </div>
+    </a>
+  </div>
+  <div *ngIf="mostrarCartel === true && revisionMetodoPago === 'Tarjeta de Débito'" class="cartel">
+    <h2>¡Gracias por su compra!</h2>
     <a
       mat-list-item
       routerLink="/home"
