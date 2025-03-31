@@ -149,6 +149,33 @@ h2{
      text-align: left;
      font-weight: normal;
    }
+
+   .parrafo{
+    width: 271px;
+   }
+
+   .cartel-importante{
+    border: 1px solid black;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    background-color: #CDC1DE;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+   .cartel-importante h2{
+    margin: 5px 0px 0px 0px;
+    font-size: 19px;
+   }
+
+   .cartel-importante p{
+    margin: 0px 0px 10px 0px;
+    width: 271px;
+   }
  
 
   @media (min-width: 768px) {
@@ -172,8 +199,10 @@ h2{
     }
 
     .parrafo{
-      font-size: 21px;
-      width: 300px;
+      // font-size: 21px;
+      width: auto;
+      border-radius: 10px;
+    background-color: #CDC1DE;
     }
 
   }

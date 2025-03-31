@@ -2424,6 +2424,64 @@ export class PagoComponent implements OnInit {
           this.mostrarFormulario = false;
           this.mostrarCartel = true;
         }
+      } else if (formaPago === 'Efectivo (20% de descuento, solo pago en showroom)') {
+        let carrito = this.carritoService.obtenerCarrito();
+
+        let carritoNombres = carrito.map(
+          (nombre) => `${nombre.nombre} X${nombre.cantidad}`
+        );
+        console.log(carritoNombres);
+
+        let id_productos = carrito.map((id) => `${id.id}`);
+        console.log(id_productos);
+        if (carritoNombres.length > 1) {
+          for (let i = 0; i < carritoNombres.length; i++) {
+            const datos = {
+              formaPago: this.formaPago,
+              cantCuotas: this.revisionCuotas,
+              nombre: formData.nombreFormControl,
+              email: formData.emailFormControl,
+              telefono: formData.phoneNumberFormControl,
+              dni: formData.dniFormControl,
+              metodoEnvio: formData.formaEnvioFormControl,
+              sucursal: formData.direccionSucursal,
+              provincia: formData.provinciaFormControl,
+              ciudad: formData.ciudadFormControl,
+              postal: formData.postalFormControl,
+              direccion: formData.direccionFormControl,
+              dept: formData.departamentoFormControl,
+              idProducto: id_productos[i],
+              productos: carritoNombres[i],
+            };
+            this.pagoService.pedidosPendientes(datos);
+            this.carritoService.eliminarTodo();
+            this.mostrarFormulario = false;
+            this.mostrarCartel = true;
+          }
+        } else {
+          const datos = {
+            formaPago: this.formaPago,
+            cantCuotas: this.revisionCuotas,
+            nombre: formData.nombreFormControl,
+            email: formData.emailFormControl,
+            telefono: formData.phoneNumberFormControl,
+            dni: formData.dniFormControl,
+            metodoEnvio: formData.formaEnvioFormControl,
+            sucursal: formData.direccionSucursal,
+            provincia: formData.provinciaFormControl,
+            ciudad: formData.ciudadFormControl,
+            postal: formData.postalFormControl,
+            direccion: formData.direccionFormControl,
+            dept: formData.departamentoFormControl,
+            idProducto: id_productos,
+            productos: carritoNombres,
+          };
+
+          this.pagoService.pedidosPendientesEfectivo(datos);
+          this.carritoService.eliminarTodo();
+          this.mostrarFormulario = false;
+          this.mostrarCartel = true;
+        }
       }
     }
     // this.miServicio.guardarDatos(formData).subscribe(...);
