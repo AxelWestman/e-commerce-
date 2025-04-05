@@ -126,6 +126,10 @@ export class PagoComponent implements OnInit {
 
   obtenerProductosLocalStorage() {
     this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    this.pagoService.precioSubtotal = 0;
+    this.pagoService.precioEnvio = 0;
+    this.pagoService.precioTotal = 0;
+    this.pagoService.cambioDePrecios(true, false, false)
     console.log(this.carrito);
     for (let i = 0; i < this.carrito.length; i++) {
       if (this.carrito[i].oferta > 0) {
@@ -2540,7 +2544,7 @@ export class DialogContent {
     this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
     this.subtotalVerdadero = this.pagoService.precioSubtotal;
     this.envioPrecio = this.pagoService.precioEnvio;
-    this.precioTotal = this.pagoService.precioTotal
+    this.precioTotal = this.pagoService.precioTotal;
     this.precioTarjetas = this.pagoService.precioTarjetas;
     this.precioTransferencia = this.pagoService.precioTransferencia;
     this.precioEfectivo = this.pagoService.precioEfectivo;
